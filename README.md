@@ -10,4 +10,4 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 python -m src.run_pipeline
-python -m src.evaluate# adi-visit-structurer
+python -m src.evaluate
