@@ -1,10 +1,7 @@
 {
   "meta": {
     "record_id": "ADI-0001",
-    "template_type": [
-      "diario_clinico",
-      "presa_in_carico"
-    ],
+    "template_type": ["diario_clinico", "presa_in_carico"],
     "visit_datetime": "2026-02-15T10:30:00",
     "operator_role": "infermiere"
   },
@@ -25,9 +22,7 @@
     },
     "consciousness": null,
     "mobility": null,
-    "interventions": [
-      "controllo_parametri_vitali"
-    ],
+    "interventions": ["controllo_parametri_vitali"],
     "critical_issues": [],
     "follow_up": "Programmato controllo tra 7 giorni"
   },
