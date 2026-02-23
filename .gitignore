@@ -201,10 +201,7 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
 # generated outputs
 reports/examples/
 reports/metrics.json
+
