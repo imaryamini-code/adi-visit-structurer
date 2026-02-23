@@ -11,3 +11,25 @@ pip install -r requirements.txt
 
 python -m src.run_pipeline
 python -m src.evaluate
+## Tests
+
+```bash
+pytest -q
+
+---
+
+## Visually, your README should look like this:
+
+```md
+## What this project does
+...
+
+## Run
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+python -m src.run_pipeline
+python -m src.evaluate
