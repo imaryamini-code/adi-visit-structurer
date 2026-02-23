@@ -30,6 +30,11 @@ def normalize_text(x: Any) -> Any:
 def f1_for_lists(gold_list: list[str], pred_list: list[str]) -> dict[str, float]:
     gold_set = set(gold_list or [])
     pred_set = set(pred_list or [])
+
+    # If both are empty, it's a perfect match
+    if not gold_set and not pred_set:
+        return {"precision": 1.0, "recall": 1.0, "f1": 1.0}
+
     tp = len(gold_set & pred_set)
     fp = len(pred_set - gold_set)
     fn = len(gold_set - pred_set)
@@ -143,4 +148,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
