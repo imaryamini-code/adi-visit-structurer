@@ -11,6 +11,3 @@ pip install -r requirements.txt
 
 python -m src.run_pipeline
 python -m src.evaluate
-## Tests
-```bash
-pytest -q
