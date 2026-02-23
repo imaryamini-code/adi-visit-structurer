@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0002",
+    "template_type": [
+      "diario_clinico",
+      "presa_in_carico"
+    ],
+    "visit_datetime": null,
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0002",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": null,
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "consciousness": null,
+    "mobility": null,
+    "interventions": [],
+    "critical_issues": [],
+    "follow_up": null
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime",
+      "clinical.reason_for_visit",
+      "clinical.interventions"
+    ],
+    "warnings": []
+  }
+}

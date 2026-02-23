@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "required": ["meta", "patient", "clinical", "quality"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["record_id", "visit_datetime", "operator_role"],
+      "properties": {
+        "record_id": { "type": "string" },
+        "template_type": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["diario_clinico", "presa_in_carico"]
+          }
+        },
+        "visit_datetime": { "type": "string" },
+        "operator_role": { "type": "string" }
+      }
+    },
+    "patient": {
+      "type": "object",
+      "required": ["patient_id"],
+      "properties": {
+        "patient_id": { "type": "string" },
+        "age": { "type": ["integer", "null"] },
+        "sex": {
+          "type": ["string", "null"],
+          "enum": ["F", "M", null]
+        }
+      }
+    },
+    "clinical": {
+      "type": "object",
+      "required": ["reason_for_visit", "interventions"],
+      "properties": {
+        "reason_for_visit": { "type": ["string", "null"] },
+        "anamnesis_brief": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "vitals": {
+          "type": "object",
+          "properties": {
+            "blood_pressure_systolic": { "type": ["integer", "null"] },
+            "blood_pressure_diastolic": { "type": ["integer", "null"] },
+            "heart_rate": { "type": ["integer", "null"] },
+            "temperature": { "type": ["number", "null"] },
+            "spo2": { "type": ["integer", "null"] }
+          }
+        },
+        "consciousness": { "type": ["string", "null"] },
+        "mobility": { "type": ["string", "null"] },
+        "interventions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "critical_issues": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "follow_up": { "type": ["string", "null"] }
+      }
+    },
+    "coding": {
+      "type": "object",
+      "properties": {
+        "problems_normalized": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "required": ["missing_mandatory_fields", "warnings"],
+      "properties": {
+        "missing_mandatory_fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

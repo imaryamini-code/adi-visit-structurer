@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0001",
+    "template_type": [
+      "diario_clinico",
+      "presa_in_carico"
+    ],
+    "visit_datetime": "2026-02-15T10:30:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0001",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 72,
+      "temperature": 36.7,
+      "spo2": null
+    },
+    "consciousness": null,
+    "mobility": null,
+    "interventions": [
+      "controllo_parametri_vitali"
+    ],
+    "critical_issues": [],
+    "follow_up": "Programmato controllo tra 7 giorni"
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}
