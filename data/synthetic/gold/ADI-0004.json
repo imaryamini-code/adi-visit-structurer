@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "record_id": "ADI-0004",
+    "template_type": ["diario_clinico", "presa_in_carico"],
+    "visit_datetime": "2026-02-20T09:15:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0004",
+    "age": 78,
+    "sex": "M"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo pressione e rivalutazione terapia",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 95,
+      "heart_rate": 88,
+      "temperature": 36.8,
+      "spo2": 94
+    },
+    "consciousness": null,
+    "mobility": null,
+    "interventions": ["controllo_parametri_vitali"],
+    "critical_issues": [],
+    "follow_up": "Programmato controllo tra 3 giorni"
+  },
+  "coding": {
+    "problems_normalized": ["ipertensione", "scompenso_cardiaco"]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

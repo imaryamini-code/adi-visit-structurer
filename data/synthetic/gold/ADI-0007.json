@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "record_id": "ADI-0007",
+    "template_type": ["diario_clinico", "presa_in_carico"],
+    "visit_datetime": "2026-02-23T08:30:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0007",
+    "age": 72,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 65,
+      "temperature": 36.2,
+      "spo2": 98
+    },
+    "consciousness": null,
+    "mobility": null,
+    "interventions": ["controllo_parametri_vitali"],
+    "critical_issues": [],
+    "follow_up": null
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

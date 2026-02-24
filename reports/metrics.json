@@ -1,6 +1,6 @@
 {
   "summary": {
-    "n_records": 3,
+    "n_records": 8,
     "text_field_accuracy": {
       "clinical.reason_for_visit": 1.0,
       "clinical.follow_up": 1.0
@@ -131,6 +131,203 @@
           "pred": [
             "diabete_tipo_2",
             "dolore_cronico"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "vitals_exact_match": true
+    },
+    "ADI-0004": {
+      "text_fields": {
+        "clinical.reason_for_visit": {
+          "gold": "controllo pressione e rivalutazione terapia",
+          "pred": "controllo pressione e rivalutazione terapia",
+          "correct": true
+        },
+        "clinical.follow_up": {
+          "gold": "programmato controllo tra 3 giorni",
+          "pred": "programmato controllo tra 3 giorni",
+          "correct": true
+        }
+      },
+      "lists": {
+        "clinical.interventions": {
+          "gold": [
+            "controllo_parametri_vitali"
+          ],
+          "pred": [
+            "controllo_parametri_vitali"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "coding.problems_normalized": {
+          "gold": [
+            "ipertensione",
+            "scompenso_cardiaco"
+          ],
+          "pred": [
+            "ipertensione",
+            "scompenso_cardiaco"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "vitals_exact_match": true
+    },
+    "ADI-0005": {
+      "text_fields": {
+        "clinical.reason_for_visit": {
+          "gold": "medicazione piaga da decubito",
+          "pred": "medicazione piaga da decubito",
+          "correct": true
+        },
+        "clinical.follow_up": {
+          "gold": null,
+          "pred": null,
+          "correct": true
+        }
+      },
+      "lists": {
+        "clinical.interventions": {
+          "gold": [
+            "medicazione",
+            "controllo_parametri_vitali"
+          ],
+          "pred": [
+            "medicazione",
+            "controllo_parametri_vitali"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "coding.problems_normalized": {
+          "gold": [
+            "lesione_da_pressione"
+          ],
+          "pred": [
+            "lesione_da_pressione"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "vitals_exact_match": true
+    },
+    "ADI-0006": {
+      "text_fields": {
+        "clinical.reason_for_visit": {
+          "gold": "valutazione dolore e controllo parametri",
+          "pred": "valutazione dolore e controllo parametri",
+          "correct": true
+        },
+        "clinical.follow_up": {
+          "gold": null,
+          "pred": null,
+          "correct": true
+        }
+      },
+      "lists": {
+        "clinical.interventions": {
+          "gold": [
+            "controllo_parametri_vitali"
+          ],
+          "pred": [
+            "controllo_parametri_vitali"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "coding.problems_normalized": {
+          "gold": [
+            "dolore_cronico",
+            "diabete_tipo_2"
+          ],
+          "pred": [
+            "diabete_tipo_2",
+            "dolore_cronico"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "vitals_exact_match": true
+    },
+    "ADI-0007": {
+      "text_fields": {
+        "clinical.reason_for_visit": {
+          "gold": "controllo generale",
+          "pred": "controllo generale",
+          "correct": true
+        },
+        "clinical.follow_up": {
+          "gold": null,
+          "pred": null,
+          "correct": true
+        }
+      },
+      "lists": {
+        "clinical.interventions": {
+          "gold": [
+            "controllo_parametri_vitali"
+          ],
+          "pred": [
+            "controllo_parametri_vitali"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "coding.problems_normalized": {
+          "gold": [],
+          "pred": [],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "vitals_exact_match": true
+    },
+    "ADI-0008": {
+      "text_fields": {
+        "clinical.reason_for_visit": {
+          "gold": "rivalutazione caduta recente",
+          "pred": "rivalutazione caduta recente",
+          "correct": true
+        },
+        "clinical.follow_up": {
+          "gold": "programmato nuovo controllo",
+          "pred": "programmato nuovo controllo",
+          "correct": true
+        }
+      },
+      "lists": {
+        "clinical.interventions": {
+          "gold": [
+            "controllo_parametri_vitali"
+          ],
+          "pred": [
+            "controllo_parametri_vitali"
+          ],
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "coding.problems_normalized": {
+          "gold": [
+            "caduta"
+          ],
+          "pred": [
+            "caduta"
           ],
           "precision": 1.0,
           "recall": 1.0,

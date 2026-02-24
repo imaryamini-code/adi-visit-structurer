@@ -38,6 +38,16 @@ SYNONYM_MAP = {
     # Chronic pain
     "dolore cronico": "dolore_cronico",
 
+    # Heart failure
+    "scompenso cardiaco": "scompenso_cardiaco",
+    "scompenso": "scompenso_cardiaco",  # optional: broader, but OK for this dataset
+
+    # Falls
+    "caduta": "caduta",
+    "caduta recente": "caduta",
+    "rischio caduta": "rischio_caduta",
+    "rischio di caduta": "rischio_caduta",
+
     # Respiratory
     "bpco": "bpco",
     "bronchite cronica": "bpco",
