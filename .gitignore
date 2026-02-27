@@ -205,3 +205,4 @@ cython_debug/
 reports/examples/
 reports/metrics.json
 
+.DS_Store
