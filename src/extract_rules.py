@@ -7,13 +7,6 @@ from dateutil import parser
 # DATETIME
 # ----------------------------
 def extract_datetime(text: str):
-    """
-    Extract datetime from patterns like:
-      - 24/02/2026 09:10
-      - 24/02/2026 ore 09:10
-      - Visita ... del 24/02/2026 alle 10:00
-    Returns ISO string if possible, else None.
-    """
     patterns = [
         r"(\d{1,2}/\d{1,2}/\d{4})\s*(?:ore|alle)?\s*(\d{1,2}:\d{2})",
     ]
@@ -34,14 +27,8 @@ def extract_datetime(text: str):
 # ----------------------------
 def extract_bp(text: str):
     """
-    Extract blood pressure safely (avoid matching dates like 24/02/2026).
-
-    Handles:
-      - PA 135/80
-      - PA135/80
-      - Pressione 135-80
-      - 135/80 mmHg
-      - Valori: 128/76
+    Safe BP extraction that avoids matching dates like 24/02/2026.
+    Handles PA 135/80, PA135/80, Pressione 135-80, 135/80 mmHg, Valori: 128/76
     """
     lines = [l.strip() for l in text.splitlines() if l.strip()]
 
@@ -50,19 +37,18 @@ def extract_bp(text: str):
         re.compile(r"\bPA\s*(\d{2,3})\s*/\s*(\d{2,3})\b", re.IGNORECASE),
         re.compile(r"\bpressione\s*(\d{2,3})\s*[-/]\s*(\d{2,3})\b", re.IGNORECASE),
         re.compile(r"\b(\d{2,3})\s*/\s*(\d{2,3})\s*(?:mmhg)?\b", re.IGNORECASE),
-        re.compile(r"\b(\d{2,3})\s*-\s*(\d{2,3})\b", re.IGNORECASE),  # last resort
+        re.compile(r"\b(\d{2,3})\s*-\s*(\d{2,3})\b", re.IGNORECASE),
     ]
 
-    allowed_cues = ("pa", "pressione", "parametri", "valori", "mmhg", "fc", "bpm", "temp", " t ")
+    allowed_cues = ("pa", "pressione", "parametri", "valori", "mmhg", "fc", "bpm", "temp", " t ", "spo2", "saturazione", "sato2")
 
     for line in lines:
         low = line.lower()
 
-        # Only consider "clinical looking" lines
         if not any(cue in low for cue in allowed_cues):
             continue
 
-        # If the line contains a date like 24/02/2026, ignore unless explicitly BP-cued
+        # Avoid date lines unless explicitly BP-cued
         if re.search(r"\b\d{1,2}/\d{1,2}/\d{2,4}\b", line):
             if "pa" not in low and "pressione" not in low:
                 continue
@@ -72,8 +58,6 @@ def extract_bp(text: str):
             if m:
                 sys = int(m.group(1))
                 dia = int(m.group(2))
-
-                # Sanity checks
                 if 70 <= sys <= 250 and 40 <= dia <= 150:
                     return sys, dia
 
@@ -84,13 +68,6 @@ def extract_bp(text: str):
 # HEART RATE
 # ----------------------------
 def extract_hr(text: str):
-    """
-    Handles:
-      - FC 76
-      - FC=74
-      - frequenza 80 bpm
-      - HR 80
-    """
     patterns = [
         r"\bFC\s*[:=]?\s*(\d{2,3})\b",
         r"\bHR\s*[:=]?\s*(\d{2,3})\b",
@@ -110,12 +87,6 @@ def extract_hr(text: str):
 # TEMPERATURE
 # ----------------------------
 def extract_temp(text: str):
-    """
-    Handles:
-      - temperatura 36.5
-      - temp 36,6
-      - T 36.4
-    """
     patterns = [
         r"\btemperatura\s*[:=]?\s*([0-9]{1,2}[.,][0-9])\b",
         r"\btemp\s*[:=]?\s*([0-9]{1,2}[.,][0-9])\b",
@@ -134,13 +105,6 @@ def extract_temp(text: str):
 # SpO2
 # ----------------------------
 def extract_spo2(text: str):
-    """
-    Handles:
-      - SpO2 98
-      - SatO2 97%
-      - saturazione 96
-    Returns integer or None.
-    """
     patterns = [
         r"\bSpO2\s*[:=]?\s*(\d{2,3})\s*%?\b",
         r"\bSatO2\s*[:=]?\s*(\d{2,3})\s*%?\b",
@@ -156,52 +120,38 @@ def extract_spo2(text: str):
 
 
 # ----------------------------
-# REASON FOR VISIT (UPGRADED)
+# REASON FOR VISIT (ROBUST)
 # ----------------------------
 def extract_reason(text: str):
-    """
-    Primary:
-      - Motivo della visita: ...
-      - Motivo: ...
-
-    Secondary:
-      - Paziente riferisce ...
-      - Riferisce ...
-      - Riferito ...
-
-    Fallback:
-      - choose first meaningful sentence after datetime line containing key words.
-    """
-    # 1) Primary: Motivo
+    # Primary: Motivo
     m = re.search(r"\bMotivo(?: della visita)?\s*:\s*(.*?)(?:\.|\n|$)", text, flags=re.IGNORECASE)
     if m:
         reason = m.group(1).strip()
         return reason if reason else None
 
-    # 2) Secondary: (Paziente )?riferisce ...
+    # Secondary: (Paziente )?Riferisce ...
     m = re.search(r"\b(?:Paziente\s+)?Riferisce\s+(.*?)(?:\.|\n|$)", text, flags=re.IGNORECASE)
     if m:
         reason = m.group(1).strip()
         return reason if reason else None
 
-    # 3) Secondary: Riferito ...
+    # Secondary: Riferito ...
     m = re.search(r"\bRiferito\s+(.*?)(?:\.|\n|$)", text, flags=re.IGNORECASE)
     if m:
         reason = m.group(1).strip()
         return reason if reason else None
 
-    # 4) Fallback: first "reason-like" line
+    # Fallback: first reason-like line
     lines = [l.strip() for l in text.splitlines() if l.strip()]
     for line in lines:
         low = line.lower()
 
-        # skip header/datetime lines
+        # skip header/datetime
         if re.search(r"\b\d{1,2}/\d{1,2}/\d{4}\b", line) and re.search(r"\b\d{1,2}:\d{2}\b", line):
             continue
-        if low.startswith(("visita",)):
+        if low.startswith("visita"):
             continue
 
-        # reason keywords
         if any(k in low for k in [
             "controllo", "monitoraggio", "rivalutazione", "dolore", "caduta",
             "medicazione", "verifica", "stanchezza", "appetito"
@@ -211,17 +161,9 @@ def extract_reason(text: str):
 
 
 # ----------------------------
-# FOLLOW UP
+# FOLLOW UP (ROBUST)
 # ----------------------------
 def extract_follow_up(text: str):
-    """
-    Handles:
-      - Programmato nuovo controllo...
-      - Follow up: ...
-      - Follow-up: ...
-      - controllo tra X giorni / prossima settimana
-      - ricontatto telefonico ...
-    """
     patterns = [
         r"\bProgrammato\b.*?(?:\.|\n|$)",
         r"\bFollow[-\s]?up\s*:\s*(.*?)(?:\.|\n|$)",
@@ -234,12 +176,10 @@ def extract_follow_up(text: str):
         if not m:
             continue
 
-        # If Follow up had a capturing group, return that group
         if m.lastindex and m.lastindex >= 1:
             val = m.group(1).strip()
             return val if val else None
 
-        # Otherwise return entire matched phrase
         val = m.group(0).strip().rstrip(".")
         return val if val else None
 
@@ -247,11 +187,13 @@ def extract_follow_up(text: str):
 
 
 # ----------------------------
-# INTERVENTIONS (baseline)
+# INTERVENTIONS (SAFE, NO HALLUCINATION)
 # ----------------------------
-def extract_interventions(text: str):
+def extract_interventions(text: str, vitals: dict | None = None):
     """
-    Minimal keyword-based interventions.
+    Adds 'controllo_parametri_vitali' ONLY if:
+      - at least one vital value exists, OR
+      - the text explicitly states that vitals/parameters were measured.
     """
     t = text.lower()
     interventions = []
@@ -259,19 +201,21 @@ def extract_interventions(text: str):
     if "medicazione" in t:
         interventions.append("medicazione")
 
-    # parameter/vitals check
-    if (
-        "parametri" in t
-        or "pa" in t
-        or "pressione" in t
-        or "fc" in t
-        or "bpm" in t
-        or "temperatura" in t
-        or "temp" in t
-        or "spo2" in t
-        or "saturazione" in t
-        or "sato2" in t
-    ):
+    explicit_parametri = any(
+        k in t for k in [
+            "rilevati parametri", "rilevazione parametri", "controllo parametri",
+            "monitoraggio segni vitali", "misurati parametri", "parametri rilevati"
+        ]
+    )
+
+    any_vital_present = False
+    if vitals:
+        any_vital_present = any(
+            vitals.get(k) is not None
+            for k in ["blood_pressure_systolic", "blood_pressure_diastolic", "heart_rate", "temperature", "spo2"]
+        )
+
+    if explicit_parametri or any_vital_present:
         interventions.append("controllo_parametri_vitali")
 
     # remove duplicates but keep order

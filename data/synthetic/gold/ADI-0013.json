@@ -1,0 +1,14 @@
+{
+  "clinical": {
+    "reason_for_visit": "stanchezza e scarso appetito",
+    "follow_up": "ricontatto telefonico con caregiver",
+    "interventions": [],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null
+    }
+  },
+  "coding": { "problems_normalized": ["malnutrizione"] }
+}

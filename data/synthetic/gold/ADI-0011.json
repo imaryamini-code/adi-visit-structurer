@@ -1,0 +1,14 @@
+{
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "follow_up": null,
+    "interventions": ["controllo_parametri_vitali"],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 76,
+      "temperature": 36.5
+    }
+  },
+  "coding": { "problems_normalized": [] }
+}
