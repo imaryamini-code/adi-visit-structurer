@@ -4,7 +4,7 @@ import argparse
 import json
 import re
 from pathlib import Path
-from typing import Any, Dict, Callable, Optional
+from typing import Any, Dict, Callable, Optional, Tuple
 
 import src.preprocess as preprocess_mod
 import src.extract_rules as rules_mod
@@ -87,8 +87,159 @@ EXTRACT_SPO2 = _pick_callable(
 )
 
 
+# ---------------------------
+# Robust vitals fallback regex
+# ---------------------------
+
+_BP_CONTEXT = re.compile(r"\b(pa|pressione|press\.?|bp)\b", re.IGNORECASE)
+_HR_CONTEXT = re.compile(r"\b(fc|frequenza\s*cardiaca|hr|bpm)\b", re.IGNORECASE)
+_TEMP_CONTEXT = re.compile(r"\b(temp(?:eratura)?|t)\b", re.IGNORECASE)
+_SPO2_CONTEXT = re.compile(r"\b(spo2|saturazione|sat\.?)\b", re.IGNORECASE)
+
+
+def _to_float(s: str) -> Optional[float]:
+    s = s.strip().replace(",", ".")
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
+def _parse_bp_fallback(text: str) -> Tuple[Optional[int], Optional[int]]:
+    """
+    Parse BP like:
+      - 130/80
+      - 130-80
+      - PA 130/80
+      - pressione 135-80
+    Avoid dates by requiring plausible BP ranges.
+    """
+    t = text
+
+    # Prefer matches near BP context words
+    candidates = []
+    for m in re.finditer(r"(\d{2,3})\s*[/\-]\s*(\d{2,3})", t):
+        s1 = int(m.group(1))
+        s2 = int(m.group(2))
+        # Plausible BP ranges
+        if 70 <= s1 <= 260 and 30 <= s2 <= 150 and s1 > s2:
+            # check context window
+            start = max(0, m.start() - 25)
+            end = min(len(t), m.end() + 25)
+            window = t[start:end]
+            score = 2 if _BP_CONTEXT.search(window) else 1
+            candidates.append((score, s1, s2))
+
+    if not candidates:
+        return None, None
+
+    # pick best-scoring candidate
+    candidates.sort(key=lambda x: (-x[0], x[1]))
+    _, sys, dia = candidates[0]
+    return sys, dia
+
+
+def _parse_hr_fallback(text: str) -> Optional[int]:
+    """
+    Parse HR like:
+      - FC=72
+      - FC 72
+      - HR 74
+      - 72 bpm
+    """
+    t = text
+
+    candidates = []
+    patterns = [
+        r"\bfc\s*[:=]?\s*(\d{2,3})\b",
+        r"\bhr\s*[:=]?\s*(\d{2,3})\b",
+        r"\b(\d{2,3})\s*bpm\b",
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat, t, flags=re.IGNORECASE):
+            val = int(m.group(1))
+            if 30 <= val <= 220:
+                start = max(0, m.start() - 25)
+                end = min(len(t), m.end() + 25)
+                window = t[start:end]
+                score = 2 if _HR_CONTEXT.search(window) else 1
+                candidates.append((score, val))
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (-x[0], x[1]))
+    return candidates[0][1]
+
+
+def _parse_temp_fallback(text: str) -> Optional[float]:
+    """
+    Parse temperature like:
+      - temp 36,7
+      - T 36.6
+      - 36,7°C
+    """
+    t = text
+    candidates = []
+
+    patterns = [
+        r"\btemp(?:eratura)?\s*[:=]?\s*(\d{2}[.,]\d)\b",
+        r"\bt\s*[:=]?\s*(\d{2}[.,]\d)\b",
+        r"\b(\d{2}[.,]\d)\s*°\s*c\b",
+        r"\b(\d{2}[.,]\d)\s*°c\b",
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat, t, flags=re.IGNORECASE):
+            val = _to_float(m.group(1))
+            if val is not None and 33.0 <= val <= 42.5:
+                start = max(0, m.start() - 25)
+                end = min(len(t), m.end() + 25)
+                window = t[start:end]
+                score = 2 if _TEMP_CONTEXT.search(window) else 1
+                candidates.append((score, val))
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (-x[0], x[1]))
+    return candidates[0][1]
+
+
+def _parse_spo2_fallback(text: str) -> Optional[int]:
+    """
+    Parse SpO2 like:
+      - SpO2 98
+      - SpO2=98%
+      - saturazione 97%
+    """
+    t = text
+    candidates = []
+
+    patterns = [
+        r"\bspo2\s*[:=]?\s*(\d{2,3})\s*%?\b",
+        r"\bsaturazione\s*[:=]?\s*(\d{2,3})\s*%?\b",
+        r"\bsat\.?\s*[:=]?\s*(\d{2,3})\s*%?\b",
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat, t, flags=re.IGNORECASE):
+            val = int(m.group(1))
+            if 50 <= val <= 100:
+                start = max(0, m.start() - 25)
+                end = min(len(t), m.end() + 25)
+                window = t[start:end]
+                score = 2 if _SPO2_CONTEXT.search(window) else 1
+                candidates.append((score, val))
+
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: (-x[0], x[1]))
+    return candidates[0][1]
+
+
 def extract_vitals_wrapper(text: str) -> Dict[str, Any]:
-    vitals = {
+    """
+    1) Try existing rule extractors from src/extract_rules.py
+    2) If any field is missing/partial, apply robust regex fallback
+    """
+    vitals: Dict[str, Any] = {
         "blood_pressure_systolic": None,
         "blood_pressure_diastolic": None,
         "heart_rate": None,
@@ -96,6 +247,7 @@ def extract_vitals_wrapper(text: str) -> Dict[str, Any]:
         "spo2": None,
     }
 
+    # --- Rule-based first ---
     if EXTRACT_BP:
         bp = EXTRACT_BP(text)
         if isinstance(bp, dict):
@@ -113,6 +265,25 @@ def extract_vitals_wrapper(text: str) -> Dict[str, Any]:
 
     if EXTRACT_SPO2:
         vitals["spo2"] = EXTRACT_SPO2(text)
+
+    # --- Fallback only if needed ---
+    sys_missing = vitals["blood_pressure_systolic"] is None
+    dia_missing = vitals["blood_pressure_diastolic"] is None
+    if sys_missing or dia_missing:
+        sys_val, dia_val = _parse_bp_fallback(text)
+        if sys_missing:
+            vitals["blood_pressure_systolic"] = sys_val
+        if dia_missing:
+            vitals["blood_pressure_diastolic"] = dia_val
+
+    if vitals["heart_rate"] is None:
+        vitals["heart_rate"] = _parse_hr_fallback(text)
+
+    if vitals["temperature"] is None:
+        vitals["temperature"] = _parse_temp_fallback(text)
+
+    if vitals["spo2"] is None:
+        vitals["spo2"] = _parse_spo2_fallback(text)
 
     return vitals
 
@@ -182,7 +353,7 @@ def apply_hybrid(text: str, rec: Dict[str, Any], model: str) -> None:
     rec["clinical"]["follow_up"] = out["clinical"].get("follow_up")
     rec["clinical"]["interventions"] = out["clinical"].get("interventions", [])
 
-    # Rules-based vitals are more reliable than LLM vitals
+    # Rules(+fallback) for vitals
     rec["clinical"]["vitals"] = extract_vitals_wrapper(text)
 
     # Merge problems (union)
@@ -199,19 +370,12 @@ def normalize_reason(reason: Optional[str]) -> Optional[str]:
     if not reason:
         return None
     r = reason.strip().lower()
-
-    # Normalize punctuation variants that break exact-match
     r = r.replace("+", " e ")
     r = re.sub(r"\s+", " ", r).strip()
-
-    # Normalize common abbreviations
     r = re.sub(r"\bdx\b", "destro", r)
     r = re.sub(r"\bsx\b", "sinistro", r)
-
-    # ✅ NEW: remove filler phrase that breaks exact match
     r = re.sub(r"\bda giorni\b", "", r).strip()
     r = re.sub(r"\s+", " ", r).strip()
-
     return r
 
 
@@ -221,20 +385,17 @@ def normalize_follow_up(fu: Optional[str]) -> Optional[str]:
     s = fu.strip().lower()
     s = re.sub(r"\s+", " ", s)
 
-    # Canonical "programmato controllo tra X giorni"
     m = re.match(r"^(?:programmato controllo )?(?:tra )?(\d+)\s*giorni$", s)
     if m:
         n = m.group(1)
         return f"programmato controllo tra {n} giorni"
 
-    # Canonical "programmato nuovo controllo"
     if s in {"nuovo controllo", "programmato nuovo controllo"}:
         return "programmato nuovo controllo"
 
     return s
 
 
-# Controlled vocab for interventions (matches your gold labels)
 INTERVENTION_VOCAB = {
     "controllo_parametri_vitali",
     "medicazione",
@@ -246,7 +407,6 @@ INTERVENTION_SYNONYMS = {
     "rilevati parametri": "controllo_parametri_vitali",
     "rilevazione parametri": "controllo_parametri_vitali",
     "controllo generale": "controllo_parametri_vitali",
-
     "medicazione avanzata": "medicazione",
     "medicazione lesione": "medicazione",
     "medicazione piaga": "medicazione",
@@ -256,55 +416,43 @@ INTERVENTION_SYNONYMS = {
 def normalize_interventions(interventions: list[str], text: str, reason: Optional[str]) -> list[str]:
     t = (text or "").lower()
     r = (reason or "").lower()
+    out: list[str] = []
 
-    out = []
-
-    # map LLM outputs to controlled vocab
     for it in interventions or []:
         low = str(it).strip().lower()
         mapped = INTERVENTION_SYNONYMS.get(low, low)
         if mapped in INTERVENTION_VOCAB:
             out.append(mapped)
 
-    # infer medicazione from text/reason keywords
     if ("medicazione" in t) or ("medicazione" in r) or ("piaga" in t) or ("lesione" in t) or ("decubito" in t):
         out.append("medicazione")
 
-    # unique + stable order
     out = list(dict.fromkeys(out))
-
-    # final filter to vocab
     return [x for x in out if x in INTERVENTION_VOCAB]
 
 
 def postprocess_record(rec: Dict[str, Any], text: str) -> None:
-    # Normalize text fields to canonical forms
     rec["clinical"]["reason_for_visit"] = normalize_reason(rec["clinical"].get("reason_for_visit"))
     rec["clinical"]["follow_up"] = normalize_follow_up(rec["clinical"].get("follow_up"))
 
-    # If LLM returned None for reason, fallback to rules
     if rec["clinical"]["reason_for_visit"] is None and EXTRACT_REASON:
         rec["clinical"]["reason_for_visit"] = normalize_reason(EXTRACT_REASON(text))
 
-    # ✅ NEW: If follow_up is None but note mentions "nuovo controllo"
     if rec["clinical"]["follow_up"] is None and "nuovo controllo" in (text or "").lower():
         rec["clinical"]["follow_up"] = "programmato nuovo controllo"
 
-    # Normalize interventions into controlled vocab + infer medicazione when appropriate
     rec["clinical"]["interventions"] = normalize_interventions(
         rec["clinical"].get("interventions", []),
         text=text,
         reason=rec["clinical"].get("reason_for_visit"),
     )
 
-    # Infer controllo_parametri_vitali when vitals exist
     vitals = rec.get("clinical", {}).get("vitals", {}) or {}
     has_any_vital = any(
         vitals.get(k) is not None
         for k in ["blood_pressure_systolic", "blood_pressure_diastolic", "heart_rate", "temperature", "spo2"]
     )
 
-    # ✅ NEW: If reason is still None but vitals exist, set standard reason
     if rec["clinical"]["reason_for_visit"] is None and has_any_vital:
         rec["clinical"]["reason_for_visit"] = "controllo parametri"
 
@@ -313,12 +461,6 @@ def postprocess_record(rec: Dict[str, Any], text: str) -> None:
 
 
 def run_quality_check(rec: Dict[str, Any], text: str) -> Dict[str, Any]:
-    """
-    Call quality_check() safely regardless of its signature.
-    Supports:
-      - quality_check(rec, text)
-      - quality_check(rec)
-    """
     try:
         return quality_check(rec, text)  # type: ignore
     except TypeError:
@@ -349,7 +491,6 @@ def main() -> None:
         else:
             apply_rules(text, rec)
 
-        # ✅ postprocessing before quality checks
         postprocess_record(rec, text)
 
         q = run_quality_check(rec, text)

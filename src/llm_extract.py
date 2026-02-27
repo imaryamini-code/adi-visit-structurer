@@ -2,13 +2,12 @@
 
 import json
 import os
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import requests
 
-
-DEFAULT_OLLAMA_URL = "http://localhost:11434"
-DEFAULT_MODEL = "llama3.1:8b"
+DEFAULT_OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
+DEFAULT_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1")  # safer default than llama3.1:8b
 
 
 SYSTEM_PROMPT = (
@@ -31,10 +30,13 @@ def llm_extract(
     text: str,
     model: str = DEFAULT_MODEL,
     base_url: str = DEFAULT_OLLAMA_URL,
+    timeout_s: int = 90,
 ) -> Dict[str, Any]:
     """
     Local LLM extraction using Ollama.
-    Requires Ollama running (usually already) and model pulled (e.g., llama3.1:8b).
+    Requires:
+      - Ollama running on base_url (default http://localhost:11434)
+      - Model pulled locally (e.g. `ollama pull llama3.1`)
     """
     prompt = f"{SYSTEM_PROMPT}\n\nTEXT:\n{text}\n\nJSON ONLY:"
 
@@ -46,21 +48,29 @@ def llm_extract(
     }
 
     try:
-        r = requests.post(f"{base_url}/api/generate", json=payload, timeout=90)
+        r = requests.post(f"{base_url}/api/generate", json=payload, timeout=timeout_s)
     except requests.RequestException as e:
         raise RuntimeError(
-            f"Could not reach Ollama at {base_url}. "
-            "Make sure Ollama is running.\n"
+            f"Could not reach Ollama at {base_url}.\n"
+            "Make sure Ollama is running (e.g. `ollama serve`).\n"
             f"Error: {e}"
         )
 
     if r.status_code != 200:
+        # Common case: model not found locally
+        if "model" in r.text.lower() and "not" in r.text.lower():
+            raise RuntimeError(
+                f"Ollama returned {r.status_code}: {r.text}\n"
+                f"Model '{model}' may not be installed.\n"
+                f"Try: ollama pull {model}\n"
+                "Or set OLLAMA_MODEL to a model you have."
+            )
         raise RuntimeError(f"Ollama error {r.status_code}: {r.text}")
 
     data = r.json()
     out_text = (data.get("response") or "").strip()
 
-    # Best-effort extract JSON object if the model adds extra text
+    # Best-effort: extract JSON object if the model adds extra text
     if "{" in out_text and "}" in out_text:
         out_text = out_text[out_text.find("{") : out_text.rfind("}") + 1]
 
@@ -70,6 +80,7 @@ def llm_extract(
         os.makedirs("reports", exist_ok=True)
         with open("reports/llm_raw_output.txt", "w", encoding="utf-8") as f:
             f.write(out_text)
+
         raise RuntimeError(
             "Local LLM returned invalid JSON. Raw output saved to reports/llm_raw_output.txt.\n"
             f"JSON error: {e}"
