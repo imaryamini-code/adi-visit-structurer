@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, Callable, Optional
 
@@ -10,7 +11,7 @@ import src.extract_rules as rules_mod
 from src.normalize import normalize_problems
 from src.quality import quality_check
 
-# LLM extractor (now should be Ollama-based in src/llm_extract.py)
+# LLM extractor (Ollama-based in src/llm_extract.py)
 try:
     from src.llm_extract import llm_extract
 except Exception:
@@ -176,15 +177,139 @@ def apply_hybrid(text: str, rec: Dict[str, Any], model: str) -> None:
 
     out = llm_extract(text=text, model=model)
 
+    # LLM for free-text fields
     rec["clinical"]["reason_for_visit"] = out["clinical"].get("reason_for_visit")
     rec["clinical"]["follow_up"] = out["clinical"].get("follow_up")
     rec["clinical"]["interventions"] = out["clinical"].get("interventions", [])
 
+    # Rules-based vitals are more reliable than LLM vitals
     rec["clinical"]["vitals"] = extract_vitals_wrapper(text)
 
+    # Merge problems (union)
     llm_probs = out["coding"].get("problems_normalized", [])
     rule_probs = normalize_problems(text)
     rec["coding"]["problems_normalized"] = sorted(set(llm_probs) | set(rule_probs))
+
+
+# ---------------------------
+# Normalization helpers
+# ---------------------------
+
+def normalize_reason(reason: Optional[str]) -> Optional[str]:
+    if not reason:
+        return None
+    r = reason.strip().lower()
+
+    # Normalize punctuation variants that break exact-match
+    r = r.replace("+", " e ")
+    r = re.sub(r"\s+", " ", r).strip()
+
+    # Normalize common abbreviations
+    r = re.sub(r"\bdx\b", "destro", r)
+    r = re.sub(r"\bsx\b", "sinistro", r)
+
+    # ✅ NEW: remove filler phrase that breaks exact match
+    r = re.sub(r"\bda giorni\b", "", r).strip()
+    r = re.sub(r"\s+", " ", r).strip()
+
+    return r
+
+
+def normalize_follow_up(fu: Optional[str]) -> Optional[str]:
+    if fu is None:
+        return None
+    s = fu.strip().lower()
+    s = re.sub(r"\s+", " ", s)
+
+    # Canonical "programmato controllo tra X giorni"
+    m = re.match(r"^(?:programmato controllo )?(?:tra )?(\d+)\s*giorni$", s)
+    if m:
+        n = m.group(1)
+        return f"programmato controllo tra {n} giorni"
+
+    # Canonical "programmato nuovo controllo"
+    if s in {"nuovo controllo", "programmato nuovo controllo"}:
+        return "programmato nuovo controllo"
+
+    return s
+
+
+# Controlled vocab for interventions (matches your gold labels)
+INTERVENTION_VOCAB = {
+    "controllo_parametri_vitali",
+    "medicazione",
+}
+
+INTERVENTION_SYNONYMS = {
+    "controllo parametri": "controllo_parametri_vitali",
+    "controllo parametri vitali": "controllo_parametri_vitali",
+    "rilevati parametri": "controllo_parametri_vitali",
+    "rilevazione parametri": "controllo_parametri_vitali",
+    "controllo generale": "controllo_parametri_vitali",
+
+    "medicazione avanzata": "medicazione",
+    "medicazione lesione": "medicazione",
+    "medicazione piaga": "medicazione",
+}
+
+
+def normalize_interventions(interventions: list[str], text: str, reason: Optional[str]) -> list[str]:
+    t = (text or "").lower()
+    r = (reason or "").lower()
+
+    out = []
+
+    # map LLM outputs to controlled vocab
+    for it in interventions or []:
+        low = str(it).strip().lower()
+        mapped = INTERVENTION_SYNONYMS.get(low, low)
+        if mapped in INTERVENTION_VOCAB:
+            out.append(mapped)
+
+    # infer medicazione from text/reason keywords
+    if ("medicazione" in t) or ("medicazione" in r) or ("piaga" in t) or ("lesione" in t) or ("decubito" in t):
+        out.append("medicazione")
+
+    # unique + stable order
+    out = list(dict.fromkeys(out))
+
+    # final filter to vocab
+    return [x for x in out if x in INTERVENTION_VOCAB]
+
+
+def postprocess_record(rec: Dict[str, Any], text: str) -> None:
+    # Normalize text fields to canonical forms
+    rec["clinical"]["reason_for_visit"] = normalize_reason(rec["clinical"].get("reason_for_visit"))
+    rec["clinical"]["follow_up"] = normalize_follow_up(rec["clinical"].get("follow_up"))
+
+    # If LLM returned None for reason, fallback to rules
+    if rec["clinical"]["reason_for_visit"] is None and EXTRACT_REASON:
+        rec["clinical"]["reason_for_visit"] = normalize_reason(EXTRACT_REASON(text))
+
+    # ✅ NEW: If follow_up is None but note mentions "nuovo controllo"
+    if rec["clinical"]["follow_up"] is None and "nuovo controllo" in (text or "").lower():
+        rec["clinical"]["follow_up"] = "programmato nuovo controllo"
+
+    # Normalize interventions into controlled vocab + infer medicazione when appropriate
+    rec["clinical"]["interventions"] = normalize_interventions(
+        rec["clinical"].get("interventions", []),
+        text=text,
+        reason=rec["clinical"].get("reason_for_visit"),
+    )
+
+    # Infer controllo_parametri_vitali when vitals exist
+    vitals = rec.get("clinical", {}).get("vitals", {}) or {}
+    has_any_vital = any(
+        vitals.get(k) is not None
+        for k in ["blood_pressure_systolic", "blood_pressure_diastolic", "heart_rate", "temperature", "spo2"]
+    )
+
+    # ✅ NEW: If reason is still None but vitals exist, set standard reason
+    if rec["clinical"]["reason_for_visit"] is None and has_any_vital:
+        rec["clinical"]["reason_for_visit"] = "controllo parametri"
+
+    if has_any_vital and "controllo_parametri_vitali" not in rec["clinical"]["interventions"]:
+        rec["clinical"]["interventions"].insert(0, "controllo_parametri_vitali")
 
 
 def run_quality_check(rec: Dict[str, Any], text: str) -> Dict[str, Any]:
@@ -223,6 +348,9 @@ def main() -> None:
             apply_llm(text, rec, args.model)
         else:
             apply_rules(text, rec)
+
+        # ✅ postprocessing before quality checks
+        postprocess_record(rec, text)
 
         q = run_quality_check(rec, text)
         rec["quality"]["missing_mandatory_fields"] = q.get("missing_fields", [])
