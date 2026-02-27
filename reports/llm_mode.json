@@ -1,5 +1,0 @@
-{
-  "use_llm": false,
-  "hybrid": true,
-  "model": "llama3.1:8b"
-}
