@@ -10,12 +10,14 @@ The project supports healthcare professionals by transforming **free-text or dic
 
 ## Key Features
 
-- **Voice-to-text input** — clinical dictation transcribed via Whisper
+- **Voice-to-text input** — clinical dictation transcribed via faster-whisper
 - **Manual text input** — paste or type notes directly
-- **Hybrid extraction pipeline** — rule-based NLP + optional local LLM (Ollama)
+- **Hybrid extraction pipeline** — rule-based NLP + optional local LLM (Mistral via Ollama)
+- **Anamnesis extraction** — patient background and medical history detected automatically
 - **Structured ADI-compatible output** — JSON with all clinical fields
 - **Quality checks** — missing fields, inconsistent data, follow-up reminders
 - **Interactive web dashboard** — review reports and raw JSON in one place
+- **Clinical knowledge quiz** — 10-question ADI knowledge check
 
 ---
 
@@ -26,6 +28,7 @@ From a single clinical note, the assistant generates:
 | Field | Description |
 |---|---|
 | Reason for visit | Normalized clinical reason |
+| Anamnesis brief | Patient background and medical history |
 | Vital signs | Blood pressure, heart rate, temperature, SpO₂ |
 | Interventions | Actions performed during the visit |
 | Follow-up | Next steps, timing, and responsible party |
@@ -42,9 +45,9 @@ Voice / Text Input
         ↓
    Preprocessing          Strip LLM wrappers, normalize whitespace
         ↓
-  Rule-based NLP          Extract vitals, reason, follow-up, interventions
+  Rule-based NLP          Extract vitals, reason, anamnesis, follow-up, interventions
         ↓
-  LLM (optional)          Fill gaps rules couldn't cover (Ollama, local)
+  LLM (optional)          Fill gaps rules couldn't cover (Mistral via Ollama)
         ↓
    Normalization           Align labels to ADI vocabulary
         ↓
@@ -66,13 +69,14 @@ Voice / Text Input
 {
   "clinical": {
     "reason_for_visit": "controllo parametri",
+    "anamnesis_brief": "paziente con storia di ipertensione arteriosa nota, in terapia domiciliare",
     "vitals": {
       "blood_pressure": "130/80",
       "heart_rate": 72,
       "temperature": 36.7,
       "spo2": 97
     },
-    "interventions": ["monitoraggio_parametri_vitali"],
+    "interventions": ["monitoraggio_parametri_vitali", "valutazione_generale"],
     "follow_up": "Nuovo controllo tra 7 giorni.",
     "critical_issues": []
   },
@@ -89,13 +93,15 @@ Voice / Text Input
 
 The system includes a full evaluation module (`src/evaluate.py`) comparing structured predictions against a 100-record synthetic gold dataset.
 
-**Metrics computed:**
+**Results (rules-only baseline, 100 records):**
 
-- Reason for visit accuracy
-- Follow-up accuracy (type + timing)
-- Vitals exact match rate
-- Interventions macro F1
-- Problems macro F1
+| Metric | Score |
+|---|---|
+| Reason for visit accuracy | 74% |
+| Follow-up accuracy | 75% |
+| Vitals exact match rate | 79% |
+| Interventions macro F1 | 0.706 |
+| Problems macro F1 | 0.448 |
 
 To run evaluation:
 
@@ -117,7 +123,7 @@ adi-visit-structurer/
 │   ├── extract_rules.py      # Rule-based NLP (single source of truth)
 │   ├── normalize.py          # Label normalization
 │   ├── quality.py            # Quality checks
-│   ├── llm_extract.py        # Local LLM via Ollama
+│   ├── llm_extract.py        # Local LLM via Ollama (Mistral)
 │   ├── schema.py             # LLM output coercion
 │   ├── run_pipeline.py       # Batch pipeline
 │   ├── evaluate.py           # Evaluation metrics
@@ -137,8 +143,9 @@ adi-visit-structurer/
 │   └── validate_dataset.py   # Dataset schema validator
 ├── templates/
 │   ├── index.html            # Main dashboard
-│   ├── login.html
-│   └── register.html
+│   ├── login.html            # Login page
+│   ├── register.html         # Registration page
+│   └── quiz.html             # Clinical knowledge quiz
 ├── static/
 │   ├── style.css
 │   └── app.js
@@ -171,7 +178,7 @@ pip install -r requirements.txt
 
 ```bash
 ollama serve
-ollama pull llama3.1:8b
+ollama pull mistral
 ```
 
 The system works without Ollama — it falls back to rule-only mode automatically.
