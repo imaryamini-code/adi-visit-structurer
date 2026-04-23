@@ -19,6 +19,7 @@ from src.preprocess import preprocess_text
 from src.extract_rules import (
     extract_vitals,
     extract_reason,
+    extract_anamnesis,
     extract_follow_up,
     extract_interventions,
     extract_critical_issues,
@@ -141,7 +142,7 @@ def _should_call_llm(rule_vitals: Dict, reason: Optional[str], interventions: Li
         return False
     if not SMART_LLM_MODE:
         return True
-    enough_vitals = sum(1 for v in rule_vitals.values() if v is not None) >= 2
+    enough_vitals = sum(1 for v in rule_vitals.values() if v is not None) >= 1
     return not (reason and enough_vitals and interventions)
 
 
@@ -157,11 +158,11 @@ def hybrid_extract(text: str) -> Dict[str, Any]:
     """
     vitals = extract_vitals(text)
     reason = extract_reason(text)
+    anamnesis = extract_anamnesis(text)
     follow_up = extract_follow_up(text)
     interventions = extract_interventions(text, vitals=vitals, reason=reason)
     critical = extract_critical_issues(text, spo2=vitals.get("spo2"))
     problems = normalize_problems(text)
-    anamnesis = None
     llm_error = None
 
     if _should_call_llm(vitals, reason, interventions):
@@ -170,8 +171,6 @@ def hybrid_extract(text: str) -> Dict[str, Any]:
 
         if not reason:
             reason = llm.get("reason_for_visit")
-        if not anamnesis:
-            anamnesis = llm.get("anamnesis_brief")
         if not follow_up:
             raw_fu = llm.get("follow_up")
             if raw_fu:
@@ -219,8 +218,7 @@ def build_output(extracted: Dict[str, Any]) -> Dict[str, Any]:
     if not extracted.get("interventions"):
         warnings.append("No interventions detected")
 
-    if extracted.get("_llm_error"):
-        warnings.append(f"LLM unavailable: {extracted['_llm_error']}")
+
 
     # Convert follow_up dict to human-readable string for web display
     follow_up = extracted.get("follow_up")

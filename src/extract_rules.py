@@ -572,6 +572,50 @@ def extract_critical_issues(
     return list(dict.fromkeys(issues))
 
 
+
+
+# ---------------------------------------------------------------------------
+# Anamnesis brief
+# ---------------------------------------------------------------------------
+
+def extract_anamnesis(text: str) -> Optional[str]:
+    """
+    Extract a brief anamnesis from the clinical note.
+    Looks for patient background, medical history, and chronic conditions.
+    """
+    sents = _sentences(text)
+    t = _clean(text)
+
+    # Trigger keywords that signal anamnesis content
+    anamnesis_triggers = [
+        "paziente con", "paziente affetto", "paziente portatore",
+        "anamnesi", "storia di", "storia clinica",
+        "affetto da", "portatore di", "soffre di",
+        "in terapia con", "in terapia domiciliare",
+        "patologia nota", "diagnosi di", "follow up di",
+        "ipertensione nota", "diabete noto", "bpco nota",
+        "cardiopatia nota", "insufficienza renale",
+        "pregressa", "pregresso",
+    ]
+
+    found_sentences = []
+    for sent in sents:
+        s = _clean(sent)
+        if any(trigger in s for trigger in anamnesis_triggers):
+            # Skip sentences that are mainly about vitals or interventions
+            vital_words = ["pa ", "fc ", "spo2", "temperatura", "mmhg", "bpm"]
+            if not any(v in s for v in vital_words):
+                found_sentences.append(sent.strip())
+
+    if not found_sentences:
+        return None
+
+    # Return first 2 relevant sentences joined, max 200 chars
+    result = ". ".join(found_sentences[:2])
+    if len(result) > 200:
+        result = result[:200].rsplit(" ", 1)[0] + "..."
+    return result.strip()
+
 # ---------------------------------------------------------------------------
 # Convenience: extract everything at once
 # ---------------------------------------------------------------------------
@@ -582,6 +626,7 @@ def extract_all(text: str) -> Dict[str, Any]:
     return {
         "visit_datetime": extract_datetime(text),
         "reason_for_visit": extract_reason(text),
+        "anamnesis_brief": extract_anamnesis(text),
         "vitals": vitals,
         "interventions": extract_interventions(text, vitals=vitals),
         "follow_up": extract_follow_up(text),
