@@ -1,0 +1,378 @@
+{
+  "records_evaluated": 100,
+  "reason_for_visit_accuracy": 0.74,
+  "follow_up_accuracy": 0.75,
+  "vitals_exact_match_rate": 0.79,
+  "interventions_macro_precision": 0.7217,
+  "interventions_macro_recall": 0.7367,
+  "interventions_macro_f1": 0.706,
+  "problems_macro_precision": 0.4317,
+  "problems_macro_recall": 0.495,
+  "problems_macro_f1": 0.4463,
+  "gold_only_ids": [],
+  "pred_only_ids": [],
+  "reason_mismatches_sample": [
+    {
+      "record_id": "ADI-0003",
+      "gold_reason_raw": "valutazione dolore cronico",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "rivalutazione_dolore",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0004",
+      "gold_reason_raw": "controllo pressione e rivalutazione terapia",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0005",
+      "gold_reason_raw": "medicazione piaga da decubito",
+      "pred_reason_raw": "controllo parametri",
+      "gold_reason_canonical": "medicazione_lesione",
+      "pred_reason_canonical": "controllo_parametri"
+    },
+    {
+      "record_id": "ADI-0006",
+      "gold_reason_raw": "valutazione dolore e controllo parametri",
+      "pred_reason_raw": "controllo parametri",
+      "gold_reason_canonical": "rivalutazione_dolore",
+      "pred_reason_canonical": "controllo_parametri"
+    },
+    {
+      "record_id": "ADI-0007",
+      "gold_reason_raw": "controllo generale",
+      "pred_reason_raw": "controllo parametri",
+      "gold_reason_canonical": "controllo_generale",
+      "pred_reason_canonical": "controllo_parametri"
+    },
+    {
+      "record_id": "ADI-0009",
+      "gold_reason_raw": "monitoraggio segni vitali e verifica terapia",
+      "pred_reason_raw": "controllo parametri",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_parametri"
+    },
+    {
+      "record_id": "ADI-0018",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0019",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "rivalutazione dolore",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "rivalutazione_dolore"
+    },
+    {
+      "record_id": "ADI-0022",
+      "gold_reason_raw": "controllo parametri",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_parametri",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0028",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0029",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0037",
+      "gold_reason_raw": "medicazione/controllo lesione",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "medicazione_lesione",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0039",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "rivalutazione dolore",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "rivalutazione_dolore"
+    },
+    {
+      "record_id": "ADI-0040",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_generale"
+    },
+    {
+      "record_id": "ADI-0041",
+      "gold_reason_raw": "controllo terapia/somministrazione farmaco",
+      "pred_reason_raw": "controllo generale",
+      "gold_reason_canonical": "controllo_terapia",
+      "pred_reason_canonical": "controllo_generale"
+    }
+  ],
+  "vitals_mismatches_sample": [
+    {
+      "record_id": "ADI-0003",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "125",
+        "blood_pressure_diastolic": "75",
+        "heart_rate": "70",
+        "temperature": "36.5",
+        "spo2": null
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": "70",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0018",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "98",
+        "temperature": "36.5",
+        "spo2": "99"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "98",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0028",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "78",
+        "temperature": "36.5",
+        "spo2": "97"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "78",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0036",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "78",
+        "temperature": "36.5",
+        "spo2": "96"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "78",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0037",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "60",
+        "temperature": "37.8",
+        "spo2": "96"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "60",
+        "temperature": "37.8",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0052",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "72",
+        "temperature": "36.5",
+        "spo2": "96"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "72",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0056",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "110",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "78",
+        "temperature": "37.8",
+        "spo2": "96"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "110",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "78",
+        "temperature": "37.8",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0066",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "140",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "72",
+        "temperature": "37.1",
+        "spo2": "98"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "140",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "72",
+        "temperature": "37.1",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0069",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "72",
+        "temperature": "36.7",
+        "spo2": "98"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "72",
+        "temperature": "36.7",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0070",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "65",
+        "temperature": "37.8",
+        "spo2": "99"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "65",
+        "temperature": "37.8",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0071",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "72",
+        "temperature": "36.5",
+        "spo2": "98"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "72",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0072",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "78",
+        "temperature": "36.7",
+        "spo2": "98"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "78",
+        "temperature": "36.7",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0074",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "88",
+        "temperature": "36.5",
+        "spo2": "96"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "88",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0076",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "125",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "80",
+        "temperature": "36.5",
+        "spo2": "95"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "125",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "80",
+        "temperature": "36.5",
+        "spo2": null
+      }
+    },
+    {
+      "record_id": "ADI-0079",
+      "gold_vitals_normalized": {
+        "blood_pressure_systolic": "115",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "68",
+        "temperature": "36.1",
+        "spo2": "97"
+      },
+      "pred_vitals_normalized": {
+        "blood_pressure_systolic": "115",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "68",
+        "temperature": "36.1",
+        "spo2": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+16/02/2026 ore 11:50. Oggi ho visitato il paziente per controllare le condizioni dopo la caduta riferita dal caregiver. Il paziente non presenta traumi evidenti, ma è importante proseguire con un monitoraggio attento. Ho rilevato i parametri vitali: pressione arteriosa 140/90 mmHg, frequenza cardiaca 78 bpm, temperatura corporea 36,2°C e saturazione di ossigeno 97%. Eseguito il controllo generale del paziente. Sono stata informata che il paziente esegue correttamente le terapie mediche prescritte. Prossimo controllo programmato entro breve tempo.
+
+Nota: ho lasciato fuori il codice JSON e la lista di parametri vitali per semplificare l'elaborazione della nota.

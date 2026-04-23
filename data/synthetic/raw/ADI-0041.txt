@@ -1,0 +1,7 @@
+Ecco la nota clinica domiciliare ADI riscritta in italiano:
+
+11/03/2026 ore 11:50.
+
+Paziente in condizioni generali discrete. I parametri vitali sono stati rilevati come segue: pressione arteriosa 120/80 mmHg, frequenza cardiaca 98 bpm, temperatura corporea 37,1°C e saturazione di ossigeno 99%. È stata somministrata la terapia farmacologica prevista. Inoltre, è stata fornita un'educazione sanitaria durante l'accesso domestico. Un nuovo controllo domiciliare è stato programmato per le prossime sette giorni.
+
+Nota: ho mantenuto i dati clinici originali e non ho introdotto informazioni non presenti nel JSON di riferimento.

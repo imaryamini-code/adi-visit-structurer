@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "record_id": "ADI-0084",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-26T16:10:00",
+    "operator_role": "medico"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0084",
+    "age": 81,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "medicazione e controllo lesione",
+    "anamnesis_brief": [
+      "lesione cutanea già nota in monitoraggio domiciliare"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 64,
+      "temperature": 36.7,
+      "spo2": 95
+    },
+    "consciousness": null,
+    "mobility": "con aiuto",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "valutazione_generale"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 7
+    }
+  },
+  "coding": {
+    "problems_normalized": [],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

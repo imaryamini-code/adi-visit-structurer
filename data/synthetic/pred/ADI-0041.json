@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0041",
+    "visit_datetime": "2026-03-11T11:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-04-23T22:27:00"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 98,
+      "temperature": 37.1,
+      "spo2": 99
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

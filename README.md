@@ -1,0 +1,233 @@
+# ADI Assistant
+
+> Transform clinical home-care notes into structured ADI reports in seconds.
+
+ADI Assistant is a prototype system developed during an internship at **Cooperativa Servizi Sociali, Messina**, as part of a Bachelor's degree in Data Analysis at the University of Messina.
+
+The project supports healthcare professionals by transforming **free-text or dictated ADI (Assistenza Domiciliare Integrata) home-care notes** into structured clinical report drafts aligned with real ADI workflows — reducing manual documentation effort while improving data consistency and usability.
+
+---
+
+## Key Features
+
+- **Voice-to-text input** — clinical dictation transcribed via Whisper
+- **Manual text input** — paste or type notes directly
+- **Hybrid extraction pipeline** — rule-based NLP + optional local LLM (Ollama)
+- **Structured ADI-compatible output** — JSON with all clinical fields
+- **Quality checks** — missing fields, inconsistent data, follow-up reminders
+- **Interactive web dashboard** — review reports and raw JSON in one place
+
+---
+
+## What the System Extracts
+
+From a single clinical note, the assistant generates:
+
+| Field | Description |
+|---|---|
+| Reason for visit | Normalized clinical reason |
+| Vital signs | Blood pressure, heart rate, temperature, SpO₂ |
+| Interventions | Actions performed during the visit |
+| Follow-up | Next steps, timing, and responsible party |
+| Clinical problems | Normalized problem labels |
+| Critical issues | Alerts for respiratory instability, falls, etc. |
+| Quality warnings | Missing or inconsistent data flags |
+
+---
+
+## System Architecture
+
+```
+Voice / Text Input
+        ↓
+   Preprocessing          Strip LLM wrappers, normalize whitespace
+        ↓
+  Rule-based NLP          Extract vitals, reason, follow-up, interventions
+        ↓
+  LLM (optional)          Fill gaps rules couldn't cover (Ollama, local)
+        ↓
+   Normalization           Align labels to ADI vocabulary
+        ↓
+  Quality checks           Detect missing fields and inconsistencies
+        ↓
+ Structured JSON output    ADI-compatible, web dashboard, batch reports
+```
+
+### Hybrid approach
+
+**Rules first** — deterministic and interpretable for structured data (vitals, dates, follow-up timing).
+**LLM as fallback** — handles variable clinical language when rules don't produce enough. Called only when needed via a smart gate (`should_call_llm`), so the system runs fast without Ollama.
+
+---
+
+## Example Output
+
+```json
+{
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "vitals": {
+      "blood_pressure": "130/80",
+      "heart_rate": 72,
+      "temperature": 36.7,
+      "spo2": 97
+    },
+    "interventions": ["monitoraggio_parametri_vitali"],
+    "follow_up": "Nuovo controllo tra 7 giorni.",
+    "critical_issues": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}
+```
+
+---
+
+## Evaluation
+
+The system includes a full evaluation module (`src/evaluate.py`) comparing structured predictions against a 100-record synthetic gold dataset.
+
+**Metrics computed:**
+
+- Reason for visit accuracy
+- Follow-up accuracy (type + timing)
+- Vitals exact match rate
+- Interventions macro F1
+- Problems macro F1
+
+To run evaluation:
+
+```bash
+python3 -m src.run_pipeline        # generate predictions
+python3 -m src.evaluate            # compute metrics → reports/metrics.json
+```
+
+---
+
+## Project Structure
+
+```
+adi-visit-structurer/
+├── app.py                    # Flask web application
+├── requirements.txt
+├── src/
+│   ├── preprocess.py         # Text cleaning
+│   ├── extract_rules.py      # Rule-based NLP (single source of truth)
+│   ├── normalize.py          # Label normalization
+│   ├── quality.py            # Quality checks
+│   ├── llm_extract.py        # Local LLM via Ollama
+│   ├── schema.py             # LLM output coercion
+│   ├── run_pipeline.py       # Batch pipeline
+│   ├── evaluate.py           # Evaluation metrics
+│   ├── voice_input.py        # Audio transcription (faster-whisper)
+│   ├── italian_numbers.py    # Italian word-to-number parser
+│   ├── generate_reports.py   # HTML/text report generation
+│   ├── export_reports.py     # CSV/dashboard export
+│   └── resources/
+│       └── problem_lexicon.py
+├── data/
+│   └── synthetic/
+│       ├── raw/              # 100 synthetic dictations
+│       ├── gold/             # 100 gold-standard JSON records
+│       └── pred/             # Pipeline predictions
+├── tools/
+│   ├── generate_dataset.py   # Synthetic dataset generator
+│   └── validate_dataset.py   # Dataset schema validator
+├── templates/
+│   ├── index.html            # Main dashboard
+│   ├── login.html
+│   └── register.html
+├── static/
+│   ├── style.css
+│   └── app.js
+├── reports/                  # Generated metrics and summaries
+├── schemas/
+│   └── visit_schema_v1.json
+└── tests/
+    ├── test_pipeline_rules.py
+    └── test_normalize.py
+```
+
+---
+
+## How to Run
+
+### 1. Create environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. (Optional) Start LLM for hybrid mode
+
+```bash
+ollama serve
+ollama pull llama3.1:8b
+```
+
+The system works without Ollama — it falls back to rule-only mode automatically.
+
+### 4. Run batch pipeline
+
+```bash
+python3 -m src.run_pipeline           # rules only (fast)
+python3 -m src.run_pipeline --hybrid  # rules + LLM
+```
+
+### 5. Run evaluation
+
+```bash
+python3 -m src.evaluate
+# → reports/metrics.json
+```
+
+### 6. Start web app
+
+```bash
+python3 app.py
+# → http://127.0.0.1:5001/assistant
+```
+
+### 7. Run tests
+
+```bash
+pytest tests/
+```
+
+---
+
+## Notes
+
+- This is a **prototype** developed for research and demonstration purposes
+- The dataset is **fully synthetic** — no real patient data is used
+- The system is **not intended for clinical use**
+- Focus: clarity, robustness, and practical workflow support
+
+---
+
+## Future Improvements
+
+- Integration with real (anonymized) clinical datasets
+- Improved speech recognition for Italian clinical vocabulary
+- Fine-tuned LLM prompting for higher extraction accuracy
+- User authentication and session management
+- Deployment as a hosted web service
+
+---
+
+## Author
+
+**Maryam Amini**  
+Data Analysis Student — University of Messina  
+Internship: Cooperativa Servizi Sociali, Messina
+
+**Repository:** https://github.com/imaryamini-code/adi-visit-structurer

@@ -1,0 +1,7 @@
+Ecco la nota clinica domiciliare in italiano e nel formato desiderato:
+
+19/02/2026 ore 16:20.
+
+Il paziente presenta persistenza di dolore, monitorizzato. La lesione è stata rivista e medicata secondo le indicazioni. Si rilevano i seguenti parametri vitali: pressione arteriosa 150/85 mmHg, frequenza cardiaca 60 bpm, temperatura corporea 36,7°C. Eseguita valutazione generale della condizione del paziente. Programmato controllo della lesione per proseguire la gestione nel prossimo 3 giorni.
+
+Nota: Ho mantenuto lo stesso significato clinico, aggiustando il testo in italiano e nella forma desiderata, senza introdurre nuovi elementi non presenti nel JSON di riferimento.

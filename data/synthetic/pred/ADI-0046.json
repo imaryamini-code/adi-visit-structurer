@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0046",
+    "visit_datetime": "2026-02-14T12:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-04-23T22:28:21"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione dolore",
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 90,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "educazione_terapeutica",
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

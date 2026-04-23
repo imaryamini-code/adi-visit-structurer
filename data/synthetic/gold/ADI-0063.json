@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "record_id": "ADI-0063",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-19T16:20:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0063",
+    "age": null,
+    "sex": "M"
+  },
+  "clinical": {
+    "reason_for_visit": "medicazione/controllo lesione",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 60,
+      "temperature": 36.7,
+      "spo2": null
+    },
+    "interventions": [
+      "medicazione",
+      "valutazione_generale"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "SpO2 non menzionata"
+    ]
+  }
+}

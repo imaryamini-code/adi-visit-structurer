@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="app-body">
+  <div class="dashboard">
+
+    <aside class="menu">
+      <div class="menu-top">
+        <div class="brand brand-compact">
+          <div class="brand-badge">AI</div>
+          <div>
+            <h1>ADI Assistant</h1>
+            <p>Clinical Dictation Structurer</p>
+          </div>
+        </div>
+
+        <nav class="menu-nav">
+          <button class="menu-item active" data-view="inputView">
+            <span class="menu-item-icon">⌘</span>
+            <span>Workspace</span>
+          </button>
+          <button class="menu-item" data-view="reportView">
+            <span class="menu-item-icon">▣</span>
+            <span>Structured Report</span>
+          </button>
+          <button class="menu-item" data-view="jsonView">
+            <span class="menu-item-icon">{ }</span>
+            <span>Raw JSON</span>
+          </button>
+          <a href="/quiz" class="menu-item" style="text-decoration:none">
+            <span class="menu-item-icon">?</span>
+            <span>Knowledge Check</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="menu-bottom">
+        <div class="menu-note dark-note">
+          <p class="menu-note-title">Workflow</p>
+          <p>
+            Record or paste a note → review the report → inspect JSON if needed.
+          </p>
+        </div>
+        <a href="/" class="logout-link">Logout</a>
+      </div>
+    </aside>
+
+    <main class="content claude-shell">
+      <header class="page-header claude-header">
+        <div class="page-header-copy">
+          <h2>Voice-to-report assistant</h2>
+          <p class="subtitle">
+            Paste or dictate an ADI home-care note and get a structured report draft in seconds.
+          </p>
+        </div>
+      </header>
+
+      <!-- INPUT VIEW -->
+      <section id="inputView" class="view active-view">
+        <div class="claude-main-grid">
+
+          <div class="claude-chat-panel">
+            <div class="claude-panel-head">
+              <div>
+                <p class="small-kicker">Input</p>
+                <h3>Capture your clinical note</h3>
+              </div>
+              <span class="panel-badge">Live</span>
+            </div>
+
+            <div class="input-mode-grid">
+              <div class="input-mode-card">
+                <div class="mode-top">
+                  <p class="small-kicker">Voice Input</p>
+                  <h4>Record dictation</h4>
+                </div>
+                <p class="card-text">
+                  Record a dictation directly in the browser.
+                </p>
+                <div class="button-row">
+                  <button id="startBtn" type="button" class="primary-btn">&#9679;&nbsp; Start</button>
+                  <button id="stopBtn" type="button" class="secondary-btn" disabled>&#9632;&nbsp; Stop</button>
+                </div>
+                <div class="status-line">
+                  <span class="status-dot"></span>
+                  <p id="recordingStatus">Not recording</p>
+                </div>
+              </div>
+
+              <div class="input-mode-card">
+                <div class="mode-top">
+                  <p class="small-kicker">Manual Input</p>
+                  <h4>Type or paste note</h4>
+                </div>
+                <p class="card-text">
+                  Paste a clinical note and generate the report.
+                </p>
+                <textarea
+                  id="manualText"
+                  rows="9"
+                  placeholder="Example: Paziente vigile, PA 130/80, FC 78 bpm, lieve dolore lombare, eseguita medicazione e consigliata rivalutazione tra 3 giorni..."
+                ></textarea>
+                <button id="textBtn" type="button" class="primary-btn full-btn">
+                  Generate Report
+                </button>
+              </div>
+            </div>
+
+            <div class="transcript-shell">
+              <div class="transcript-head">
+                <div>
+                  <p class="small-kicker">Transcript</p>
+                  <h4>Recognized text</h4>
+                </div>
+              </div>
+              <pre id="transcriptBox" class="clean-pre claude-pre">No transcript yet.</pre>
+            </div>
+          </div>
+
+          <aside class="claude-side-panel">
+            <div class="side-card emphasis-card">
+              <p class="small-kicker">Assistant Flow</p>
+              <h4>How to use this</h4>
+              <ul class="side-list">
+                <li>Record or paste a clinical note</li>
+                <li>Generate the structured report</li>
+                <li>Review the extracted fields</li>
+                <li>Inspect raw JSON when needed</li>
+              </ul>
+            </div>
+
+            <div class="side-card">
+              <p class="small-kicker">Extracted fields</p>
+              <div class="tag-group">
+                <span class="soft-tag">Reason for visit</span>
+                <span class="soft-tag">Vital signs</span>
+                <span class="soft-tag">Interventions</span>
+                <span class="soft-tag">Follow-up</span>
+                <span class="soft-tag">Clinical problems</span>
+              </div>
+            </div>
+
+            <div class="side-card">
+              <p class="small-kicker">Output views</p>
+              <p class="side-text">
+                Switch to Report for a clean summary, or Raw JSON for the full structured output.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </section>
+
+      <!-- REPORT VIEW -->
+      <section id="reportView" class="view">
+        <div class="report-shell">
+          <div class="report-shell-head">
+            <div>
+              <p class="small-kicker">Structured Output</p>
+              <h3>Structured report draft</h3>
+            </div>
+          </div>
+
+          <div id="summaryBanner" class="summary-banner hidden"></div>
+
+          <div id="reportCards">
+            <div class="report-grid">
+              <div class="info-card span-2">
+                <span class="label">Reason for Visit</span>
+                <div class="value muted">Run the pipeline to see results here.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JSON VIEW -->
+      <section id="jsonView" class="view">
+        <div class="json-shell">
+          <div class="card-head">
+            <div>
+              <p class="small-kicker">Developer View</p>
+              <h3>Raw JSON</h3>
+            </div>
+          </div>
+          <pre id="outputBox" class="json-pre">No output yet.</pre>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

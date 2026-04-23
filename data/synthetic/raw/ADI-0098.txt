@@ -1,0 +1,5 @@
+Ecco la nota clinica domiciliare ADI in italiano, riscritta secondo le regole indicate:
+
+21/03/2026 ore 18:50. Oggi è stato effettuato il controllo domiciliare della paziente per la somministrazione del farmaco e il monitoraggio della terapia. La paziente ha dichiarato di soffrire di lieve dispnea. I parametri vitali rilevati sono stati: pressione arteriosa 125/90 mmHg, frequenza cardiaca 76 bpm, temperatura corporea 36,5°C e saturazione di ossigeno 94%. È stato eseguito il monitoraggio dei parametri vitali e somministrata la terapia come da prescrizione. La paziente è stata istruita sull'uso del farmaco e su eventuali sintomi avversi. È programmato un nuovo controllo domiciliare per domani.
+
+Nota: ho mantenuto gli stessi dati clinici del JSON di riferimento, aggiustando la forma della nota per renderla più naturale e professionale, come richiesto.

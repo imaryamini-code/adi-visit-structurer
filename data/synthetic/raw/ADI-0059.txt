@@ -1,0 +1,8 @@
+11/03/2026 ore 15:30. Eseguito controllo domiciliare per valutazione parametri vitali. La persona in visita presenta condizioni generali discrete. I dati rilevati sono:
+
+* Tensione arteriosa: 110/80 mmHg
+* Frequenza cardiaca: 60 battiti al minuto
+* Temperatura corporea: 37,8°C
+* Saturo di ossigeno per via orale (SpO2): 97%
+
+Effettuata rilevazione dei parametri vitali. Programmato controllo domiciliare per verificarne lo stato futuro in data 18/03/2026.

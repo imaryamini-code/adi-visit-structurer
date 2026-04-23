@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0050",
+    "visit_datetime": "2026-03-03T11:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-04-23T22:29:26"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 60,
+      "temperature": 36.2,
+      "spo2": null
+    },
+    "interventions": [
+      "educazione_terapeutica",
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco",
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "quadro respiratorio"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

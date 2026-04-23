@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "record_id": "ADI-0076",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-26T16:00:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0076",
+    "age": 91,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "controllo e gestione stomia",
+    "anamnesis_brief": [
+      "presenza di stomia in gestione domiciliare"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 80,
+      "temperature": 36.5,
+      "spo2": 95
+    },
+    "consciousness": "vigile",
+    "mobility": "con aiuto",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "gestione_stomia",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 3
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "nausea"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

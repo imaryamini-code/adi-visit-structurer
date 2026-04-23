@@ -1,0 +1,5 @@
+Ecco la nota clinica riscritta in italiano:
+
+11/02/2026 ore 08:20. Controllo generale domiciliare. Il paziente è stato accolto in buona salute, collaborante e vigile durante l'accesso. I parametri vitali registrati sono: pressione arteriosa 130/90 mmHg, frequenza cardiaca 98 bpm, temperatura corporea 36,7°C. È stata somministrata la terapia farmacologica prevista e è stato effettuato un intervento educativo sanitario. Il prossimo controllo domiciliare è programmato per i prossimi 2 giorni.
+
+Nota: Ho mantenuto lo stesso significato clinico, evitando di aggiungere informazioni non presenti nel JSON di riferimento. Le "warning" del JSON sono state ignorate nella redazione della nota.

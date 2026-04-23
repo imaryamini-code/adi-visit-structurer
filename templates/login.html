@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — ADI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-body">
+  <div class="auth-layout">
+
+    <section class="auth-panel">
+      <div class="auth-panel-top">
+        <div class="logo-wrap">
+          <div class="logo-badge">AI</div>
+          <div>
+            <h1 class="logo-title">ADI Assistant</h1>
+            <p class="logo-subtitle">Clinical Dictation Structurer</p>
+          </div>
+        </div>
+
+        <div class="auth-copy">
+          <p class="eyebrow light">For healthcare professionals</p>
+          <h2>Structured ADI reports from voice or text.</h2>
+          <p>
+            Dictate or paste a home-care note. The assistant extracts
+            vitals, interventions, and follow-up — and structures it
+            as an ADI report draft.
+          </p>
+        </div>
+      </div>
+
+      <div class="auth-note">
+        <strong>How it works</strong>
+        <p>
+          Voice or text input → transcript processing → clinical extraction
+          → structured ADI report.
+        </p>
+      </div>
+    </section>
+
+    <section class="auth-form-side">
+      <div class="auth-card">
+        <p class="eyebrow">Sign in</p>
+        <h2>Welcome back</h2>
+        <p class="auth-subtext">Continue to your workspace.</p>
+
+        <form class="auth-form" onsubmit="event.preventDefault(); window.location.href='/assistant';">
+          <div class="field-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Enter your email" required>
+          </div>
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="primary-btn auth-main-btn">Login</button>
+        </form>
+
+        <p class="auth-footer">
+          Don't have an account? <a href="/register">Register</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0099",
+    "visit_datetime": "2026-03-13T12:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-04-23T22:44:18"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "interventions": [
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia",
+      "debolezza generale"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}

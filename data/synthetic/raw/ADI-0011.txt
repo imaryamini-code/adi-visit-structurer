@@ -1,0 +1,5 @@
+Ecco la nota clinica domiciliare ADI in italiano, scritta in un stile naturale e professionale:
+
+10/02/2026 ore 08:00. Oggi ho effettuato il controllo dei parametri vitali e valutazione generale della paziente. I dati rilevati sono i seguenti: pressione arteriosa sistolica 135 mmHg, pressione arteriosa diastolica 80 mmHg, frequenza cardiaca 76 battiti al minuto, temperatura corporea 36,5°C. La paziente si trova in condizioni generali discrete e non è stata rilevata alcuna criticità. Prossima visita programmata.
+
+Nota: ho mantenuto gli stessi dati clinici del JSON di riferimento e ho scritto la nota in un linguaggio tipico ADI/infermieristico, senza cambiare nulla dei parametri o dei farmaci menzionati. La nota è stata scritta in 4-7 frasi come richiesto e include data e ora all'inizio.

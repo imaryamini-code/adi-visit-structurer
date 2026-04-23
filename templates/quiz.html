@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Check — ADI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .quiz-shell {
+      max-width: 720px;
+    }
+
+    .progress-wrap {
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 0.35s ease;
+    }
+
+    .quiz-counter {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted-2);
+      margin-bottom: 20px;
+    }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .question-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .opt {
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 16px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface-soft);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      line-height: 1.5;
+    }
+
+    .opt:hover:not(.disabled) {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .opt.correct {
+      background: #eef8f1;
+      border-color: #1D9E75;
+      color: #085041;
+      font-weight: 700;
+    }
+
+    .opt.wrong {
+      background: var(--danger-soft);
+      border-color: var(--danger-border);
+      color: #9f4035;
+    }
+
+    .opt.disabled {
+      cursor: not-allowed;
+    }
+
+    .feedback-box {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: var(--r-sm);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .feedback-box.correct {
+      background: #eef8f1;
+      border: 1px solid #9FE1CB;
+      color: #085041;
+    }
+
+    .feedback-box.wrong {
+      background: var(--danger-soft);
+      border: 1px solid var(--danger-border);
+      color: #9f4035;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 4px;
+    }
+
+    .score-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 48px 32px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .score-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 10px;
+    }
+
+    .score-number {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .score-total {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .score-msg {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .restart-btn {
+      background: var(--sidebar);
+      color: white;
+      border: none;
+      border-radius: var(--r-sm);
+      padding: 12px 28px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .restart-btn:hover { opacity: 0.85; }
+  </style>
+</head>
+<body class="app-body">
+  <div class="dashboard">
+
+    <aside class="menu">
+      <div class="menu-top">
+        <div class="brand brand-compact">
+          <div class="brand-badge">AI</div>
+          <div>
+            <h1>ADI Assistant</h1>
+            <p>Clinical Dictation Structurer</p>
+          </div>
+        </div>
+
+        <nav class="menu-nav">
+          <a href="/assistant" class="menu-item" style="text-decoration:none">
+            <span class="menu-item-icon">⌘</span>
+            <span>Workspace</span>
+          </a>
+          <a href="/quiz" class="menu-item active" style="text-decoration:none">
+            <span class="menu-item-icon">?</span>
+            <span>Knowledge Check</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="menu-bottom">
+        <div class="menu-note dark-note">
+          <p class="menu-note-title">About this quiz</p>
+          <p>
+            10 questions on ADI clinical concepts — vital signs, interventions, and documentation.
+          </p>
+        </div>
+        <a href="/" class="logout-link">Logout</a>
+      </div>
+    </aside>
+
+    <main class="content claude-shell">
+      <header class="page-header claude-header">
+        <div class="page-header-copy">
+          <h2>Knowledge Check</h2>
+          <p class="subtitle">
+            Test your understanding of ADI clinical concepts — vital signs, interventions, and documentation.
+          </p>
+        </div>
+      </header>
+
+      <div class="quiz-shell">
+        <div class="progress-wrap">
+          <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+        </div>
+        <p class="quiz-counter" id="quizCounter">Question 1 of 10</p>
+        <div id="quizArea"></div>
+      </div>
+    </main>
+
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "What does ADI stand for in the Italian healthcare system?",
+        opts: [
+          "Assistenza Domiciliare Integrata",
+          "Analisi Diagnostica Integrata",
+          "Accesso Diretto Infermieristico",
+          "Assistenza Diretta Individuale"
+        ],
+        ans: 0,
+        exp: "ADI stands for Assistenza Domiciliare Integrata — Integrated Home Care — a system providing coordinated medical and nursing services at the patient's home."
+      },
+      {
+        q: "What is the normal resting heart rate range for a healthy adult?",
+        opts: ["20–40 bpm", "60–100 bpm", "110–140 bpm", "150–180 bpm"],
+        ans: 1,
+        exp: "A normal adult resting heart rate is 60–100 bpm. Above 100 is tachycardia; below 60 is bradycardia."
+      },
+      {
+        q: "In a blood pressure reading of 130/80 mmHg, what does the first number represent?",
+        opts: ["Diastolic pressure", "Mean arterial pressure", "Systolic pressure", "Pulse pressure"],
+        ans: 2,
+        exp: "The first number is systolic pressure — the pressure in the arteries when the heart beats. The second number (80) is diastolic — pressure between beats."
+      },
+      {
+        q: "An SpO2 reading of 88% in a patient with dyspnea should be interpreted as:",
+        opts: [
+          "Normal — no action needed",
+          "Mild hypoxemia — monitor only",
+          "Significant hypoxemia — clinical attention required",
+          "SpO2 cannot be measured during dyspnea"
+        ],
+        ans: 2,
+        exp: "SpO2 below 92% is clinically significant. At 88% with dyspnea, the patient requires immediate assessment. Normal SpO2 is 95–100%."
+      },
+      {
+        q: "Which intervention is documented when a nurse performs wound care for a pressure ulcer?",
+        opts: ["Gestione catetere", "Medicazione", "Gestione ossigenoterapia", "Monitoraggio glicemia"],
+        ans: 1,
+        exp: "Medicazione (wound dressing/care) is the correct intervention for a pressure ulcer — it includes cleaning, applying dressings, and reassessing the wound."
+      },
+      {
+        q: "What is a normal adult body temperature?",
+        opts: ["34.0–35.5 °C", "36.1–37.2 °C", "38.0–39.0 °C", "39.5–41.0 °C"],
+        ans: 1,
+        exp: "Normal body temperature is 36.1–37.2 °C. Fever is generally defined as a temperature above 38.0 °C."
+      },
+      {
+        q: "In ADI documentation, what does the 'follow-up' field describe?",
+        opts: [
+          "The patient's medical history",
+          "The next planned clinical contact or visit",
+          "The full list of prescribed medications",
+          "The trend in vital signs over time"
+        ],
+        ans: 1,
+        exp: "Follow-up describes the next planned action — a home visit, phone contact, or reassessment — ideally with a timeframe (e.g. 'controllo tra 7 giorni')."
+      },
+      {
+        q: "Which vital sign is measured as a percentage?",
+        opts: ["Heart rate", "Blood pressure", "Body temperature", "Oxygen saturation (SpO2)"],
+        ans: 3,
+        exp: "SpO2 (oxygen saturation) is expressed as a percentage, representing the proportion of haemoglobin carrying oxygen. Normal range is 95–100%."
+      },
+      {
+        q: "A clinical note mentions: FC 112 bpm, dyspnea, SpO2 90%. What should the system flag?",
+        opts: [
+          "No issues — all values are within normal limits",
+          "Possible respiratory instability — clinical alert",
+          "Only heart rate is abnormal",
+          "Only SpO2 is abnormal"
+        ],
+        ans: 1,
+        exp: "Tachycardia (FC > 100) combined with dyspnea and SpO2 below 92% indicates possible respiratory or clinical instability. The system should raise a critical issue alert."
+      },
+      {
+        q: "What is the main purpose of the 'reason for visit' field in an ADI report?",
+        opts: [
+          "To record the patient's full name and ID",
+          "To describe the primary clinical purpose of the home visit",
+          "To list all medications administered during the visit",
+          "To record the exact start and end time of the visit"
+        ],
+        ans: 1,
+        exp: "The reason for visit captures the primary clinical motivation — e.g. 'controllo parametri vitali' or 'medicazione e controllo lesione' — helping categorise and justify the ADI access."
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function render() {
+      const area = document.getElementById('quizArea');
+      const fill = document.getElementById('progressFill');
+      const counter = document.getElementById('quizCounter');
+
+      if (current >= questions.length) {
+        fill.style.width = '100%';
+        counter.textContent = 'Complete';
+
+        const pct = Math.round((score / questions.length) * 100);
+        let msg = '';
+        if (pct >= 90) msg = 'Outstanding — excellent clinical knowledge.';
+        else if (pct >= 70) msg = 'Good work — review the explanations to strengthen weak areas.';
+        else if (pct >= 50) msg = 'A solid start — keep studying the clinical concepts.';
+        else msg = 'Keep going — every wrong answer is a learning opportunity.';
+
+        area.innerHTML = `
+          <div class="score-card">
+            <p class="score-label">Your final score</p>
+            <div class="score-number">${score}/${questions.length}</div>
+            <p class="score-total">${pct}% correct</p>
+            <p class="score-msg">${msg}</p>
+            <button class="restart-btn" onclick="restart()">Try again</button>
+          </div>`;
+        return;
+      }
+
+      const q = questions[current];
+      fill.style.width = ((current + 1) / questions.length * 100) + '%';
+      counter.textContent = `Question ${current + 1} of ${questions.length}`;
+
+      area.innerHTML = `
+        <div class="question-card">
+          <h3>${q.q}</h3>
+          <div class="options">
+            ${q.opts.map((o, i) => `
+              <button class="opt" id="opt${i}" onclick="pick(${i})">${o}</button>
+            `).join('')}
+          </div>
+          <div id="feedbackBox"></div>
+        </div>
+        <div class="quiz-nav">
+          <button class="primary-btn" id="nextBtn" onclick="next()" disabled>
+            ${current === questions.length - 1 ? 'See results' : 'Next question'}
+          </button>
+        </div>`;
+
+      answered = false;
+    }
+
+    function pick(i) {
+      if (answered) return;
+      answered = true;
+
+      const q = questions[current];
+      const opts = document.querySelectorAll('.opt');
+      opts.forEach(o => o.classList.add('disabled'));
+      opts[i].classList.add(i === q.ans ? 'correct' : 'wrong');
+      if (i !== q.ans) opts[q.ans].classList.add('correct');
+      if (i === q.ans) score++;
+
+      const isCorrect = i === q.ans;
+      document.getElementById('feedbackBox').innerHTML = `
+        <div class="feedback-box ${isCorrect ? 'correct' : 'wrong'}">
+          <strong>${isCorrect ? 'Correct.' : 'Incorrect.'}</strong> ${q.exp}
+        </div>`;
+
+      document.getElementById('nextBtn').disabled = false;
+    }
+
+    function next() {
+      current++;
+      render();
+    }
+
+    function restart() {
+      current = 0;
+      score = 0;
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>

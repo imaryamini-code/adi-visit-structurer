@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0027",
+    "visit_datetime": "2026-02-19T16:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-04-23T22:23:14"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione caduta recente",
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 65,
+      "temperature": 36.7,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "critical_issues": [
+      "caduta_recente"
+    ]
+  },
+  "coding": {
+    "problems_normalized": [
+      "caduta"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

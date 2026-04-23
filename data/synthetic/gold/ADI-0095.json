@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "record_id": "ADI-0095",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-21T18:10:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0095",
+    "age": 86,
+    "sex": "M"
+  },
+  "clinical": {
+    "reason_for_visit": "medicazione e controllo lesione",
+    "anamnesis_brief": [
+      "lesione cutanea già nota in monitoraggio domiciliare"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 60,
+      "temperature": 36.7,
+      "spo2": 94
+    },
+    "consciousness": "vigile e orientato",
+    "mobility": "autonoma",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "valutazione_generale"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    }
+  },
+  "coding": {
+    "problems_normalized": [],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

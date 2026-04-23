@@ -1,0 +1,5 @@
+Ecco la nota clinica domiciliare ADI in italiano, redatta nel rispetto delle regole indicate:
+
+11/02/2026 ore 14:20. Accesso domiciliare per il controllo dei parametri vitali del paziente. Le condizioni generali sono stabili. Sono stati rilevati i seguenti valori: pressione arteriosa sistolica 110 mmHg e diastolica 80 mmHg, frequenza cardiaca 60 battiti al minuto, temperatura corporea 36,2°C. Eseguito monitoraggio dei parametri vitali. Prossimo controllo domiciliare in programma per le prossime sette giorni.
+
+Nota: Ho lasciato l'inclusione della "SpO2 non menzionata" come avviso nella versione originale del JSON, ma sarebbe meglio rimuoverla o specificarne il valore reale se disponibile.

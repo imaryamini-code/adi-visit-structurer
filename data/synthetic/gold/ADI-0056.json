@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "record_id": "ADI-0056",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-24T09:00:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0056",
+    "age": null,
+    "sex": "M"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione caduta recente",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 78,
+      "temperature": 37.8,
+      "spo2": 96
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "critical_issues": [
+      "caduta_recente"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "caduta"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up senza tempistica"
+    ]
+  }
+}

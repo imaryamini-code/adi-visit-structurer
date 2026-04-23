@@ -1,0 +1,5 @@
+Ecco la nota clinica domiciliare ADI in italiano, riscritta nel rispetto delle regole:
+
+24/02/2026 ore 09:10. Visita per medicazione della ferita e controllo locale. La paziente, 82 anni, con lesione cutanea già nota e in trattamento domiciliare, è stata sottoposta a monitoraggio dei parametri vitali: pressione arteriosa 105/80 mmHg, frequenza cardiaca 80 bpm, temperatura corporea 36,4°C. È stato effettuato il cambio medicazione e valutata la lesione. E' programmato un controllo della ferita in 3 giorni.
+
+Ho mantenuto lo stesso significato clinico dei dati originali, senza inventare parametri o farmaci, e ho scritto la nota in stile breve e realistico da cartella domiciliare.

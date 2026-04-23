@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — ADI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-body">
+  <div class="auth-layout">
+
+    <section class="auth-panel">
+      <div class="auth-panel-top">
+        <div class="logo-wrap">
+          <div class="logo-badge">AI</div>
+          <div>
+            <h1 class="logo-title">ADI Assistant</h1>
+            <p class="logo-subtitle">Clinical Dictation Structurer</p>
+          </div>
+        </div>
+
+        <div class="auth-copy">
+          <p class="eyebrow light">Get started</p>
+          <h2>Your ADI documentation workspace.</h2>
+          <p>
+            Capture visit notes by voice or text, extract structured
+            clinical data, and review ADI report drafts — all in one place.
+          </p>
+        </div>
+      </div>
+
+      <div class="auth-note">
+        <strong>Built for clarity</strong>
+        <p>
+          Voice input, structured extraction, and report validation —
+          all in one consistent workflow.
+        </p>
+      </div>
+    </section>
+
+    <section class="auth-form-side">
+      <div class="auth-card">
+        <p class="eyebrow">Create account</p>
+        <h2>Create account</h2>
+        <p class="auth-subtext">Set up your account to get started.</p>
+
+        <form class="auth-form" onsubmit="event.preventDefault(); window.location.href='/assistant';">
+          <div class="field-group">
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="Enter your full name" required>
+          </div>
+          <div class="field-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="Enter your email" required>
+          </div>
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Create a password" required>
+          </div>
+          <button type="submit" class="primary-btn auth-main-btn">Create Account</button>
+        </form>
+
+        <p class="auth-footer">
+          Already have an account? <a href="/">Login</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

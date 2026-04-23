@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "record_id": "ADI-0096",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-17T08:50:00",
+    "operator_role": "medico"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0096",
+    "age": 87,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo e gestione catetere",
+    "anamnesis_brief": [
+      "presenza di catetere vescicale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 65,
+      "heart_rate": 96,
+      "temperature": 36.4,
+      "spo2": 98
+    },
+    "consciousness": null,
+    "mobility": null,
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "gestione_catetere",
+      "valutazione_generale"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

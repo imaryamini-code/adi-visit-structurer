@@ -1,0 +1,5 @@
+Ecco la nota clinica domiciliare ADI rivista in italiano:
+
+03/03/2026 ore 15:30. Accesso del paziente per rivalutazione clinica seguita a una caduta recente, di cui è stata informato il caregiver. Al momento della visita, i parametri vitali registrati sono: pressione arteriosa 130/70 mmHg, frequenza cardiaca 72 bpm, temperatura corporea 36,5°C e saturazione ossigeno 98%. Eseguita la rivalutazione generale del paziente. Il monitoraggio dei parametri vitali è stato condotto regolarmente. Programmato un nuovo controllo domiciliare per seguire la evoluzione della situazione.
+
+Nota: ho mantenuto i dati clinici originali e li ho solo tradotti in italiano, senza alcuna modifica o aggiunta di informazioni non presenti nel JSON di riferimento.

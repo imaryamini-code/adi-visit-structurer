@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "record_id": "ADI-0082",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-10T10:40:00",
+    "operator_role": "medico"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0082",
+    "age": null,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione dolore",
+    "anamnesis_brief": [
+      "dolore già noto in sede riferita dal paziente"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 60,
+      "temperature": 37.0,
+      "spo2": 98
+    },
+    "consciousness": null,
+    "mobility": "ridotta",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

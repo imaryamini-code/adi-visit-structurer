@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0010",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": null,
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0010",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "dolore al ginocchio destro",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 128,
+      "blood_pressure_diastolic": 76,
+      "heart_rate": 80,
+      "temperature": 36.4,
+      "spo2": null
+    },
+    "interventions": [
+      "controllo_parametri_vitali"
+    ],
+    "critical_issues": [],
+    "follow_up": null
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore_cronico"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "run_timestamp": "2026-04-23T22:44:51",
+  "mode": "hybrid",
+  "model": "mistral",
+  "pipeline_version": "1.0.0",
+  "records_total": 100,
+  "records_ok": 100,
+  "records_failed": 0,
+  "failures": []
+}

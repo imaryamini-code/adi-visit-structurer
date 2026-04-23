@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "record_id": "ADI-0098",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-21T18:50:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0098",
+    "age": 72,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo terapia e somministrazione farmaco",
+    "anamnesis_brief": [
+      "terapia domiciliare in corso"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 76,
+      "temperature": 36.5,
+      "spo2": 94
+    },
+    "consciousness": "vigile e orientato",
+    "mobility": "ridotta",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dispnea"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

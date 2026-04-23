@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "record_id": "ADI-0087",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-12T10:20:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0087",
+    "age": 91,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione caduta recente",
+    "anamnesis_brief": [
+      "caduta recente riferita dal caregiver",
+      "nessuna perdita di coscienza segnalata"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 96,
+      "temperature": 37.0,
+      "spo2": 94
+    },
+    "consciousness": "collaborante",
+    "mobility": "autonoma",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "critical_issues": [
+      "caduta_recente"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "caduta"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up senza tempistica"
+    ]
+  }
+}

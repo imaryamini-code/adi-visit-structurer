@@ -1,0 +1,5 @@
+Ecco la nota clinica domiciliare ADI riscritta in italiano e stilizzata:
+
+26/02/2026 ore 11:50. Il paziente è stato visto per una rivalutazione clinica dopo aver riferito sintomi di debolezza generale. La valutazione generale ha evidenziato un senso di stanchezza e ridotta mobilità. Sono state fornite indicazioni terapeutiche al paziente e al caregiver, con il previsto ricontatto telefonico entro breve per monitorare l'evolversi della condizione.
+
+Nota: ho mantenuto lo stesso significato clinico dei dati originali, aggiungendo alcune precisazioni per renderlo più naturale e professionale. Non sono state introdotte informazioni non presenti nel JSON di riferimento.

@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0030",
+    "visit_datetime": "2026-02-24T15:10:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-04-23T22:24:02"
+  },
+  "clinical": {
+    "reason_for_visit": "valutazione sintomi generali",
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "interventions": [
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": "caregiver"
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia",
+      "nausea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}
