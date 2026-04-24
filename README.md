@@ -226,6 +226,7 @@ pytest tests/
 - Integration with real (anonymized) clinical datasets
 - Improved speech recognition for Italian clinical vocabulary
 - Fine-tuned LLM prompting for higher extraction accuracy
+- Structured extraction of Bartel Index scores and pain assessment fields (location, irradiation, NRS scale) aligned with DR.ADI.02 clinical documentation standards
 - User authentication and session management
 - Deployment as a hosted web service
 
