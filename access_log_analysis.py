@@ -17,7 +17,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-LOG_FILE  = Path("access_log.jsonl")
+LOG_FILE   = Path("access_log.jsonl")
 REPORT_DIR = Path("reports")
 REPORT_DIR.mkdir(exist_ok=True)
 

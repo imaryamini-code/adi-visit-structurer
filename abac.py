@@ -1,22 +1,27 @@
 """
 abac.py — Attribute-Based Access Control for ADI Assistant
-Drop into your project root. No new dependencies needed.
 
-HOW TO ACTIVATE (3 steps at the bottom of this file summary):
-  1. Place this file in project root (same level as app.py)
-  2. Replace app.py with the patched version (app_patched.py)
-  3. Replace login.html and register.html with the new templates
-
-WHAT THIS ADDS:
-  - Real user storage in users.json (flat file, swap for SQLite later)
+WHAT THIS PROVIDES:
+  - SQLite-backed user store with salted SHA-256 password hashing
   - Flask session-based authentication
-  - ABAC policy engine: every access decision checks subject + resource + env attributes
-  - Access log in access_log.jsonl — one JSON line per decision
-  - @require_access decorator wraps your existing routes with zero changes to pipeline logic
+  - ABAC policy engine: every access decision evaluates subject + resource + environment attributes
+  - Audit log in access_log.jsonl — one JSON line per decision (permit and deny)
+  - @require_access decorator — wraps Flask routes with zero changes to pipeline logic
+
+USAGE:
+  from abac import require_access, login_user, logout_user, get_current_user, register_user
+
+  @app.route("/process_text", methods=["POST"])
+  @require_access("clinical_report", "create")
+  def process_text():
+      ...  # unchanged
 """
 from __future__ import annotations
 
 import json
+import hashlib
+import os
+import sqlite3
 import functools
 from datetime import datetime, time
 from pathlib import Path
@@ -26,10 +31,8 @@ from flask import jsonify, request, session
 
 
 # ---------------------------------------------------------------------------
-# User store  (SQLite — thread-safe, no extra dependencies)
+# User store — SQLite (thread-safe, no extra dependencies)
 # ---------------------------------------------------------------------------
-
-import sqlite3
 
 DB_FILE = Path("users.db")
 
@@ -91,7 +94,6 @@ def register_user(username: str, password: str, role: str, department: str) -> T
     if not password:
         return False, "Password required"
 
-    import hashlib, os
     salt = os.urandom(16).hex()
     hashed = hashlib.sha256((salt + password).encode()).hexdigest()
 
@@ -111,10 +113,10 @@ def login_user(username: str, password: str) -> Tuple[bool, str]:
     """Verify credentials against SQLite and write subject attributes into the Flask session."""
     user = _get_user(username)
 
-    import hashlib
     stored_hash = user.get("password", "") if user else ""
     salt = user.get("salt", "") if user else ""
     input_hash = hashlib.sha256((salt + password).encode()).hexdigest()
+
     if not user or stored_hash != input_hash:
         _log(
             subject={"username": username, "role": "unknown", "department": ""},
@@ -148,7 +150,7 @@ def get_current_user() -> Optional[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Access log  (one JSON object per line — easy to analyse with pandas)
+# Access log — one JSON object per line, easy to analyse with pandas
 # ---------------------------------------------------------------------------
 
 ACCESS_LOG = Path("access_log.jsonl")
@@ -163,9 +165,8 @@ def _log(
     resource_owner: Optional[str] = None,
 ) -> None:
     """
-    Every access decision — permit AND deny — is written here.
-    This is the raw material for access_log_analysis.py.
-    Columns: timestamp, who (role+dept), what (resource+action), outcome, why.
+    Append one access decision to the audit log.
+    Every permit and deny is recorded — this is the input for access_log_analysis.py.
     """
     entry = {
         "timestamp": datetime.now().isoformat(timespec="seconds"),
@@ -201,31 +202,31 @@ def evaluate_policy(
     resource_owner: Optional[str] = None,
 ) -> PolicyDecision:
     """
-    Pure ABAC evaluation. No side effects. Easy to unit-test.
+    Pure ABAC evaluation function. No side effects. Easy to unit-test.
 
-    WHY THIS IS ABAC AND NOT RBAC
-    ──────────────────────────────
-    Role-Based Access Control (RBAC) only checks the subject's role.
-    It can say "doctors can read reports" but it CANNOT say
-    "doctors can only read their OWN reports."
+    WHY ABAC AND NOT RBAC
+    ─────────────────────
+    RBAC checks the subject's role only — it can say "doctors can read reports"
+    but cannot say "doctors can only read their OWN reports."
 
-    That ownership check — subject.username == resource.owner — requires
-    comparing subject attributes against resource attributes at evaluation time.
-    That is the defining capability of ABAC.
+    The ownership check (subject.username == resource.owner) requires comparing
+    subject attributes against resource attributes at evaluation time.
+    That is the defining capability of ABAC over RBAC.
 
-    Subject attributes (from Flask session, set at login):
+    Subject attributes (from Flask session):
         role:       infermiere | medico | amministratore | finance
         department: adi | cardiologia | billing | admin | ...
         username:   unique string identifier
 
-    Resource types in this system:
+    Resource types:
         clinical_report  — output of /process_text and /process_audio
         audio_upload     — files sent to /process_audio
         dashboard        — the /assistant page
         quiz             — the /quiz page
         payment_record   — financial data (finance role only)
+        admin_panel      — access analytics page
 
-    Environment attributes checked internally:
+    Environment attributes:
         shift hours — clinical staff restricted to 08:00–20:00
 
     Conflict resolution: deny-overrides (safest default for medical data).
@@ -234,11 +235,9 @@ def evaluate_policy(
 
     role = subject.get("role", "")
     username = subject.get("username", "")
-
     now = datetime.now().time()
     in_shift = time(8, 0) <= now <= time(20, 0)
 
-    # No role = unauthenticated
     if not role:
         return PolicyDecision(False, "Unauthenticated subject — no role attribute")
 
@@ -258,15 +257,12 @@ def evaluate_policy(
 
     # CLINICAL REPORTS
     if resource_type == "clinical_report":
-
-        # Finance: hard deny on ALL clinical data — this is the key separation
         if role == "finance":
             return PolicyDecision(
                 False,
                 "Finance role is explicitly denied all clinical report access. "
                 "Attribute resource.type=clinical_report conflicts with subject.role=finance."
             )
-
         if action == "create":
             if role in ("infermiere", "medico"):
                 if not in_shift:
@@ -286,17 +282,12 @@ def evaluate_policy(
                 return PolicyDecision(True, "Admin can read all reports (audit access)")
             if role in ("infermiere", "medico"):
                 if resource_owner is None:
-                    # Owner unknown — permit but flag for audit review
                     return PolicyDecision(
                         True,
-                        "Owner unknown — access permitted but flagged for audit. "
-                        "Add resource_owner attribute to enable full ownership enforcement."
+                        "Owner unknown — access permitted but flagged for audit."
                     )
                 if resource_owner == username:
-                    return PolicyDecision(
-                        True, f"Subject is the resource owner — read permitted"
-                    )
-                # THIS IS THE ABAC MOMENT: same role, different outcome based on ownership
+                    return PolicyDecision(True, "Subject is the resource owner — read permitted")
                 return PolicyDecision(
                     False,
                     f"Subject '{username}' is not the owner of this report "
@@ -351,25 +342,27 @@ def evaluate_policy(
 
 
 # ---------------------------------------------------------------------------
-# Flask decorator — wraps your existing routes
+# Flask decorator — wraps routes with ABAC enforcement
 # ---------------------------------------------------------------------------
 
 def require_access(resource_type: str, action: str = "read", resource_owner_fn=None):
     """
-    Decorator that enforces ABAC before the route handler runs.
+    Route decorator that enforces ABAC before the handler runs.
 
     Usage:
         @app.route("/process_text", methods=["POST"])
         @require_access("clinical_report", "create")
         def process_text():
-            ...  # your code is completely unchanged
+            ...  # unchanged
 
-    resource_owner_fn: optional callable returning the resource owner string,
-    used for ownership-based read policies:
-        @require_access("clinical_report", "read",
-                        resource_owner_fn=lambda: request.args.get("owner"))
+    resource_owner_fn: optional callable returning the resource owner from the request,
+    used for ownership-based read policies.
 
-    Returns 401 if not authenticated, 403 if policy denies, or runs the route normally.
+    Returns:
+        - Redirect to / if unauthenticated
+        - 403 JSON if API route is denied
+        - 403 HTML access_denied.html if page route is denied
+        - Calls the route function if permitted
     """
     def decorator(f):
         @functools.wraps(f)
@@ -404,8 +397,6 @@ def require_access(resource_type: str, action: str = "read", resource_owner_fn=N
             )
 
             if not decision.permitted:
-                # API endpoints (called by JS fetch) get JSON
-                # Page routes (navigated in browser) get a nice HTML error page
                 wants_json = (
                     request.is_json
                     or request.method == "POST"

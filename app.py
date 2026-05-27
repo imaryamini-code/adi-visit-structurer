@@ -38,9 +38,8 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 OLLAMA_MODEL = "mistral"
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
-# Smart mode: only call LLM when rules don't produce enough
-SMART_LLM_MODE = False  # mistral is fast — always run for best accuracy
-RULE_ONLY_MODE = False
+SMART_LLM_MODE = False  # set True to skip LLM when rules produce enough output
+RULE_ONLY_MODE = False   # set True to disable LLM entirely
 
 
 # ---------------------------------------------------------------------------
@@ -177,9 +176,8 @@ def hybrid_extract(text: str) -> Dict[str, Any]:
         if not follow_up:
             raw_fu = llm.get("follow_up")
             if raw_fu:
-                follow_up = raw_fu  # string from LLM, kept as-is
+                follow_up = raw_fu
 
-        # LLM interventions supplement but don't override rules
         llm_interventions = llm.get("interventions", []) or []
         interventions = normalize_interventions(list(set(interventions + llm_interventions)))
 
@@ -221,9 +219,6 @@ def build_output(extracted: Dict[str, Any]) -> Dict[str, Any]:
     if not extracted.get("interventions"):
         warnings.append("No interventions detected")
 
-
-
-    # Convert follow_up dict to human-readable string for web display
     follow_up = extracted.get("follow_up")
     if isinstance(follow_up, dict):
         ftype = follow_up.get("type", "")
@@ -297,19 +292,28 @@ def quiz():
     return render_template("quiz.html")
 
 
+@app.route("/finance")
+@require_access("payment_record", "read")
+def finance():
+    return render_template("finance.html")
+
+
+@app.route("/admin")
+@require_access("admin_panel", "read")
+def admin():
+    return render_template("admin.html")
+
+
 @app.route("/process_text", methods=["POST"])
 @require_access("clinical_report", "create")
 def process_text():
     data = request.get_json(silent=True) or {}
     raw_text = (data.get("text") or "").strip()
-
     if not raw_text:
         return jsonify({"error": "No text provided"}), 400
-
     text = preprocess_text(raw_text)
     extracted = hybrid_extract(text)
     output = build_output(extracted)
-
     return jsonify({"transcript": raw_text, "result": output})
 
 
@@ -318,14 +322,11 @@ def process_text():
 def process_audio():
     if "audio" not in request.files:
         return jsonify({"error": "No audio file provided"}), 400
-
     audio_file = request.files["audio"]
     if not audio_file.filename:
         return jsonify({"error": "Empty filename"}), 400
-
     save_path = UPLOAD_DIR / audio_file.filename
     audio_file.save(save_path)
-
     try:
         raw_transcript = transcribe_audio(str(save_path))
     except Exception as e:
@@ -335,44 +336,10 @@ def process_audio():
             save_path.unlink(missing_ok=True)
         except Exception:
             pass
-
     text = preprocess_text(raw_transcript)
     extracted = hybrid_extract(text)
     output = build_output(extracted)
-
     return jsonify({"transcript": raw_transcript, "result": output})
-
-
-
-@app.route("/admin")
-@require_access("admin_panel", "read")
-def admin():
-    return render_template("admin.html")
-
-
-@app.route("/api/access_log_raw")
-@require_access("admin_panel", "read")
-def access_log_raw():
-    import json
-    from pathlib import Path
-    log_file = Path("access_log.jsonl")
-    if not log_file.exists():
-        return jsonify([])
-    entries = []
-    for line in log_file.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line:
-            try:
-                entries.append(json.loads(line))
-            except Exception:
-                continue
-    return jsonify(entries)
-
-
-@app.route("/finance")
-@require_access("payment_record", "read")
-def finance():
-    return render_template("finance.html")
 
 
 @app.route("/api/login", methods=["POST"])
@@ -383,7 +350,6 @@ def api_login():
         password=(data.get("password") or "").strip(),
     )
     if success:
-        from abac import get_current_user
         user = get_current_user()
         role = user.get("role") if user else None
         if role == "finance":
@@ -421,6 +387,24 @@ def api_register():
 def api_access_analysis():
     from access_log_analysis import analyze
     return jsonify(analyze())
+
+
+@app.route("/api/access_log_raw")
+@require_access("admin_panel", "read")
+def access_log_raw():
+    log_file = Path("access_log.jsonl")
+    if not log_file.exists():
+        return jsonify([])
+    entries = []
+    for line in log_file.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line:
+            try:
+                entries.append(json.loads(line))
+            except Exception:
+                continue
+    return jsonify(entries)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
