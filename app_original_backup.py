@@ -27,10 +27,7 @@ from src.extract_rules import (
 from src.normalize import normalize_problems, normalize_reason, normalize_interventions
 from src.voice_input import transcribe_audio
 
-from abac import require_access, login_user, logout_user, get_current_user, register_user
-
 app = Flask(__name__)
-app.secret_key = "adi-assistant-change-this-secret"  # change before any deployment
 
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
@@ -287,7 +284,6 @@ def register():
 
 
 @app.route("/assistant")
-@require_access("dashboard", "read")
 def assistant():
     return render_template("index.html")
 
@@ -298,7 +294,6 @@ def quiz():
 
 
 @app.route("/process_text", methods=["POST"])
-@require_access("clinical_report", "create")
 def process_text():
     data = request.get_json(silent=True) or {}
     raw_text = (data.get("text") or "").strip()
@@ -314,7 +309,6 @@ def process_text():
 
 
 @app.route("/process_audio", methods=["POST"])
-@require_access("audio_upload", "create")
 def process_audio():
     if "audio" not in request.files:
         return jsonify({"error": "No audio file provided"}), 400
@@ -343,84 +337,5 @@ def process_audio():
     return jsonify({"transcript": raw_transcript, "result": output})
 
 
-
-@app.route("/admin")
-@require_access("admin_panel", "read")
-def admin():
-    return render_template("admin.html")
-
-
-@app.route("/api/access_log_raw")
-@require_access("admin_panel", "read")
-def access_log_raw():
-    import json
-    from pathlib import Path
-    log_file = Path("access_log.jsonl")
-    if not log_file.exists():
-        return jsonify([])
-    entries = []
-    for line in log_file.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line:
-            try:
-                entries.append(json.loads(line))
-            except Exception:
-                continue
-    return jsonify(entries)
-
-
-@app.route("/finance")
-@require_access("payment_record", "read")
-def finance():
-    return render_template("finance.html")
-
-
-@app.route("/api/login", methods=["POST"])
-def api_login():
-    data = request.get_json(silent=True) or {}
-    success, message = login_user(
-        username=(data.get("username") or "").strip(),
-        password=(data.get("password") or "").strip(),
-    )
-    if success:
-        from abac import get_current_user
-        user = get_current_user()
-        role = user.get("role") if user else None
-        if role == "finance":
-            redirect_to = "/finance"
-        elif role == "amministratore":
-            redirect_to = "/admin"
-        else:
-            redirect_to = "/assistant"
-        return jsonify({"ok": True, "redirect": redirect_to})
-    return jsonify({"ok": False, "error": message}), 401
-
-
-@app.route("/api/logout", methods=["POST"])
-def api_logout():
-    logout_user()
-    return jsonify({"ok": True})
-
-
-@app.route("/api/register", methods=["POST"])
-def api_register():
-    data = request.get_json(silent=True) or {}
-    success, message = register_user(
-        username=(data.get("username") or "").strip(),
-        password=(data.get("password") or "").strip(),
-        role=(data.get("role") or "").strip(),
-        department=(data.get("department") or "").strip(),
-    )
-    if success:
-        return jsonify({"ok": True})
-    return jsonify({"ok": False, "error": message}), 400
-
-
-@app.route("/api/access_analysis")
-@require_access("admin_panel", "read")
-def api_access_analysis():
-    from access_log_analysis import analyze
-    return jsonify(analyze())
-
 if __name__ == "__main__":
-    app.run(debug=True, port=5002)
+    app.run(debug=True, port=5001)

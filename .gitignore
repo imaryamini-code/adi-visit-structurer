@@ -1,67 +1,33 @@
+# Database and access logs — never commit these
+users.db
+users.json
+access_log.jsonl
+reports/
+
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Virtual environments
+*.pyo
 .venv/
 venv/
 env/
-
-# Flask / App
-instance/
-*.sqlite3
-*.db
+*.egg-info/
+dist/
+build/
 
 # Environment variables
 .env
 .env.*
 
-# Logs
-*.log
-
 # macOS
 .DS_Store
 __MACOSX/
 
-# VS Code / IDE
+# VS Code
 .vscode/
-.idea/
 
-# Runtime uploads — never commit recorded audio
+# Uploads
 uploads/
-*.webm
 *.wav
 *.mp3
 *.m4a
-data/audio_recordings/
-
-# Generated reports (keep metrics for submission)
-reports/*.html
-reports/examples/
-reports/hybrid_debug.log
-reports/llm_raw_output_last.txt
-
-# Keep important report outputs
-!reports/metrics.json
-!reports/run_summary.json
-!reports/summary_table.csv
-
-# Tests / coverage
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Build / packaging
-build/
-dist/
-*.egg-info/
-
-# ML model weights
-*.gguf
-*.bin
-*.pt
-
-# Misc
-*.tmp
-*.bak

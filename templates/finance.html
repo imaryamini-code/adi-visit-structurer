@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billing — ADI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 4px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px 22px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .stat-sub.positive { color: #2e7d52; }
+    .stat-sub.pending  { color: var(--accent-text); }
+
+    .table-shell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .table-head {
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .table-head h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .access-badge {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: var(--accent-soft);
+      color: var(--accent-text);
+      border: 1px solid #e8c9a0;
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted-2);
+      padding: 10px 22px;
+      background: var(--surface-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.12s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-soft); }
+
+    tbody td {
+      padding: 13px 22px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .td-mono {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      border-radius: 99px;
+    }
+
+    .status-paid {
+      background: #e8f5ee;
+      color: #2e7d52;
+      border: 1px solid #b7dfc9;
+    }
+
+    .status-pending {
+      background: var(--warning-soft);
+      color: #8a5a0a;
+      border: 1px solid var(--warning-border);
+    }
+
+    .status-overdue {
+      background: var(--danger-soft);
+      color: #9b2a22;
+      border: 1px solid var(--danger-border);
+    }
+
+    .abac-note {
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .abac-note-icon {
+      font-size: 15px;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .abac-note strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="app-body">
+  <div class="dashboard">
+
+    <aside class="menu">
+      <div class="menu-top">
+        <div class="brand brand-compact">
+          <div class="brand-badge">AI</div>
+          <div>
+            <h1>ADI Assistant</h1>
+            <p>Billing Portal</p>
+          </div>
+        </div>
+
+        <nav class="menu-nav">
+          <button class="menu-item active" style="color: var(--sidebar-text); background: rgba(255,255,255,0.11);">
+            <span class="menu-item-icon">₿</span>
+            <span>Payments</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="menu-bottom">
+        <div class="menu-note dark-note">
+          <p class="menu-note-title">Access scope</p>
+          <p>Finance role — billing records only. Clinical data is not accessible from this account.</p>
+        </div>
+        <a href="/" class="logout-link">Logout</a>
+      </div>
+    </aside>
+
+    <main class="content claude-shell" style="padding: 32px 36px; overflow-y: auto;">
+
+      <header class="page-header claude-header">
+        <div class="page-header-copy">
+          <p class="eyebrow">Finance portal</p>
+          <h2>Payment records</h2>
+          <p class="subtitle">Billing and payment data for ADI home-care visits. Read-only access.</p>
+        </div>
+      </header>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total billed (May)</div>
+          <div class="stat-value">€ 18,420</div>
+          <div class="stat-sub positive">↑ 12% vs April</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Payments received</div>
+          <div class="stat-value">€ 14,900</div>
+          <div class="stat-sub positive">81% collection rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending / overdue</div>
+          <div class="stat-value">€ 3,520</div>
+          <div class="stat-sub pending">4 invoices outstanding</div>
+        </div>
+      </div>
+
+      <div class="table-shell">
+        <div class="table-head">
+          <div>
+            <p class="small-kicker">Records</p>
+            <h3>Invoice ledger — May 2026</h3>
+          </div>
+          <span class="access-badge">Read only</span>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Invoice ID</th>
+              <th>Patient ref.</th>
+              <th>Visit date</th>
+              <th>Department</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-mono">INV-2026-0041</td>
+              <td>PT-00183</td>
+              <td>02 May 2026</td>
+              <td>ADI — Cardiologia</td>
+              <td>€ 320</td>
+              <td><span class="status-pill status-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0042</td>
+              <td>PT-00197</td>
+              <td>03 May 2026</td>
+              <td>ADI — Geriatria</td>
+              <td>€ 280</td>
+              <td><span class="status-pill status-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0043</td>
+              <td>PT-00201</td>
+              <td>05 May 2026</td>
+              <td>ADI — Neurologia</td>
+              <td>€ 410</td>
+              <td><span class="status-pill status-pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0044</td>
+              <td>PT-00158</td>
+              <td>07 May 2026</td>
+              <td>ADI — Cardiologia</td>
+              <td>€ 320</td>
+              <td><span class="status-pill status-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0045</td>
+              <td>PT-00214</td>
+              <td>09 May 2026</td>
+              <td>ADI — Oncologia</td>
+              <td>€ 560</td>
+              <td><span class="status-pill status-overdue">Overdue</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0046</td>
+              <td>PT-00189</td>
+              <td>12 May 2026</td>
+              <td>ADI — Geriatria</td>
+              <td>€ 280</td>
+              <td><span class="status-pill status-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0047</td>
+              <td>PT-00222</td>
+              <td>14 May 2026</td>
+              <td>ADI — Cardiologia</td>
+              <td>€ 320</td>
+              <td><span class="status-pill status-pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0048</td>
+              <td>PT-00176</td>
+              <td>16 May 2026</td>
+              <td>ADI — Neurologia</td>
+              <td>€ 410</td>
+              <td><span class="status-pill status-overdue">Overdue</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0049</td>
+              <td>PT-00231</td>
+              <td>19 May 2026</td>
+              <td>ADI — Geriatria</td>
+              <td>€ 280</td>
+              <td><span class="status-pill status-paid">Paid</span></td>
+            </tr>
+            <tr>
+              <td class="td-mono">INV-2026-0050</td>
+              <td>PT-00198</td>
+              <td>22 May 2026</td>
+              <td>ADI — Oncologia</td>
+              <td>€ 560</td>
+              <td><span class="status-pill status-pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="abac-note">
+        <span class="abac-note-icon">🔒</span>
+        <span>
+          <strong>ABAC policy active.</strong> This session is scoped to
+          <code style="font-family: var(--mono); font-size: 11px; background: var(--border); padding: 1px 5px; border-radius: 4px;">resource.type = payment_record</code>.
+          Clinical reports, patient records, and the clinical workspace are not accessible from this account.
+          All access events are logged.
+        </span>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>

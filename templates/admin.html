@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — ADI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px 20px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-2);
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .stat-value.danger { color: #c0392b; }
+    .stat-value.safe   { color: #2e7d52; }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 16px 22px 13px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-head h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .live-badge {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: #e8f5ee;
+      color: #2e7d52;
+      border: 1px solid #b7dfc9;
+      padding: 3px 9px;
+      border-radius: var(--r-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted-2);
+      padding: 9px 20px;
+      background: var(--surface-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-soft); }
+
+    tbody td {
+      padding: 11px 20px;
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .permit-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .permit-true  { background: #e8f5ee; color: #2e7d52; border: 1px solid #b7dfc9; }
+    .permit-false { background: var(--danger-soft); color: #9b2a22; border: 1px solid var(--danger-border); }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar-row:last-child { border-bottom: none; }
+
+    .bar-role {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      width: 130px;
+      flex-shrink: 0;
+      font-family: var(--mono);
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--surface-muted);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+
+    .bar-fill.danger { background: #c0392b; }
+
+    .bar-stat {
+      font-size: 11px;
+      color: var(--muted);
+      width: 80px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .loading {
+      padding: 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body class="app-body">
+  <div class="dashboard">
+
+    <aside class="menu">
+      <div class="menu-top">
+        <div class="brand brand-compact">
+          <div class="brand-badge">AI</div>
+          <div>
+            <h1>ADI Assistant</h1>
+            <p>Admin Panel</p>
+          </div>
+        </div>
+        <nav class="menu-nav">
+          <button class="menu-item active" style="color:var(--sidebar-text);background:rgba(255,255,255,0.11);">
+            <span class="menu-item-icon">◈</span>
+            <span>Access Analytics</span>
+          </button>
+          <a href="/assistant" class="menu-item" style="text-decoration:none;">
+            <span class="menu-item-icon">⌘</span>
+            <span>Clinical Workspace</span>
+          </a>
+        </nav>
+      </div>
+      <div class="menu-bottom">
+        <div class="menu-note dark-note">
+          <p class="menu-note-title">Admin scope</p>
+          <p>Full access to audit logs and access analytics. All events logged.</p>
+        </div>
+        <a href="/" class="logout-link">Logout</a>
+      </div>
+    </aside>
+
+    <main class="content claude-shell" style="padding:32px 36px; overflow-y:auto;">
+
+      <header class="page-header claude-header">
+        <div class="page-header-copy">
+          <p class="eyebrow">System security</p>
+          <h2>Access log analytics</h2>
+          <p class="subtitle">Live ABAC decision audit — every permit and deny recorded. <span id="lastRefresh" style="color:var(--muted-2); font-size:11px;"></span></p>
+        </div>
+      </header>
+
+      <div class="stat-grid" id="statsGrid">
+        <div class="stat-card"><div class="stat-label">Total events</div><div class="stat-value" id="totalEvents">—</div><div class="stat-sub">all decisions</div></div>
+        <div class="stat-card"><div class="stat-label">Permitted</div><div class="stat-value safe" id="totalPermit">—</div><div class="stat-sub">access granted</div></div>
+        <div class="stat-card"><div class="stat-label">Denied</div><div class="stat-value danger" id="totalDeny">—</div><div class="stat-sub">access blocked</div></div>
+        <div class="stat-card"><div class="stat-label">Denial rate</div><div class="stat-value" id="denyRate">—</div><div class="stat-sub">overall</div></div>
+      </div>
+
+      <div class="two-col">
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="small-kicker">By role</p>
+              <h3>Denial rate per role</h3>
+            </div>
+          </div>
+          <div id="roleChart"><div class="loading">Loading...</div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="small-kicker">Top reasons</p>
+              <h3>Most common denials</h3>
+            </div>
+          </div>
+          <div id="reasonList"><div class="loading">Loading...</div></div>
+        </div>
+
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="small-kicker">Audit trail</p>
+            <h3>Recent access events</h3>
+          </div>
+          <span class="live-badge">Live</span>
+        </div>
+        <div id="eventTable"><div class="loading">Loading...</div></div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    async function load() {
+      try {
+        const res  = await fetch('/api/access_analysis');
+        if (!res.ok) { document.getElementById('eventTable').innerHTML = '<div class="loading">Failed to load data.</div>'; return; }
+        const d = await res.json();
+
+        document.getElementById('totalEvents').textContent = d.total_events ?? '—';
+        document.getElementById('totalPermit').textContent = d.total_permitted ?? '—';
+        document.getElementById('totalDeny').textContent   = d.total_denied ?? '—';
+        document.getElementById('denyRate').textContent    = d.overall_denial_rate_pct != null ? d.overall_denial_rate_pct + '%' : '—';
+
+        const roles = d.denial_rate_by_role || {};
+        const maxTotal = Math.max(...Object.values(roles).map(r => r.total_requests), 1);
+        document.getElementById('roleChart').innerHTML = Object.entries(roles).map(([role, stats]) => `
+          <div class="bar-row">
+            <span class="bar-role">${role}</span>
+            <div class="bar-track">
+              <div class="bar-fill ${stats.denial_rate_pct > 50 ? 'danger' : ''}"
+                   style="width:${Math.round(stats.total_requests / maxTotal * 100)}%"></div>
+            </div>
+            <span class="bar-stat">${stats.denied}/${stats.total_requests} denied</span>
+          </div>
+        `).join('') || '<div class="loading">No data yet.</div>';
+
+        const reasons = d.top_denial_reasons || [];
+        document.getElementById('reasonList').innerHTML = reasons.length ? reasons.map(r => `
+          <div class="bar-row">
+            <span class="bar-role" style="width:30px; text-align:right; color:var(--accent); font-size:13px;">${r.count}×</span>
+            <span style="font-size:11px; color:var(--muted); line-height:1.5; flex:1;">${r.reason.length > 80 ? r.reason.slice(0,80)+'…' : r.reason}</span>
+          </div>
+        `).join('') : '<div class="loading">No denials yet.</div>';
+
+        renderTable(d.recent_events || []);
+
+      } catch(e) {
+        document.getElementById('eventTable').innerHTML = '<div class="loading">Error loading data.</div>';
+      }
+    }
+
+    function renderTable(events) {
+      if (!events.length) {
+        document.getElementById('eventTable').innerHTML = '<div class="loading">No events logged yet. Make some requests first.</div>';
+        return;
+      }
+      document.getElementById('eventTable').innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>User</th>
+              <th>Role</th>
+              <th>Resource</th>
+              <th>Action</th>
+              <th>Decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${events.map(e => `
+              <tr>
+                <td class="mono">${(e.timestamp||'').replace('T',' ')}</td>
+                <td>${e.subject_username || '—'}</td>
+                <td class="mono">${e.subject_role || '—'}</td>
+                <td class="mono">${e.resource_type || '—'}</td>
+                <td class="mono">${e.action || '—'}</td>
+                <td><span class="permit-pill ${e.permitted ? 'permit-true' : 'permit-false'}">${e.permitted ? 'PERMIT' : 'DENY'}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    load();
+    setInterval(load, 10000);
+
+    // Show last refreshed time
+    setInterval(() => {
+      const el = document.getElementById('lastRefresh');
+      if (el) el.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+    }, 1000);
+  </script>
+</body>
+</html>

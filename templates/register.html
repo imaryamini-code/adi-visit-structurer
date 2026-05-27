@@ -6,10 +6,7 @@
   <title>Register — ADI Assistant</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="auth-body">
@@ -24,23 +21,15 @@
             <p class="logo-subtitle">Clinical Dictation Structurer</p>
           </div>
         </div>
-
         <div class="auth-copy">
           <p class="eyebrow light">Get started</p>
           <h2>Your ADI documentation workspace.</h2>
-          <p>
-            Capture visit notes by voice or text, extract structured
-            clinical data, and review ADI report drafts — all in one place.
-          </p>
+          <p>Capture visit notes by voice or text, extract structured clinical data, and review ADI report drafts — all in one place.</p>
         </div>
       </div>
-
       <div class="auth-note">
-        <strong>Built for clarity</strong>
-        <p>
-          Voice input, structured extraction, and report validation —
-          all in one consistent workflow.
-        </p>
+        <strong>Role-based access</strong>
+        <p>Clinical staff access reports. Finance staff access billing only. Your role determines what you can see.</p>
       </div>
     </section>
 
@@ -50,21 +39,34 @@
         <h2>Create account</h2>
         <p class="auth-subtext">Set up your account to get started.</p>
 
-        <form class="auth-form" onsubmit="event.preventDefault(); window.location.href='/assistant';">
+        <div id="auth-error" style="display:none; color:#c0392b; font-size:14px; margin-bottom:12px; padding:10px; background:#fdf0f0; border-radius:6px;"></div>
+        <div id="auth-success" style="display:none; color:#1a7a4a; font-size:14px; margin-bottom:12px; padding:10px; background:#f0fdf4; border-radius:6px;"></div>
+
+        <div class="auth-form">
           <div class="field-group">
-            <label for="name">Full name</label>
-            <input id="name" type="text" placeholder="Enter your full name" required>
-          </div>
-          <div class="field-group">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="Enter your email" required>
+            <label for="username">Username</label>
+            <input id="username" type="text" placeholder="Choose a username" required>
           </div>
           <div class="field-group">
             <label for="password">Password</label>
             <input id="password" type="password" placeholder="Create a password" required>
           </div>
-          <button type="submit" class="primary-btn auth-main-btn">Create Account</button>
-        </form>
+          <div class="field-group">
+            <label for="role">Role</label>
+            <select id="role" required style="width:100%; padding:10px 12px; border:1px solid #ddd; border-radius:8px; font-size:15px; background:#fff;">
+              <option value="">Select your role</option>
+              <option value="infermiere">Infermiere (Nurse)</option>
+              <option value="medico">Medico (Doctor)</option>
+              <option value="amministratore">Amministratore (Admin)</option>
+              <option value="finance">Finance / Billing</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="department">Department</label>
+            <input id="department" type="text" placeholder="e.g. adi, cardiologia, billing" required>
+          </div>
+          <button type="button" class="primary-btn auth-main-btn" onclick="doRegister()">Create Account</button>
+        </div>
 
         <p class="auth-footer">
           Already have an account? <a href="/">Login</a>
@@ -73,5 +75,46 @@
     </section>
 
   </div>
+
+  <script>
+    async function doRegister() {
+      const username   = document.getElementById('username').value.trim();
+      const password   = document.getElementById('password').value.trim();
+      const role       = document.getElementById('role').value;
+      const department = document.getElementById('department').value.trim();
+      const errBox     = document.getElementById('auth-error');
+      const okBox      = document.getElementById('auth-success');
+
+      errBox.style.display = 'none';
+      okBox.style.display  = 'none';
+
+      if (!username || !password || !role || !department) {
+        errBox.textContent = 'Please fill in all fields.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      try {
+        const res  = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, role, department }),
+        });
+        const data = await res.json();
+
+        if (data.ok) {
+          okBox.textContent = 'Account created! Redirecting to login...';
+          okBox.style.display = 'block';
+          setTimeout(() => window.location.href = '/', 1500);
+        } else {
+          errBox.textContent = data.error || 'Registration failed.';
+          errBox.style.display = 'block';
+        }
+      } catch (e) {
+        errBox.textContent = 'Network error — is the server running?';
+        errBox.style.display = 'block';
+      }
+    }
+  </script>
 </body>
 </html>
