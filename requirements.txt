@@ -1,4 +1,4 @@
-flask
-faster-whisper
-requests
-python-dateutil
+flask>=3.1.0
+faster-whisper>=1.0.0
+requests>=2.31.0
+python-dateutil>=2.9.0
