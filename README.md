@@ -18,6 +18,9 @@ The project supports healthcare professionals by transforming **free-text or dic
 - **Quality checks** — missing fields, inconsistent data, follow-up reminders
 - **Interactive web dashboard** — review reports and raw JSON in one place
 - **Clinical knowledge quiz** — 10-question ADI knowledge check
+- **Attribute-Based Access Control (ABAC)** — role-based access enforcement at the backend
+- **Role-specific dashboards** — clinical workspace, billing portal, and admin analytics
+- **Audit log** — every access decision (permit and deny) logged for analysis
 
 ---
 
@@ -54,12 +57,31 @@ Voice / Text Input
   Quality checks           Detect missing fields and inconsistencies
         ↓
  Structured JSON output    ADI-compatible, web dashboard, batch reports
+        ↓
+   ABAC layer              Every request evaluated against role + resource + environment attributes
 ```
 
-### Hybrid approach
+### Hybrid extraction
 
-**Rules first** — deterministic and interpretable for structured data (vitals, dates, follow-up timing).
-**LLM as fallback** — handles variable clinical language when rules don't produce enough. Called only when needed via a smart gate (`should_call_llm`), so the system runs fast without Ollama.
+**Rules first** — deterministic and interpretable for structured data (vitals, dates, follow-up timing).  
+**LLM as fallback** — handles variable clinical language when rules don't produce enough. Called only when needed via a smart gate (`_should_call_llm`), so the system runs without Ollama.
+
+### Access control — ABAC vs RBAC
+
+The system uses Attribute-Based Access Control rather than simple Role-Based Access Control. The key distinction: RBAC can say "doctors can read reports" but cannot say "doctors can only read their **own** reports." The ownership check (`subject.username == resource.owner`) requires comparing subject attributes against resource attributes at evaluation time — that is the defining capability of ABAC.
+
+Every access decision is logged to `access_log.jsonl` and analysed by `access_log_analysis.py`.
+
+---
+
+## Roles and Access
+
+| Role | Dashboard | Clinical reports | Payment records | Admin panel |
+|---|---|---|---|---|
+| `medico` | ✓ | own reports only | ✗ | ✗ |
+| `infermiere` | ✓ | own reports only | ✗ | ✗ |
+| `amministratore` | ✓ | all reports | read-only | ✓ |
+| `finance` | ✗ | ✗ | ✓ | ✗ |
 
 ---
 
@@ -116,43 +138,49 @@ python3 -m src.evaluate            # compute metrics → reports/metrics.json
 
 ```
 adi-visit-structurer/
-├── app.py                    # Flask web application
+├── app.py                        # Flask web application
+├── abac.py                       # ABAC policy engine + SQLite user store
+├── access_log_analysis.py        # Access log analytics
 ├── requirements.txt
 ├── src/
-│   ├── preprocess.py         # Text cleaning
-│   ├── extract_rules.py      # Rule-based NLP (single source of truth)
-│   ├── normalize.py          # Label normalization
-│   ├── quality.py            # Quality checks
-│   ├── llm_extract.py        # Local LLM via Ollama (Mistral)
-│   ├── schema.py             # LLM output coercion
-│   ├── run_pipeline.py       # Batch pipeline
-│   ├── evaluate.py           # Evaluation metrics
-│   ├── voice_input.py        # Audio transcription (faster-whisper)
-│   ├── italian_numbers.py    # Italian word-to-number parser
-│   ├── generate_reports.py   # HTML/text report generation
-│   ├── export_reports.py     # CSV/dashboard export
+│   ├── preprocess.py             # Text cleaning
+│   ├── extract_rules.py          # Rule-based NLP (single source of truth)
+│   ├── normalize.py              # Label normalization
+│   ├── quality.py                # Quality checks
+│   ├── llm_extract.py            # Local LLM via Ollama (Mistral)
+│   ├── schema.py                 # LLM output coercion
+│   ├── run_pipeline.py           # Batch pipeline
+│   ├── evaluate.py               # Evaluation metrics
+│   ├── voice_input.py            # Audio transcription (faster-whisper)
+│   ├── italian_numbers.py        # Italian word-to-number parser
+│   ├── generate_reports.py       # HTML/text report generation
+│   ├── export_reports.py         # CSV/dashboard export
 │   └── resources/
 │       └── problem_lexicon.py
 ├── data/
 │   └── synthetic/
-│       ├── raw/              # 100 synthetic dictations
-│       ├── gold/             # 100 gold-standard JSON records
-│       └── pred/             # Pipeline predictions
+│       ├── raw/                  # 100 synthetic dictations
+│       ├── gold/                 # 100 gold-standard JSON records
+│       └── pred/                 # Pipeline predictions
 ├── tools/
-│   ├── generate_dataset.py   # Synthetic dataset generator
-│   └── validate_dataset.py   # Dataset schema validator
+│   ├── generate_dataset.py       # Synthetic dataset generator
+│   └── validate_dataset.py       # Dataset schema validator
 ├── templates/
-│   ├── index.html            # Main dashboard
-│   ├── login.html            # Login page
-│   ├── register.html         # Registration page
-│   └── quiz.html             # Clinical knowledge quiz
+│   ├── index.html                # Clinical workspace dashboard
+│   ├── finance.html              # Billing portal (finance role)
+│   ├── admin.html                # Access analytics (admin role)
+│   ├── login.html                # Login page
+│   ├── register.html             # Registration page
+│   ├── quiz.html                 # Clinical knowledge quiz
+│   └── access_denied.html        # ABAC denial page
 ├── static/
 │   ├── style.css
 │   └── app.js
-├── reports/                  # Generated metrics and summaries
+├── reports/                      # Generated metrics and summaries
 ├── schemas/
 │   └── visit_schema_v1.json
 └── tests/
+    ├── test_abac.py              # ABAC policy engine tests (20 tests)
     ├── test_pipeline_rules.py
     └── test_normalize.py
 ```
@@ -201,13 +229,20 @@ python3 -m src.evaluate
 
 ```bash
 python3 app.py
-# → http://127.0.0.1:5001/assistant
+# → http://127.0.0.1:5002
 ```
 
 ### 7. Run tests
 
 ```bash
 pytest tests/
+```
+
+### 8. Analyse access log
+
+```bash
+python3 access_log_analysis.py
+# → reports/access_analysis.json
 ```
 
 ---
@@ -217,7 +252,8 @@ pytest tests/
 - This is a **prototype** developed for research and demonstration purposes
 - The dataset is **fully synthetic** — no real patient data is used
 - The system is **not intended for clinical use**
-- Focus: clarity, robustness, and practical workflow support
+- Passwords are salted and hashed with SHA-256 before storage
+- The ABAC policy engine is a pure function with no side effects — fully unit-tested
 
 ---
 
@@ -226,9 +262,8 @@ pytest tests/
 - Integration with real (anonymized) clinical datasets
 - Improved speech recognition for Italian clinical vocabulary
 - Fine-tuned LLM prompting for higher extraction accuracy
-- Structured extraction of Bartel Index scores and pain assessment fields (location, irradiation, NRS scale) aligned with DR.ADI.02 clinical documentation standards
-- User authentication and session management
-- Deployment as a hosted web service
+- Structured extraction of Bartel Index scores and pain assessment fields aligned with DR.ADI.02 standards
+- Deployment as a hosted web service with production-grade secret management
 
 ---
 
