@@ -18,11 +18,6 @@ EVIDENCE_PATTERNS: dict[str, list[str]] = {
         r"\btrauma\b",
         r"\bcontus",
     ],
-    "scompenso_cardiaco": [
-        r"\bscompenso\b",
-        r"\binsufficienza\s+cardiaca\b",
-        r"\bchf\b",
-    ],
     "ipertensione": [
         r"\bipertens",
     ],
