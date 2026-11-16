@@ -8,6 +8,7 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from src.evaluate import evaluate
+import src.run_pipeline as pipeline
 from src.run_pipeline import process_note, PIPELINE_VERSION
 
 try:
@@ -59,6 +60,8 @@ def main():
     if args.limit:
         raw, gold = raw[:args.limit], gold[:args.limit]
     root = Path('experiments') / args.run_id
+    # One LLM answer per (prompt, model, note), shared by llm / hybrid / adaptive in this run.
+    pipeline.LLM_CACHE_DIR = root / 'llm_cache'
     if args.resume:
         if not (root / 'manifest.json').exists():
             ap.error('Cannot resume: run manifest not found')
@@ -95,6 +98,7 @@ def main():
                 'prompt_sha256': sha(SYSTEM_PROMPT.encode()) if SYSTEM_PROMPT else None,
                 'ollama_url': DEFAULT_OLLAMA_URL,
                 'llm_options': {'temperature': 0.0, 'stream': False, 'max_retries': 1},
+                'llm_cache': 'llm_cache/<model>/<sha256(prompt+model+note)>.json; modes share one answer per note',
                 'conditions': {}}
         (root / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     selected_gold = root / 'selected_gold'
