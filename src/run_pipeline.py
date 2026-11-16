@@ -209,6 +209,19 @@ def apply_rules(text: str, rec: Dict[str, Any]) -> None:
     rec["coding"]["problems_normalized"] = normalize_problems(text) or []
 
 
+def canonical_follow_up(value: Any) -> Any:
+    """Free-text follow-up phrase -> {"type", "timing_days"[, "target"]} via the project's rules parser.
+
+    The LLM answers with a phrase ("controllo entro tre giorni"). Structured dicts, None and
+    phrases the parser does not understand are returned unchanged/None, so nothing is invented.
+    Every condition (rules, LLM, hybrid, adaptive) should be compared on the same structured form.
+    """
+    if isinstance(value, str):
+        parsed = rules_mod.extract_follow_up(value) if value.strip() else None
+        return parsed if parsed else None
+    return value
+
+
 def apply_llm(text: str, rec: Dict[str, Any], model: str, context: str = "") -> None:
     if not llm_extract:
         raise RuntimeError("LLM extraction not available. Is Ollama installed?")
@@ -217,6 +230,7 @@ def apply_llm(text: str, rec: Dict[str, Any], model: str, context: str = "") -> 
 
     rec["meta"]["visit_datetime"] = None  # LLM doesn't extract datetime
     rec["clinical"] = out.get("clinical", {})
+    rec["clinical"]["follow_up"] = canonical_follow_up(rec["clinical"].get("follow_up"))
     rec["coding"] = out.get("coding", {})
 
 
