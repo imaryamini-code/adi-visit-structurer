@@ -72,11 +72,8 @@ def main():
     root = Path('experiments') / args.run_id
     # One LLM answer per (prompt, model, note), shared by llm / hybrid / adaptive in this run.
     pipeline.LLM_CACHE_DIR = root / 'llm_cache'
-    if args.reuse_cache and not (root / 'llm_cache').exists():
-        if not args.reuse_cache.is_dir():
-            ap.error(f'--reuse-cache not found: {args.reuse_cache}')
-        root.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(args.reuse_cache, root / 'llm_cache')
+    if args.reuse_cache and not args.reuse_cache.is_dir():
+        ap.error(f'--reuse-cache not found: {args.reuse_cache}')
     layers = {}
     if set(args.knowledge) - {'none'}:
         reference = load_records(args.gold_dir, RAW)  # reviewed reference + its raw notes
@@ -96,6 +93,8 @@ def main():
             ap.error('Cannot resume with a different model list')
     else:
         root.mkdir(parents=True, exist_ok=False)
+    if args.reuse_cache and not (root / 'llm_cache').exists():  # after the run dir exists
+        shutil.copytree(args.reuse_cache, root / 'llm_cache')
     if not args.rules_only and SYSTEM_PROMPT is None:
         ap.error('Install requirements.txt before model comparisons')
     if SYSTEM_PROMPT is not None and not args.resume:
