@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
@@ -24,9 +25,37 @@ from src.routing import RoutingConfig, RoutingResult, route_record
 from src.schema import coerce_llm_output
 
 try:
+    from src.llm_extract import SYSTEM_PROMPT as _LLM_PROMPT
     from src.llm_extract import llm_extract
 except Exception:
     llm_extract = None  # type: ignore[assignment]
+    _LLM_PROMPT = None
+
+# Per-run disk cache of raw LLM answers. tools/compare_models.py points this at
+# experiments/<run-id>/llm_cache so every mode (llm / hybrid / adaptive) reuses the
+# SAME answer for the same note, and routing policies can be replayed without Ollama.
+# None (the default) disables caching, so interactive use and other scripts are unchanged.
+LLM_CACHE_DIR: Optional[Path] = None
+
+
+def _cache_path(text: str, model: str) -> Optional[Path]:
+    if LLM_CACHE_DIR is None:
+        return None
+    key = hashlib.sha256("\0".join([_LLM_PROMPT or "", model, text]).encode("utf-8")).hexdigest()
+    return Path(LLM_CACHE_DIR) / model.replace(":", "_").replace("/", "_") / f"{key}.json"
+
+
+def call_llm(text: str, model: str) -> Dict[str, Any]:
+    """llm_extract() with the optional per-run cache. The key covers prompt + model + note text."""
+    path = _cache_path(text, model)
+    if path is not None and path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))["parsed"]
+    res = llm_extract(text=text, model=model, return_raw=True)
+    out, raw = res if isinstance(res, tuple) else (res, "")
+    if path is not None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"parsed": out, "raw": raw}, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -183,8 +212,7 @@ def apply_llm(text: str, rec: Dict[str, Any], model: str) -> None:
     if not llm_extract:
         raise RuntimeError("LLM extraction not available. Is Ollama installed?")
 
-    out, _ = llm_extract(text=text, model=model, return_raw=True)
-    out = coerce_llm_output(out)
+    out = coerce_llm_output(call_llm(text, model))
 
     rec["meta"]["visit_datetime"] = None  # LLM doesn't extract datetime
     rec["clinical"] = out.get("clinical", {})
@@ -197,8 +225,7 @@ def apply_hybrid(text: str, rec: Dict[str, Any], model: str, require_llm: bool =
 
     if llm_extract:
         try:
-            out, _ = llm_extract(text=text, model=model, return_raw=True)
-            out = coerce_llm_output(out)
+            out = coerce_llm_output(call_llm(text, model))
             rec["meta"]["llm_status"] = "called"
 
             # LLM fills gaps rules couldn't cover
@@ -238,7 +265,7 @@ def apply_adaptive(
 
     if llm_fn is None and llm_extract:
         def llm_fn(t: str) -> Dict[str, Any]:  # noqa: F811
-            return coerce_llm_output(llm_extract(text=t, model=model))
+            return coerce_llm_output(call_llm(t, model))
 
     result = route_record(text, rec, llm_fn, cfg)
     rec["meta"]["llm_status"] = (

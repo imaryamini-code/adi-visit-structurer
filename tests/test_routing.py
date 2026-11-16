@@ -244,3 +244,53 @@ def test_process_note_adaptive_require_llm_raises_if_needed_but_unavailable(monk
     rec = rp.process_note(f.read_text(encoding="utf-8"), f.stem, "adaptive", "mistral")
     assert rec["meta"]["llm_status"] == "unavailable"
     assert rec["routing"]["needs_review"]
+
+
+# --- shared LLM cache (one answer per note, reused by llm / hybrid / adaptive) ---------------
+
+def _counting_stub():
+    calls = []
+
+    def stub(text, model, return_raw=False, **k):
+        calls.append(model)
+        out = {"clinical": {"reason_for_visit": "rivalutazione del dolore"}, "coding": {}}
+        return (out, "RAW") if return_raw else out
+
+    stub.calls = calls
+    return stub
+
+
+def test_cache_shares_one_llm_answer_across_modes(monkeypatch, tmp_path):
+    stub = _counting_stub()
+    monkeypatch.setattr(rp, "llm_extract", stub)
+    monkeypatch.setattr(rp, "LLM_CACHE_DIR", tmp_path)
+    f = _first_note(needs_llm=True)
+    text = f.read_text(encoding="utf-8")
+    for mode in ("llm", "hybrid", "adaptive"):
+        rp.process_note(text, f.stem, mode, "mistral")
+    assert len(stub.calls) == 1
+    saved = list(tmp_path.rglob("*.json"))
+    assert len(saved) == 1 and "RAW" in saved[0].read_text(encoding="utf-8")
+
+
+def test_cache_is_separate_per_model(monkeypatch, tmp_path):
+    stub = _counting_stub()
+    monkeypatch.setattr(rp, "llm_extract", stub)
+    monkeypatch.setattr(rp, "LLM_CACHE_DIR", tmp_path)
+    f = _first_note(needs_llm=True)
+    text = f.read_text(encoding="utf-8")
+    rp.process_note(text, f.stem, "llm", "mistral")
+    rp.process_note(text, f.stem, "llm", "llama3.1:8b")
+    assert stub.calls == ["mistral", "llama3.1:8b"]
+    assert {p.parent.name for p in tmp_path.rglob("*.json")} == {"mistral", "llama3.1_8b"}
+
+
+def test_no_cache_by_default_calls_llm_every_time(monkeypatch):
+    stub = _counting_stub()
+    monkeypatch.setattr(rp, "llm_extract", stub)
+    monkeypatch.setattr(rp, "LLM_CACHE_DIR", None)
+    f = _first_note(needs_llm=True)
+    text = f.read_text(encoding="utf-8")
+    rp.process_note(text, f.stem, "llm", "mistral")
+    rp.process_note(text, f.stem, "hybrid", "mistral")
+    assert len(stub.calls) == 2
