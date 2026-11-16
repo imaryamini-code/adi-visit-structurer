@@ -1,0 +1,20 @@
+# Synthetic reference audit (provisional v1, 24 September 2026)
+
+The original `data/synthetic/gold` remains unchanged. `data/synthetic/gold_reviewed_v1` is a copy with the corrections below, based only on statements visible in the corresponding raw note. The reference was generated before the notes, so an original label is not automatically supported by its note. All 100 pairs were screened for explicit diagnosis/symptom mentions and visit dates; the flagged pairs were manually examined. This is an evidence audit, not independent clinical annotation or a final thesis benchmark. A one-reviewer pass cannot resolve all ambiguous visit reasons and interventions.
+
+| ID | Corrected field | Evidence and decision |
+| --- | --- | --- |
+| ADI-0002 | Removed `ipertensione` from problems | The note gives a blood-pressure measurement and a pressure lesion, but no hypertension diagnosis. A single 140/90 measurement is not proof of a documented diagnosis. |
+| ADI-0003 | Reason `controllo parametri`; removed `diabete_tipo_2`, `dolore_cronico` | The note describes measuring vital signs. It contains no diabetes or pain history and no pain assessment. |
+| ADI-0004 | Reason `controllo generale`; removed `ipertensione`, `scompenso_cardiaco` | The note explicitly says general home visit and lists observations. It contains no therapy review, hypertension diagnosis, or cardiac failure history. Elevated blood pressure alone must not be converted into a diagnosis. |
+| ADI-0006 | Reason `controllo generale`; removed `dolore_cronico`, `diabete_tipo_2` | The note explicitly says general home visit and vital-sign measurements; it contains no pain or diabetes mention. |
+| ADI-0018, 0029, 0041, 0067, 0085 | Removed `febbre` | The notes have no fever complaint or diagnosis. Recorded temperatures range from 36.5 to 37.1 °C; a diagnosis must not be inferred from the original target record. |
+| ADI-0024, 0042, 0064, 0097 | Removed `insonnia` | The notes mention other symptoms but no insomnia, sleep complaint, or equivalent. |
+| ADI-0050, 0093 | Removed `dispnea` | The notes describe a respiratory situation in general terms, without an explicit dyspnea/shortness-of-breath statement. |
+| ADI-0009–0013 | Filled `meta.visit_datetime` from the explicit `10/02/2026 ore 08:00` text | Original references had null despite a stated visit date and time. |
+
+An initial narrow screen flagged ADI-0024 and ADI-0034 for `inappetenza`; manual inspection found the exact word in both notes. Those were false flags, so their labels were retained. The broader screen found no remaining problem labels without a lexical mention after these corrections, but lexical support alone does not prove clinical correctness: negation, uncertainty, and problem subtype still need human review. A separate screen found assistant-style framing in 49 raw notes; `preprocess_text` removes some wrappers, but this remains a synthetic-distribution limitation.
+
+Do not overwrite the original experiments or silently re-label their saved metrics. Re-score saved predictions against this explicitly named reference version for *exploratory* analysis only. Before a thesis comparison, adjudicate ambiguous reason and intervention semantics (for example, whether a visit documented as `controllo generale` with drug administration should have one or both purposes), review negated or inferred symptoms, freeze the reference and normalization code, and record their hashes. A revised prompt also requires fresh, paired model predictions with a new run ID; old predictions cannot be presented as if they used the revised prompt.
+
+The pure LLM can omit explicitly stated temperatures. The updated prompt calls out Italian decimal commas, and `src/schema.py` now parses numeric strings such as `"37,1"`; neither guarantees that a model returning `null` will recover a temperature. The rules and hybrid modes already extract temperature deterministically. Keep pure LLM and hybrid results separate and report omission rates as an error category.

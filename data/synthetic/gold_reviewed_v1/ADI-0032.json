@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "record_id": "ADI-0032",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-15T14:30:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0032",
+    "age": null,
+    "sex": "M"
+  },
+  "clinical": {
+    "reason_for_visit": "riferiti sintomi generali",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "interventions": [
+      "valutazione_generale",
+      "educazione_alimentare"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "target": "caregiver",
+      "timing_days": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "inappetenza",
+      "nausea"
+    ],
+    "risk_flags": [
+      "rischio_malnutrizione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up senza tempistica",
+      "Nessun parametro vitale riportato"
+    ]
+  }
+}
