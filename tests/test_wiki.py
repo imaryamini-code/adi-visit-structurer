@@ -59,3 +59,10 @@ def test_build_is_deterministic(tmp_path):
     build_wiki(recs, "concept", a)
     build_wiki(recs, "concept", b)
     assert {p.name: p.read_bytes() for p in a.rglob("*.md")} == {p.name: p.read_bytes() for p in b.rglob("*.md")}
+
+
+def test_evidence_matches_reworded_label_and_never_invents():
+    from src.wiki import _evidence_by_stems
+    t = "Oggi controlli dei parametri vitali. Segnalata caduta recente."
+    assert "caduta" in _evidence_by_stems(t, "caduta_recente")
+    assert _evidence_by_stems(t, "ulcera_sacrale") is None
