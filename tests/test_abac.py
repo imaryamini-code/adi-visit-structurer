@@ -14,7 +14,16 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import abac
 from abac import evaluate_policy
+from datetime import datetime as _real_datetime
+
+
+class _AtTen(_real_datetime):
+    """Freeze the clock inside shift hours (10:00) so the tests do not depend on when they are run."""
+    @classmethod
+    def now(cls, tz=None):
+        return _real_datetime(2026, 2, 17, 10, 0)
 
 
 # ── subject helpers ──────────────────────────────────────────────────────────
@@ -38,12 +47,13 @@ def anonymous():
 # ── clinical report: create ───────────────────────────────────────────────────
 
 class TestCreate:
-    def test_doctor_can_create(self):
+    def test_doctor_can_create(self, monkeypatch):
+        monkeypatch.setattr(abac, "datetime", _AtTen)  # inside shift hours (08:00-20:00)
         d = evaluate_policy(doctor(), "clinical_report", "create")
-        # passes during shift hours (08:00–20:00); run tests in that window
         assert d.permitted, d.reason
 
-    def test_nurse_can_create(self):
+    def test_nurse_can_create(self, monkeypatch):
+        monkeypatch.setattr(abac, "datetime", _AtTen)
         d = evaluate_policy(nurse(), "clinical_report", "create")
         assert d.permitted, d.reason
 
