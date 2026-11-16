@@ -9,7 +9,8 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 def test_reuse_cache_starts_a_fresh_run_and_refuses_an_existing_one(tmp_path, monkeypatch):
-    (tmp_path / "data").symlink_to(REPO / "data")
+    for d in ("data", "src", "tools"):  # the run manifest hashes these files relative to cwd
+        (tmp_path / d).symlink_to(REPO / d)
     old = tmp_path / "old_cache" / "mistral"
     old.mkdir(parents=True)
     (old / "marker.json").write_text("{}", encoding="utf-8")
