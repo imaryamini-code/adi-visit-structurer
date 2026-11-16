@@ -188,3 +188,59 @@ def test_routing_log_is_json_serialisable():
     rec = make_rec()
     route_record("PA 140/90.", rec, never_called)
     json.dumps(rec["routing"])
+
+
+# --- process_note integration (the entry point used by batch runs and compare_models) ---------
+
+from pathlib import Path  # noqa: E402
+
+import src.run_pipeline as rp  # noqa: E402
+
+RAW_DIR = Path("data/synthetic/raw")
+
+
+def _first_note(needs_llm: bool):
+    """Find a real synthetic note that does / does not need the LLM under the default policy."""
+    for f in sorted(RAW_DIR.glob("ADI-*.txt")):
+        text = rp.PREPROCESS(f.read_text(encoding="utf-8"))
+        rec = rp.build_base_record(f.stem, "adaptive", "mistral")
+        rp.apply_rules(text, rec)
+        if bool(plan_escalations(text, rec, RoutingConfig())) == needs_llm:
+            return f
+    pytest.skip("no suitable synthetic note found")
+
+
+def test_process_note_adaptive_without_need_does_not_call_llm(monkeypatch):
+    def boom(*a, **k):
+        raise AssertionError("LLM must not be called")
+    monkeypatch.setattr(rp, "llm_extract", boom)
+    f = _first_note(needs_llm=False)
+    rec = rp.process_note(f.read_text(encoding="utf-8"), f.stem, "adaptive", "mistral", require_llm=True)
+    assert rec["meta"]["llm_status"] == "not_needed"
+    assert rec["routing"]["llm_called"] is False
+
+
+def test_process_note_adaptive_calls_llm_once_when_needed(monkeypatch):
+    calls = []
+
+    def stub(text, model, **k):
+        calls.append(model)
+        return {"clinical": {}, "coding": {}}
+    monkeypatch.setattr(rp, "llm_extract", stub)
+    f = _first_note(needs_llm=True)
+    rec = rp.process_note(f.read_text(encoding="utf-8"), f.stem, "adaptive", "llama3.1:8b")
+    assert calls == ["llama3.1:8b"]
+    assert rec["meta"]["llm_status"] == "called"
+
+
+def test_process_note_adaptive_require_llm_raises_if_needed_but_unavailable(monkeypatch):
+    def down(*a, **k):
+        raise RuntimeError("Could not reach Ollama")
+    monkeypatch.setattr(rp, "llm_extract", down)
+    f = _first_note(needs_llm=True)
+    with pytest.raises(RuntimeError, match="needs the LLM"):
+        rp.process_note(f.read_text(encoding="utf-8"), f.stem, "adaptive", "mistral", require_llm=True)
+    # Without require_llm (interactive use) it degrades gracefully and flags instead.
+    rec = rp.process_note(f.read_text(encoding="utf-8"), f.stem, "adaptive", "mistral")
+    assert rec["meta"]["llm_status"] == "unavailable"
+    assert rec["routing"]["needs_review"]

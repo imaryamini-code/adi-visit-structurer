@@ -49,6 +49,8 @@ SYSTEM_PROMPT = (
     "   somministrazione_farmaco, gestione_catetere, gestione_stomia, gestione_ossigenoterapia,\n"
     "   educazione_terapeutica, monitoraggio_glicemia\n"
     "4. vitals: extract as separate numbers. blood_pressure MUST be split into systolic and diastolic.\n"
+    "   Italian decimal commas are decimal points: T 37,1°C means temperature 37.1, not null.\n"
+    "   Check explicit temperature forms such as T 37,1°C and temperatura corporea 36,7°C.\n"
     "   IMPORTANT: dates like 15/02/2026 are NOT blood pressure. Only extract BP if explicitly mentioned.\n"
     "5. problems_normalized: clinical problems found. Examples: dolore, lesione_da_pressione, caduta,\n"
     "   ipertensione, dispnea, febbre, diabete_tipo_2, bpco\n"

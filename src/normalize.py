@@ -40,6 +40,9 @@ REASON_MAP = {
     "controllo generale": "controllo generale",
     "valutazione clinica generale": "controllo generale",
     "rivalutazione clinica": "controllo generale",
+    "valutazione delle condizioni generali": "controllo generale",
+    "controllo domiciliare generale": "controllo generale",
+    "controllo generale domiciliare": "controllo generale",
 
     # Wound
     "medicazione": "medicazione e controllo lesione",
@@ -83,6 +86,7 @@ REASON_MAP = {
     "riferiti sintomi generali": "valutazione sintomi generali",
     "valutazione sintomi generali": "valutazione sintomi generali",
     "stanchezza e scarso appetito": "valutazione sintomi generali",
+    "valutazione sintomatologia generale": "valutazione sintomi generali",
 
     # Caregiver
     "educazione caregiver e controllo generale": "educazione caregiver e controllo generale",
@@ -156,8 +160,6 @@ INTERVENTION_MAP = {
     "somministrazione terapia": "somministrazione_farmaco",
     "somministrazione farmaco": "somministrazione_farmaco",
     "somministrata terapia": "somministrazione_farmaco",
-    "terapia": "somministrazione_farmaco",
-    "controllo terapia": "somministrazione_farmaco",
     "somministrazione_farmaco": "somministrazione_farmaco",
 
     # Wound

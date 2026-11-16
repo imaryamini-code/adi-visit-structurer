@@ -20,9 +20,8 @@ import src.preprocess as preprocess_mod
 import src.extract_rules as rules_mod
 from src.normalize import normalize_problems
 from src.quality import quality_check
-from src.schema import coerce_llm_output
-
 from src.routing import RoutingConfig, RoutingResult, route_record
+from src.schema import coerce_llm_output
 
 try:
     from src.llm_extract import llm_extract
@@ -192,13 +191,15 @@ def apply_llm(text: str, rec: Dict[str, Any], model: str) -> None:
     rec["coding"] = out.get("coding", {})
 
 
-def apply_hybrid(text: str, rec: Dict[str, Any], model: str) -> None:
+def apply_hybrid(text: str, rec: Dict[str, Any], model: str, require_llm: bool = False) -> None:
     apply_rules(text, rec)
+    rec["meta"]["llm_status"] = "unavailable"
 
     if llm_extract:
         try:
             out, _ = llm_extract(text=text, model=model, return_raw=True)
             out = coerce_llm_output(out)
+            rec["meta"]["llm_status"] = "called"
 
             # LLM fills gaps rules couldn't cover
             if not rec["clinical"]["reason_for_visit"]:
@@ -209,20 +210,29 @@ def apply_hybrid(text: str, rec: Dict[str, Any], model: str) -> None:
                 + out["coding"].get("problems_normalized", [])
             ))
         except RuntimeError:
-            pass  # Ollama unavailable — rules result is still valid
+            if require_llm:
+                raise
+            # Interactive demo may fall back; the status makes this visible.
+
+    if require_llm and rec["meta"]["llm_status"] != "called":
+        raise RuntimeError("Hybrid comparison requires a successful LLM call")
 
 
 def apply_adaptive(
     text: str,
     rec: Dict[str, Any],
     model: str,
+    require_llm: bool = False,
     cfg: Optional[RoutingConfig] = None,
     llm_fn: Optional[Callable[[str], Dict[str, Any]]] = None,
 ) -> RoutingResult:
     """
-    Rules first, then field-level routing: the LLM is called at most once per note,
-    only if some field needs it, and its answers are verified before use.
-    See src/routing.py.
+    Rules first, then field-level routing (see src/routing.py): the LLM is called at most
+    once per note, only if some field needs it, and its answers are verified before use.
+
+    meta.llm_status: "not_needed" (rules were enough), "called", or "unavailable".
+    With require_llm=True (comparison runs) a note that NEEDS the LLM but cannot get it
+    raises, exactly like hybrid mode, so an Ollama outage can never silently become a result.
     """
     apply_rules(text, rec)
 
@@ -230,7 +240,32 @@ def apply_adaptive(
         def llm_fn(t: str) -> Dict[str, Any]:  # noqa: F811
             return coerce_llm_output(llm_extract(text=t, model=model))
 
-    return route_record(text, rec, llm_fn, cfg)
+    result = route_record(text, rec, llm_fn, cfg)
+    rec["meta"]["llm_status"] = (
+        "called" if result.llm_called else "unavailable" if result.llm_error else "not_needed"
+    )
+    if require_llm and result.llm_error:
+        raise RuntimeError(f"Adaptive comparison needs the LLM but it was unavailable: {result.llm_error}")
+    return result
+
+
+def process_note(text: str, record_id: str, mode: str = "rules", model: str = "mistral",
+                 require_llm: bool = False) -> Dict[str, Any]:
+    """One extraction path for batch runs, comparisons, and the web interface."""
+    if mode not in {"rules", "llm", "hybrid", "adaptive"}:
+        raise ValueError(f"Unknown extraction mode: {mode}")
+    cleaned = PREPROCESS(text)
+    rec = build_base_record(record_id, mode, model)
+    if mode == "rules":
+        apply_rules(cleaned, rec)
+    elif mode == "llm":
+        apply_llm(cleaned, rec, model)
+    elif mode == "adaptive":
+        apply_adaptive(cleaned, rec, model, require_llm=require_llm)
+    else:
+        apply_hybrid(cleaned, rec, model, require_llm=require_llm)
+    rec["quality"] = quality_check(rec)
+    return rec
 
 
 # ---------------------------------------------------------------------------
@@ -263,9 +298,6 @@ def main() -> None:
         else "llm" if args.use_llm
         else "rules"
     )
-    llm_calls = 0
-    flagged_records = 0
-    field_status: Dict[str, Dict[str, int]] = {}
     raw_files = sorted(RAW_DIR.glob("ADI-*.txt"))
 
     if not raw_files:
@@ -275,28 +307,21 @@ def main() -> None:
     ok = 0
     failed = 0
     failures = []
+    llm_calls = 0
+    flagged_records = 0
+    field_status: Dict[str, Dict[str, int]] = {}
 
     for txt in raw_files:
         record_id = txt.stem
         try:
-            text = PREPROCESS(txt.read_text(encoding="utf-8"))
-            rec = build_base_record(record_id, mode, args.model)
-
-            if mode == "rules":
-                apply_rules(text, rec)
-            elif mode == "llm":
-                apply_llm(text, rec, args.model)
-            elif mode == "adaptive":
-                res = apply_adaptive(text, rec, args.model)
-                llm_calls += int(res.llm_called)
-                flagged_records += int(bool(res.needs_review))
-                for fld, dec in res.decisions.items():
+            rec = process_note(txt.read_text(encoding="utf-8"), record_id, mode, args.model)
+            if mode == "adaptive":
+                routing = rec["routing"]
+                llm_calls += int(routing["llm_called"])
+                flagged_records += int(bool(routing["needs_review"]))
+                for fld, dec in routing["fields"].items():
                     counts = field_status.setdefault(fld, {})
-                    counts[dec.status] = counts.get(dec.status, 0) + 1
-            else:
-                apply_hybrid(text, rec, args.model)
-
-            rec["quality"] = quality_check(rec)
+                    counts[dec["status"]] = counts.get(dec["status"], 0) + 1
             save_prediction(record_id, rec)
             print(f"  [ok] {record_id}")
             ok += 1
