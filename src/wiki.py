@@ -103,6 +103,9 @@ def facts_from_record(rec: dict, text: str = "") -> List[Fact]:
         out.append(("interventions", iv.replace("_", " "), _evidence_by_stems(text, iv)))
 
     fu = c.get("follow_up") or {}
+    if isinstance(fu, str):  # some reference files store the follow-up as free text
+        out.append(("follow_up", fu, _evidence(text, ["controllo", "prossima", "settiman", "giorni"])))
+        fu = {}
     if fu.get("type") or fu.get("timing_days") is not None:
         t = fu.get("type") or "controllo"
         d = fu.get("timing_days")

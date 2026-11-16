@@ -66,3 +66,10 @@ def test_evidence_matches_reworded_label_and_never_invents():
     t = "Oggi controlli dei parametri vitali. Segnalata caduta recente."
     assert "caduta" in _evidence_by_stems(t, "caduta_recente")
     assert _evidence_by_stems(t, "ulcera_sacrale") is None
+
+
+def test_follow_up_given_as_free_text_is_kept():
+    r = rec("ADI-0001")
+    r["clinical"]["follow_up"] = "Programmato controllo tra 7 giorni"
+    f = {c: t for c, t, _ in facts_from_record(r, TEXT)}
+    assert f["follow_up"] == "Programmato controllo tra 7 giorni"

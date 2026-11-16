@@ -38,19 +38,20 @@ except Exception:
 LLM_CACHE_DIR: Optional[Path] = None
 
 
-def _cache_path(text: str, model: str) -> Optional[Path]:
+def _cache_path(text: str, model: str, context: str = "") -> Optional[Path]:
     if LLM_CACHE_DIR is None:
         return None
-    key = hashlib.sha256("\0".join([_LLM_PROMPT or "", model, text]).encode("utf-8")).hexdigest()
+    parts = [_LLM_PROMPT or "", model, text] + ([context] if context else [])  # no context -> unchanged key
+    key = hashlib.sha256("\0".join(parts).encode("utf-8")).hexdigest()
     return Path(LLM_CACHE_DIR) / model.replace(":", "_").replace("/", "_") / f"{key}.json"
 
 
-def call_llm(text: str, model: str) -> Dict[str, Any]:
+def call_llm(text: str, model: str, context: str = "") -> Dict[str, Any]:
     """llm_extract() with the optional per-run cache. The key covers prompt + model + note text."""
-    path = _cache_path(text, model)
+    path = _cache_path(text, model, context)
     if path is not None and path.exists():
         return json.loads(path.read_text(encoding="utf-8"))["parsed"]
-    res = llm_extract(text=text, model=model, return_raw=True)
+    res = llm_extract(text=text, model=model, return_raw=True, **({"context": context} if context else {}))
     out, raw = res if isinstance(res, tuple) else (res, "")
     if path is not None:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -208,24 +209,25 @@ def apply_rules(text: str, rec: Dict[str, Any]) -> None:
     rec["coding"]["problems_normalized"] = normalize_problems(text) or []
 
 
-def apply_llm(text: str, rec: Dict[str, Any], model: str) -> None:
+def apply_llm(text: str, rec: Dict[str, Any], model: str, context: str = "") -> None:
     if not llm_extract:
         raise RuntimeError("LLM extraction not available. Is Ollama installed?")
 
-    out = coerce_llm_output(call_llm(text, model))
+    out = coerce_llm_output(call_llm(text, model, context))
 
     rec["meta"]["visit_datetime"] = None  # LLM doesn't extract datetime
     rec["clinical"] = out.get("clinical", {})
     rec["coding"] = out.get("coding", {})
 
 
-def apply_hybrid(text: str, rec: Dict[str, Any], model: str, require_llm: bool = False) -> None:
+def apply_hybrid(text: str, rec: Dict[str, Any], model: str, require_llm: bool = False,
+                 context: str = "") -> None:
     apply_rules(text, rec)
     rec["meta"]["llm_status"] = "unavailable"
 
     if llm_extract:
         try:
-            out = coerce_llm_output(call_llm(text, model))
+            out = coerce_llm_output(call_llm(text, model, context))
             rec["meta"]["llm_status"] = "called"
 
             # LLM fills gaps rules couldn't cover
@@ -252,6 +254,7 @@ def apply_adaptive(
     require_llm: bool = False,
     cfg: Optional[RoutingConfig] = None,
     llm_fn: Optional[Callable[[str], Dict[str, Any]]] = None,
+    context: str = "",
 ) -> RoutingResult:
     """
     Rules first, then field-level routing (see src/routing.py): the LLM is called at most
@@ -265,7 +268,7 @@ def apply_adaptive(
 
     if llm_fn is None and llm_extract:
         def llm_fn(t: str) -> Dict[str, Any]:  # noqa: F811
-            return coerce_llm_output(call_llm(t, model))
+            return coerce_llm_output(call_llm(t, model, context))
 
     result = route_record(text, rec, llm_fn, cfg)
     rec["meta"]["llm_status"] = (
@@ -277,7 +280,7 @@ def apply_adaptive(
 
 
 def process_note(text: str, record_id: str, mode: str = "rules", model: str = "mistral",
-                 require_llm: bool = False) -> Dict[str, Any]:
+                 require_llm: bool = False, context: str = "") -> Dict[str, Any]:
     """One extraction path for batch runs, comparisons, and the web interface."""
     if mode not in {"rules", "llm", "hybrid", "adaptive"}:
         raise ValueError(f"Unknown extraction mode: {mode}")
@@ -286,11 +289,13 @@ def process_note(text: str, record_id: str, mode: str = "rules", model: str = "m
     if mode == "rules":
         apply_rules(cleaned, rec)
     elif mode == "llm":
-        apply_llm(cleaned, rec, model)
+        apply_llm(cleaned, rec, model, context)
     elif mode == "adaptive":
-        apply_adaptive(cleaned, rec, model, require_llm=require_llm)
+        apply_adaptive(cleaned, rec, model, require_llm=require_llm, context=context)
     else:
-        apply_hybrid(cleaned, rec, model, require_llm=require_llm)
+        apply_hybrid(cleaned, rec, model, require_llm=require_llm, context=context)
+    if context:  # only when a knowledge layer was used, so other records are unchanged
+        rec["meta"]["knowledge_context_chars"] = len(context)
     rec["quality"] = quality_check(rec)
     return rec
 

@@ -108,6 +108,7 @@ def llm_extract(
     timeout_s: int = 90,
     return_raw: bool = False,
     max_retries: int = 1,
+    context: str = "",
 ) -> Dict[str, Any] | Tuple[Dict[str, Any], str]:
     """
     Extract structured clinical data using a local LLM via Ollama.
@@ -119,6 +120,7 @@ def llm_extract(
         timeout_s: Request timeout in seconds.
         return_raw: If True, return (parsed_dict, raw_string) tuple.
         max_retries: Number of repair attempts on invalid JSON.
+        context: Optional reference examples (knowledge layer); empty = original prompt.
 
     Returns:
         Parsed dict, or (dict, raw_str) if return_raw=True.
@@ -126,7 +128,8 @@ def llm_extract(
     Raises:
         RuntimeError: If Ollama is unreachable or JSON cannot be parsed after retries.
     """
-    prompt = f"{SYSTEM_PROMPT}\n\nTEXT:\n{text}\n\nJSON ONLY:"
+    ctx = f"\n\n{context}" if context else ""  # empty context keeps the original prompt byte-for-byte
+    prompt = f"{SYSTEM_PROMPT}{ctx}\n\nTEXT:\n{text}\n\nJSON ONLY:"
     raw = _call_ollama(prompt=prompt, model=model, base_url=base_url, timeout_s=timeout_s)
     candidate = _extract_json_object(raw)
 
