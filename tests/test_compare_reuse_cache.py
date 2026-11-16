@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 
 import src.llm_extract as le
+import src.run_pipeline as rp
 import tools.compare_models as cm
 
 REPO = Path(__file__).resolve().parents[1]
@@ -15,6 +16,7 @@ def test_reuse_cache_starts_a_fresh_run_and_refuses_an_existing_one(tmp_path, mo
     old.mkdir(parents=True)
     (old / "marker.json").write_text("{}", encoding="utf-8")
     monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(rp, "LLM_CACHE_DIR", None)  # main() sets this global; monkeypatch restores it afterwards
     monkeypatch.setattr(le, "_call_ollama", lambda *a, **k: json.dumps(
         {"clinical": {"reason_for_visit": "x", "vitals": {}, "interventions": [],
                       "follow_up": {"type": None, "timing_days": None}, "critical_issues": []},
