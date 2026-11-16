@@ -10,6 +10,8 @@ from pathlib import Path
 from src.evaluate import evaluate
 import src.run_pipeline as pipeline
 from src.run_pipeline import process_note, PIPELINE_VERSION
+from src.wiki import load_records
+from src.wiki_context import KnowledgeLayer
 
 try:
     from src.llm_extract import SYSTEM_PROMPT, DEFAULT_OLLAMA_URL
@@ -37,6 +39,9 @@ def ollama_info(model):
             'modelfile_sha256': sha(show.get('modelfile', '').encode()),
             'parameters': show.get('parameters'), 'template_sha256': sha(show.get('template', '').encode())}
 
+def cname(mode, model, knowledge='none'):
+    return f'{mode}{"" if knowledge == "none" else "+" + knowledge}_{model.replace(":", "_").replace("/", "_")}'
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--run-id', required=True, help='New directory name within experiments/')
@@ -44,6 +49,11 @@ def main():
     ap.add_argument('--gold-dir', type=Path, default=GOLD,
                     help='Versioned reference directory; default is the original synthetic gold')
     ap.add_argument('--modes', nargs='+', choices=['llm', 'hybrid', 'adaptive'], default=['llm', 'hybrid'])
+    ap.add_argument('--knowledge', nargs='+', choices=['none', 'wiki', 'raw'], default=['none'],
+                    help="Knowledge layer for LLM conditions: none (default), wiki (structured Markdown lines), "
+                         "raw (conventional retrieval of sentences). Leave-one-out from --gold-dir.")
+    ap.add_argument('--reuse-cache', type=Path,
+                    help='Copy LLM answers from an earlier run (same prompt) so no-knowledge conditions are not recomputed')
     ap.add_argument('--rules-only', action='store_true', help='Reproduce the rules baseline without Ollama')
     ap.add_argument('--limit', type=int, help='Use the first N paired records for a small pilot')
     ap.add_argument('--resume', action='store_true', help='Continue an interrupted run without replacing predictions')
@@ -62,6 +72,15 @@ def main():
     root = Path('experiments') / args.run_id
     # One LLM answer per (prompt, model, note), shared by llm / hybrid / adaptive in this run.
     pipeline.LLM_CACHE_DIR = root / 'llm_cache'
+    if args.reuse_cache and not (root / 'llm_cache').exists():
+        if not args.reuse_cache.is_dir():
+            ap.error(f'--reuse-cache not found: {args.reuse_cache}')
+        root.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(args.reuse_cache, root / 'llm_cache')
+    layers = {}
+    if set(args.knowledge) - {'none'}:
+        reference = load_records(args.gold_dir, RAW)  # reviewed reference + its raw notes
+        layers = {kn: KnowledgeLayer(reference, kn) for kn in args.knowledge if kn != 'none'}
     if args.resume:
         if not (root / 'manifest.json').exists():
             ap.error('Cannot resume: run manifest not found')
@@ -71,8 +90,8 @@ def main():
                 manifest.get('prompt_sha256') != (sha(SYSTEM_PROMPT.encode()) if SYSTEM_PROMPT else None)):
             ap.error('Cannot resume: dataset or prompt changed')
         if set(manifest['conditions']) - {'rules'} - {
-            f'{mode}_{model.replace(":", "_").replace("/", "_")}'
-            for model in args.models for mode in args.modes
+            cname(mode, model, kn)
+            for model in args.models for mode in args.modes for kn in args.knowledge
         }:
             ap.error('Cannot resume with a different model list')
     else:
@@ -89,7 +108,7 @@ def main():
                                   [Path('src/run_pipeline.py'), Path('src/extract_rules.py'),
                                    Path('src/llm_extract.py'), Path('src/normalize.py'),
                                    Path('src/evaluate.py'), Path('src/schema.py'),
-                                   Path('src/routing.py'),
+                                   Path('src/routing.py'), Path('src/wiki.py'), Path('src/wiki_context.py'),
                                    Path('tools/compare_models.py')]},
                 'pipeline_version': PIPELINE_VERSION, 'dataset': 'synthetic, gold-first; see docs/DATASET.md',
                 'gold_dir': str(args.gold_dir),
@@ -107,10 +126,15 @@ def main():
         target = selected_gold / p.name
         if not target.exists():
             shutil.copyfile(p, target)
-    conditions = [('rules', None)] if args.rules_only else [('rules', None)] + [(mode, model) for model in args.models for mode in args.modes]
-    for mode, model in conditions:
-        name = 'rules' if model is None else f'{mode}_{model.replace(":", "_").replace("/", "_")}'
+    conditions = [('rules', None, 'none')] if args.rules_only else [('rules', None, 'none')] + [
+        (mode, model, kn) for model in args.models for mode in args.modes for kn in args.knowledge]
+    for mode, model, kn in conditions:
+        name = 'rules' if model is None else cname(mode, model, kn)
         info = manifest['conditions'].get(name, {'mode': mode, 'model': model})
+        if kn != 'none':
+            info['knowledge'] = {'kind': kn, 'source': str(args.gold_dir), 'leave_one_out': True,
+                                 'entries': len(layers[kn].entries), 'fingerprint_sha256': layers[kn].fingerprint(),
+                                 'k': layers[kn].k, 'per_concept': layers[kn].per_concept, 'max_chars': layers[kn].max_chars}
         manifest['conditions'][name] = info
         (root / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
         if model and 'ollama' not in info:
@@ -124,8 +148,9 @@ def main():
                 continue
             if args.max_new is not None and new_count >= args.max_new:
                 break
-            record = process_note(p.read_text(encoding='utf-8'), p.stem, mode,
-                                  model or 'mistral', require_llm=True)
+            note = p.read_text(encoding='utf-8')
+            ctx = layers[kn].context(pipeline.PREPROCESS(note), p.stem) if kn != 'none' else ''
+            record = process_note(note, p.stem, mode, model or 'mistral', require_llm=True, context=ctx)
             target.write_text(json.dumps(record, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
             new_count += 1
         completed = len(list(pred_dir.glob('ADI-*.json')))
