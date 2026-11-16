@@ -50,6 +50,27 @@ def _evidence(text: str, needles: Iterable[str]) -> Optional[str]:
     return None
 
 
+_STOP = {"generale", "generali", "della", "delle", "dello", "degli", "visita", "controllo"}
+
+
+def _stems(label: str) -> List[str]:
+    """Word stems (first 5 letters) of a label, ignoring very generic words."""
+    words = re.findall(r"[a-zàèéìòù]{5,}", label.lower().replace("_", " "))
+    return [w[:5] for w in words if w not in _STOP]
+
+
+def _evidence_by_stems(text: str, label: str) -> Optional[str]:
+    """Sentence with the most label stems; needs >=1 hit. Best-effort, can return None."""
+    stems = _stems(label)
+    best, best_n = None, 0
+    for s in _sentences(text):
+        low = s.lower()
+        n = sum(1 for st in set(stems) if st in low)
+        if n > best_n:
+            best, best_n = s, n
+    return best[:240] if best else None
+
+
 def _num(v) -> List[str]:
     if v is None:
         return []
@@ -62,7 +83,8 @@ def facts_from_record(rec: dict, text: str = "") -> List[Fact]:
     out: List[Fact] = []
 
     if c.get("reason_for_visit"):
-        out.append(("reason", c["reason_for_visit"], _evidence(text, ["visita", "motivo"])))
+        out.append(("reason", c["reason_for_visit"],
+                    _evidence_by_stems(text, c["reason_for_visit"]) or _evidence(text, ["visita", "motivo"])))
 
     v = c.get("vitals") or {}
     parts, needles = [], []
@@ -78,7 +100,7 @@ def facts_from_record(rec: dict, text: str = "") -> List[Fact]:
         out.append(("vitals", ", ".join(parts), _evidence(text, needles)))
 
     for iv in c.get("interventions") or []:
-        out.append(("interventions", iv.replace("_", " "), _evidence(text, [iv.split("_")[0]])))
+        out.append(("interventions", iv.replace("_", " "), _evidence_by_stems(text, iv)))
 
     fu = c.get("follow_up") or {}
     if fu.get("type") or fu.get("timing_days") is not None:
@@ -89,10 +111,10 @@ def facts_from_record(rec: dict, text: str = "") -> List[Fact]:
 
     for p in (rec.get("coding") or {}).get("problems_normalized") or []:
         label = p if isinstance(p, str) else (p.get("label") or p.get("code") or json.dumps(p, ensure_ascii=False))
-        out.append(("problems", str(label), _evidence(text, [str(label).split("_")[0]])))
+        out.append(("problems", str(label), _evidence_by_stems(text, str(label))))
 
     for ci in c.get("critical_issues") or []:
-        out.append(("critical", str(ci), _evidence(text, [str(ci)])))
+        out.append(("critical", str(ci), _evidence_by_stems(text, str(ci))))
     return out
 
 
