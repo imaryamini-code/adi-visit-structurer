@@ -15,11 +15,14 @@ def _str_or_none(x: Any) -> str | None:
 
 
 def _num_or_none(x: Any) -> int | float | None:
+    if isinstance(x, bool):
+        return None
     if isinstance(x, (int, float)):
         return x
     if isinstance(x, str):
         try:
-            return int(x) if "." not in x else float(x)
+            value = x.strip().replace(",", ".")
+            return int(value) if "." not in value else float(value)
         except ValueError:
             pass
     return None
