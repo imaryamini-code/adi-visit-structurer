@@ -22,6 +22,8 @@ from src.normalize import normalize_problems
 from src.quality import quality_check
 from src.schema import coerce_llm_output
 
+from src.routing import RoutingConfig, RoutingResult, route_record
+
 try:
     from src.llm_extract import llm_extract
 except Exception:
@@ -210,6 +212,27 @@ def apply_hybrid(text: str, rec: Dict[str, Any], model: str) -> None:
             pass  # Ollama unavailable — rules result is still valid
 
 
+def apply_adaptive(
+    text: str,
+    rec: Dict[str, Any],
+    model: str,
+    cfg: Optional[RoutingConfig] = None,
+    llm_fn: Optional[Callable[[str], Dict[str, Any]]] = None,
+) -> RoutingResult:
+    """
+    Rules first, then field-level routing: the LLM is called at most once per note,
+    only if some field needs it, and its answers are verified before use.
+    See src/routing.py.
+    """
+    apply_rules(text, rec)
+
+    if llm_fn is None and llm_extract:
+        def llm_fn(t: str) -> Dict[str, Any]:  # noqa: F811
+            return coerce_llm_output(llm_extract(text=t, model=model))
+
+    return route_record(text, rec, llm_fn, cfg)
+
+
 # ---------------------------------------------------------------------------
 # Save
 # ---------------------------------------------------------------------------
@@ -229,10 +252,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="ADI visit structurer — batch pipeline")
     parser.add_argument("--use-llm", action="store_true", help="Use LLM extraction only")
     parser.add_argument("--hybrid", action="store_true", help="Use hybrid extraction (rules + LLM)")
+    parser.add_argument("--adaptive", action="store_true",
+                        help="Adaptive field-level routing (rules, LLM only where needed, flag uncertain)")
     parser.add_argument("--model", default="mistral", help="Ollama model name")
     args = parser.parse_args()
 
-    mode = "hybrid" if args.hybrid else "llm" if args.use_llm else "rules"
+    mode = (
+        "adaptive" if args.adaptive
+        else "hybrid" if args.hybrid
+        else "llm" if args.use_llm
+        else "rules"
+    )
+    llm_calls = 0
+    flagged_records = 0
+    field_status: Dict[str, Dict[str, int]] = {}
     raw_files = sorted(RAW_DIR.glob("ADI-*.txt"))
 
     if not raw_files:
@@ -253,6 +286,13 @@ def main() -> None:
                 apply_rules(text, rec)
             elif mode == "llm":
                 apply_llm(text, rec, args.model)
+            elif mode == "adaptive":
+                res = apply_adaptive(text, rec, args.model)
+                llm_calls += int(res.llm_called)
+                flagged_records += int(bool(res.needs_review))
+                for fld, dec in res.decisions.items():
+                    counts = field_status.setdefault(fld, {})
+                    counts[dec.status] = counts.get(dec.status, 0) + 1
             else:
                 apply_hybrid(text, rec, args.model)
 
@@ -278,6 +318,13 @@ def main() -> None:
         "records_failed": failed,
         "failures": failures,
     }
+    if mode == "adaptive":
+        summary["adaptive"] = {
+            "llm_calls": llm_calls,
+            "llm_call_rate": round(llm_calls / len(raw_files), 3),
+            "records_with_flagged_fields": flagged_records,
+            "field_status_counts": field_status,
+        }
     RUN_SUMMARY_PATH.write_text(
         json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
     )
