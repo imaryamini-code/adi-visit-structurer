@@ -54,6 +54,8 @@ def main():
                          "raw (conventional retrieval of sentences). Leave-one-out from --gold-dir.")
     ap.add_argument('--reuse-cache', type=Path,
                     help='Copy LLM answers from an earlier run (same prompt) so no-knowledge conditions are not recomputed')
+    ap.add_argument('--extractors', choices=['v1', 'v2'], default='v1',
+                    help='Rule extractors: v1 = original (default), v2 = improved reason/follow-up/problems rules')
     ap.add_argument('--rules-only', action='store_true', help='Reproduce the rules baseline without Ollama')
     ap.add_argument('--limit', type=int, help='Use the first N paired records for a small pilot')
     ap.add_argument('--resume', action='store_true', help='Continue an interrupted run without replacing predictions')
@@ -86,6 +88,8 @@ def main():
                 manifest['gold_fingerprint_sha256'] != fingerprint(gold) or
                 manifest.get('prompt_sha256') != (sha(SYSTEM_PROMPT.encode()) if SYSTEM_PROMPT else None)):
             ap.error('Cannot resume: dataset or prompt changed')
+        if manifest.get('extractors', 'v1') != args.extractors:
+            ap.error('Cannot resume with a different --extractors version')
         if set(manifest['conditions']) - {'rules'} - {
             cname(mode, model, kn)
             for model in args.models for mode in args.modes for kn in args.knowledge
@@ -108,7 +112,9 @@ def main():
                                    Path('src/llm_extract.py'), Path('src/normalize.py'),
                                    Path('src/evaluate.py'), Path('src/schema.py'),
                                    Path('src/routing.py'), Path('src/wiki.py'), Path('src/wiki_context.py'),
+                                   Path('src/extractors_v2.py'),
                                    Path('tools/compare_models.py')]},
+                'extractors': args.extractors,
                 'pipeline_version': PIPELINE_VERSION, 'dataset': 'synthetic, gold-first; see docs/DATASET.md',
                 'gold_dir': str(args.gold_dir),
                 'raw_count': len(raw), 'raw_fingerprint_sha256': fingerprint(raw),
@@ -149,7 +155,8 @@ def main():
                 break
             note = p.read_text(encoding='utf-8')
             ctx = layers[kn].context(pipeline.PREPROCESS(note), p.stem) if kn != 'none' else ''
-            record = process_note(note, p.stem, mode, model or 'mistral', require_llm=True, context=ctx)
+            record = process_note(note, p.stem, mode, model or 'mistral', require_llm=True, context=ctx,
+                                  extractors=args.extractors)
             target.write_text(json.dumps(record, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
             new_count += 1
         completed = len(list(pred_dir.glob('ADI-*.json')))
