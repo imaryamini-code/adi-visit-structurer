@@ -260,6 +260,7 @@ def _canonical_reason(llm_reason: Optional[str]) -> Optional[str]:
 
 def resolve_escalations(
     text: str, rec: Dict[str, Any], plan: Dict[str, str], llm_out: Dict[str, Any], cfg: RoutingConfig,
+    follow_up_parser: Optional[Callable[[str], Any]] = None,
 ) -> Dict[str, FieldDecision]:
     out: Dict[str, FieldDecision] = {}
     clin_llm = (llm_out or {}).get("clinical", {}) or {}
@@ -296,7 +297,8 @@ def resolve_escalations(
 
         elif fld == "follow_up":
             raw = clin_llm.get("follow_up")
-            parsed = rules_mod.extract_follow_up(raw) if raw else None  # LLM reads, rules canonicalise
+            parse = follow_up_parser or rules_mod.extract_follow_up
+            parsed = parse(raw) if raw else None  # LLM reads, rules canonicalise
             if parsed:
                 rec["clinical"]["follow_up"] = parsed
                 out[fld] = FieldDecision(ESCALATED_ACCEPTED, "llm", f"{why}; LLM phrase parsed by rules")
@@ -332,6 +334,7 @@ def route_record(
     rec: Dict[str, Any],
     llm_fn: Optional[LLMFn],
     cfg: Optional[RoutingConfig] = None,
+    follow_up_parser: Optional[Callable[[str], Any]] = None,
 ) -> RoutingResult:
     """
     Apply adaptive routing to a record that already contains the rules output.
@@ -378,7 +381,7 @@ def route_record(
             for fld, why in plan.items():
                 result.decisions[fld] = FieldDecision(FLAGGED, "none", f"{why}; LLM unavailable")
         else:
-            result.decisions.update(resolve_escalations(text, rec, plan, llm_out, cfg))
+            result.decisions.update(resolve_escalations(text, rec, plan, llm_out, cfg, follow_up_parser))
 
     rec["routing"] = result.to_dict()
     return result

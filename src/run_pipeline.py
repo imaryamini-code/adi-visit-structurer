@@ -19,6 +19,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 import src.preprocess as preprocess_mod
 import src.extract_rules as rules_mod
+import src.extractors_v2 as v2
 from src.normalize import normalize_problems
 from src.quality import quality_check
 from src.routing import RoutingConfig, RoutingResult, route_record
@@ -188,12 +189,19 @@ def _normalize_interventions(
 # Extraction modes
 # ---------------------------------------------------------------------------
 
-def apply_rules(text: str, rec: Dict[str, Any]) -> None:
+EXTRACTOR_VERSIONS = ("v1", "v2")
+
+
+def apply_rules(text: str, rec: Dict[str, Any], extractors: str = "v1") -> None:
     vitals = _extract_vitals(text)
 
     rec["meta"]["visit_datetime"] = EXTRACT_DATETIME(text) if EXTRACT_DATETIME else None
-    rec["clinical"]["reason_for_visit"] = EXTRACT_REASON(text) if EXTRACT_REASON else None
-    rec["clinical"]["follow_up"] = EXTRACT_FOLLOW_UP(text) if EXTRACT_FOLLOW_UP else None
+    if extractors == "v2":
+        rec["clinical"]["reason_for_visit"] = v2.reason_v3(text)
+        rec["clinical"]["follow_up"] = v2.follow_up_v2(text)
+    else:
+        rec["clinical"]["reason_for_visit"] = EXTRACT_REASON(text) if EXTRACT_REASON else None
+        rec["clinical"]["follow_up"] = EXTRACT_FOLLOW_UP(text) if EXTRACT_FOLLOW_UP else None
     rec["clinical"]["vitals"] = vitals
 
     interventions = EXTRACT_INTERVENTIONS(text, vitals=vitals) if EXTRACT_INTERVENTIONS else []
@@ -209,7 +217,7 @@ def apply_rules(text: str, rec: Dict[str, Any]) -> None:
     rec["coding"]["problems_normalized"] = normalize_problems(text) or []
 
 
-def canonical_follow_up(value: Any) -> Any:
+def canonical_follow_up(value: Any, extractors: str = "v1") -> Any:
     """Free-text follow-up phrase -> {"type", "timing_days"[, "target"]} via the project's rules parser.
 
     The LLM answers with a phrase ("controllo entro tre giorni"). Structured dicts, None and
@@ -217,12 +225,14 @@ def canonical_follow_up(value: Any) -> Any:
     Every condition (rules, LLM, hybrid, adaptive) should be compared on the same structured form.
     """
     if isinstance(value, str):
+        if extractors == "v2":
+            return v2.follow_up_phrase_v2(value)
         parsed = rules_mod.extract_follow_up(value) if value.strip() else None
         return parsed if parsed else None
     return value
 
 
-def apply_llm(text: str, rec: Dict[str, Any], model: str, context: str = "") -> None:
+def apply_llm(text: str, rec: Dict[str, Any], model: str, context: str = "", extractors: str = "v1") -> None:
     if not llm_extract:
         raise RuntimeError("LLM extraction not available. Is Ollama installed?")
 
@@ -230,13 +240,13 @@ def apply_llm(text: str, rec: Dict[str, Any], model: str, context: str = "") -> 
 
     rec["meta"]["visit_datetime"] = None  # LLM doesn't extract datetime
     rec["clinical"] = out.get("clinical", {})
-    rec["clinical"]["follow_up"] = canonical_follow_up(rec["clinical"].get("follow_up"))
+    rec["clinical"]["follow_up"] = canonical_follow_up(rec["clinical"].get("follow_up"), extractors)
     rec["coding"] = out.get("coding", {})
 
 
 def apply_hybrid(text: str, rec: Dict[str, Any], model: str, require_llm: bool = False,
-                 context: str = "") -> None:
-    apply_rules(text, rec)
+                 context: str = "", extractors: str = "v1") -> None:
+    apply_rules(text, rec, extractors)
     rec["meta"]["llm_status"] = "unavailable"
 
     if llm_extract:
@@ -269,6 +279,7 @@ def apply_adaptive(
     cfg: Optional[RoutingConfig] = None,
     llm_fn: Optional[Callable[[str], Dict[str, Any]]] = None,
     context: str = "",
+    extractors: str = "v1",
 ) -> RoutingResult:
     """
     Rules first, then field-level routing (see src/routing.py): the LLM is called at most
@@ -278,13 +289,14 @@ def apply_adaptive(
     With require_llm=True (comparison runs) a note that NEEDS the LLM but cannot get it
     raises, exactly like hybrid mode, so an Ollama outage can never silently become a result.
     """
-    apply_rules(text, rec)
+    apply_rules(text, rec, extractors)
 
     if llm_fn is None and llm_extract:
         def llm_fn(t: str) -> Dict[str, Any]:  # noqa: F811
             return coerce_llm_output(call_llm(t, model, context))
 
-    result = route_record(text, rec, llm_fn, cfg)
+    result = route_record(text, rec, llm_fn, cfg,
+                          follow_up_parser=v2.follow_up_phrase_v2 if extractors == "v2" else None)
     rec["meta"]["llm_status"] = (
         "called" if result.llm_called else "unavailable" if result.llm_error else "not_needed"
     )
@@ -294,20 +306,29 @@ def apply_adaptive(
 
 
 def process_note(text: str, record_id: str, mode: str = "rules", model: str = "mistral",
-                 require_llm: bool = False, context: str = "") -> Dict[str, Any]:
-    """One extraction path for batch runs, comparisons, and the web interface."""
+                 require_llm: bool = False, context: str = "", extractors: str = "v1") -> Dict[str, Any]:
+    """One extraction path for batch runs, comparisons, and the web interface.
+
+    extractors: "v1" (default, original rules) or "v2" (opt-in improved rules; see src/extractors_v2.py).
+    """
     if mode not in {"rules", "llm", "hybrid", "adaptive"}:
         raise ValueError(f"Unknown extraction mode: {mode}")
+    if extractors not in EXTRACTOR_VERSIONS:
+        raise ValueError(f"Unknown extractors version: {extractors}")
     cleaned = PREPROCESS(text)
     rec = build_base_record(record_id, mode, model)
     if mode == "rules":
-        apply_rules(cleaned, rec)
+        apply_rules(cleaned, rec, extractors)
     elif mode == "llm":
-        apply_llm(cleaned, rec, model, context)
+        apply_llm(cleaned, rec, model, context, extractors)
     elif mode == "adaptive":
-        apply_adaptive(cleaned, rec, model, require_llm=require_llm, context=context)
+        apply_adaptive(cleaned, rec, model, require_llm=require_llm, context=context, extractors=extractors)
     else:
-        apply_hybrid(cleaned, rec, model, require_llm=require_llm, context=context)
+        apply_hybrid(cleaned, rec, model, require_llm=require_llm, context=context, extractors=extractors)
+    if extractors == "v2":  # same text-based precision rule for every mode, so conditions stay comparable
+        rec["coding"]["problems_normalized"] = v2.drop_generic_lesion(
+            rec.get("coding", {}).get("problems_normalized", []) or [], cleaned)
+        rec["meta"]["extractors"] = "v2"
     if context:  # only when a knowledge layer was used, so other records are unchanged
         rec["meta"]["knowledge_context_chars"] = len(context)
     rec["quality"] = quality_check(rec)
