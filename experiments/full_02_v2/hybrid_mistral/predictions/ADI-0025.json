@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0025",
+    "visit_datetime": "2026-03-04T17:20:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:04",
+    "llm_status": "called",
+    "extractors": "v2"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 78,
+      "temperature": 36.7,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 3
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

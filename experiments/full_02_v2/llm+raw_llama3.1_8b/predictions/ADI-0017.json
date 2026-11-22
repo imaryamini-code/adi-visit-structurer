@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "record_id": "ADI-0017",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:09",
+    "extractors": "v2",
+    "knowledge_context_chars": 958
+  },
+  "clinical": {
+    "reason_for_visit": "accesso domiciliare di controllo generale per valutazione e medicazione della lesione persistente",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 3
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 98,
+      "temperature": 37.1,
+      "spo2": 98
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore",
+      "lesione_persistente"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "record_id": "ADI-0006",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:45:29",
+    "knowledge_context_chars": 1406
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale del paziente",
+    "follow_up": null,
+    "interventions": [],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 68,
+      "temperature": 36.4,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No interventions extracted",
+      "Follow-up not specified"
+    ]
+  }
+}

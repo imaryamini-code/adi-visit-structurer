@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "valutazione parametri vitali",
+      "follow_up": "controllo domiciliare per 18/03/2026",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 110,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 60,
+        "temperature": 37.8,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"valutazione parametri vitali\",\n    \"follow_up\": \"controllo domiciliare per 18/03/2026\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 110,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 60,\n      \"temperature\": 37.8,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

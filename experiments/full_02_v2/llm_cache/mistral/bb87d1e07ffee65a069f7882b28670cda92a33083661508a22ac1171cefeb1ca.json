@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rilevazione dei parametri vitali e valutazione generale",
+      "follow_up": "nuovo controllo domiciliare per le prossime 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 110,
+        "blood_pressure_diastolic": 85,
+        "heart_rate": 90,
+        "temperature": 37.1,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rilevazione dei parametri vitali e valutazione generale\",\n    \"follow_up\": \"nuovo controllo domiciliare per le prossime 7 giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\", \"valutazione_generale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 110,\n      \"blood_pressure_diastolic\": 85,\n      \"heart_rate\": 90,\n      \"temperature\": 37.1,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo terapia in corso e somministrazione farmaco",
+      "follow_up": "controllo in 2 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 135,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 68,
+        "temperature": 36.7,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo terapia in corso e somministrazione farmaco\",\n    \"follow_up\": \"controllo in 2 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"somministrazione_farmaco\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 135,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 68,\n      \"temperature\": 36.7,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

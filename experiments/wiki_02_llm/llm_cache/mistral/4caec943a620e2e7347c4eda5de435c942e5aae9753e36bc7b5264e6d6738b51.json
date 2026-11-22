@@ -1,0 +1,19 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "sintomi riferiti di inappetenza e nausea",
+      "follow_up": "ricontatto telefonico",
+      "interventions": [
+        "valutazione generale"
+      ],
+      "vitals": null
+    },
+    "coding": {
+      "problems_normalized": [
+        "inappetenza",
+        "nausea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"sintomi riferiti di inappetenza e nausea\",\n    \"follow_up\": \"ricontatto telefonico\",\n    \"interventions\": [\"valutazione generale\"],\n    \"vitals\": null\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"inappetenza\", \"nausea\"]\n  }\n}"
+}

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0040",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:56:43"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 98,
+      "temperature": 36.7,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "record_id": "ADI-0073",
+    "visit_datetime": "2026-03-13T12:40:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:27:09",
+    "llm_status": "called"
+  },
+  "clinical": {
+    "reason_for_visit": "valutazione sintomi generali",
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "interventions": [
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": "caregiver"
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "nausea",
+      "inappetenza",
+      "malnutrizione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [],
+    "fields": {
+      "blood_pressure": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "heart_rate": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "temperature": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "spo2": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "problems": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "rules produced only the generic fallback; LLM found nothing more specific"
+      }
+    }
+  }
+}

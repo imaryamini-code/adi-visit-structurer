@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo domiciliare per la somministrazione del farmaco e il monitoraggio della terapia",
+      "follow_up": "controllo domiciliare per domani",
+      "interventions": [
+        "somministrazione_farmaco",
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 125,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 76,
+        "temperature": 36.5,
+        "spo2": 94
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dispnea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo domiciliare per la somministrazione del farmaco e il monitoraggio della terapia\",\n    \"follow_up\": \"controllo domiciliare per domani\",\n    \"interventions\": [\n      \"somministrazione_farmaco\",\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 125,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 76,\n      \"temperature\": 36.5,\n      \"spo2\": 94\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dispnea\"\n    ]\n  }\n}"
+}

@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "verifica della terapia in corso e somministrazione di farmaci",
+      "follow_up": "nuova visita domiciliare entro due giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "115",
+        "blood_pressure_diastolic": "65",
+        "heart_rate": "80",
+        "temperature": "37,8",
+        "spo2": "98"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dispnea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"verifica della terapia in corso e somministrazione di farmaci\",\n    \"follow_up\": \"nuova visita domiciliare entro due giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\", \"somministrazione_farmaco\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"115\",\n      \"blood_pressure_diastolic\": \"65\",\n      \"heart_rate\": \"80\",\n      \"temperature\": \"37,8\",\n      \"spo2\": \"98\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dispnea\"]\n  }\n}"
+}

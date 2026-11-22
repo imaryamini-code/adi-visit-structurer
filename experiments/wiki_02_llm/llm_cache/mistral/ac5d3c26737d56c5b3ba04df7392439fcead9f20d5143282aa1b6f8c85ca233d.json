@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "visita di controllo della lesione già in trattamento presso la nostra struttura",
+      "follow_up": "controllo entro 7 giorni",
+      "interventions": [
+        "cambio_medicazione",
+        "valutazione_generale",
+        "gestione_lesione"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 65,
+        "temperature": 37.8
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"visita di controllo della lesione già in trattamento presso la nostra struttura\",\n    \"follow_up\": \"controllo entro 7 giorni\",\n    \"interventions\": [\"cambio_medicazione\", \"valutazione_generale\", \"gestione_lesione\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 65,\n      \"temperature\": 37.8\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

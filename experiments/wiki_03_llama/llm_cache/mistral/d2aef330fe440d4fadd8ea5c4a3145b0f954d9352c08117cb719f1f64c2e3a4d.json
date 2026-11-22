@@ -1,0 +1,19 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "richiesta di accompagnamento al paziente",
+      "follow_up": "ricontatto con il caregiver via telefono",
+      "interventions": [
+        "valutazione_generale"
+      ],
+      "vitals": null
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea",
+        "inappetenza"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"richiesta di accompagnamento al paziente\",\n    \"follow_up\": \"ricontatto con il caregiver via telefono\",\n    \"interventions\": [\"valutazione_generale\"],\n    \"vitals\": null\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"nausea\", \"inappetenza\"]\n  }\n}"
+}

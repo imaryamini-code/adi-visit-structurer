@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0047",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:54:43"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per trattamento della lesione già nota",
+    "follow_up": "controllo della lesione per il prossimo 2 giorni",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 72,
+      "temperature": 37.1,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione_da_pressione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

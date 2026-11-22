@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "record_id": "ADI-0031",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:03",
+    "extractors": "v2"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 3
+    },
+    "interventions": [
+      "accesso_domiciliare",
+      "rivalutazione_lesione",
+      "medicazione",
+      "rivalutazione_locale",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 65,
+      "temperature": 37.1,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

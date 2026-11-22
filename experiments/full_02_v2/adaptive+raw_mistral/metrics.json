@@ -1,0 +1,134 @@
+{
+  "records": 100,
+  "reason_accuracy": 0.87,
+  "follow_up_type_timing_accuracy": 0.93,
+  "vitals_exact_record_accuracy": 0.97,
+  "vitals_field_accuracy": {
+    "blood_pressure_systolic": 0.99,
+    "blood_pressure_diastolic": 1.0,
+    "heart_rate": 1.0,
+    "temperature": 1.0,
+    "spo2": 0.98
+  },
+  "interventions": {
+    "micro_precision": 0.7453703703703703,
+    "micro_recall": 0.8563829787234043,
+    "micro_f1": 0.7970297029702971,
+    "tp": 161,
+    "fp": 55,
+    "fn": 27
+  },
+  "problems": {
+    "micro_precision": 0.9384615384615385,
+    "micro_recall": 0.7721518987341772,
+    "micro_f1": 0.8472222222222223,
+    "tp": 61,
+    "fp": 4,
+    "fn": 18
+  },
+  "error_examples": [
+    {
+      "record_id": "ADI-0003",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0004",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0006",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0007",
+      "reason_gold": "controllo generale",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0008",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0012",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0020",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0022",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0061",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0076",
+      "reason_gold": "controllo e gestione stomia",
+      "reason_pred": "controllo e gestione stomia",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0080",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0086",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0092",
+      "reason_gold": "educazione caregiver e controllo generale",
+      "reason_pred": "valutazione sintomi generali",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0094",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0099",
+      "reason_gold": "controllo generale",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": [
+        "blood_pressure_systolic"
+      ]
+    },
+    {
+      "record_id": "ADI-0100",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    }
+  ],
+  "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+}

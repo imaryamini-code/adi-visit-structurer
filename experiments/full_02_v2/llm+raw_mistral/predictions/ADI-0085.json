@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "record_id": "ADI-0085",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:04",
+    "extractors": "v2",
+    "knowledge_context_chars": 1645
+  },
+  "clinical": {
+    "reason_for_visit": "controllare la terapia in corso e somministrare il farmaco prescritto",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    },
+    "interventions": [
+      "somministrazione_farmaco"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 68,
+      "temperature": 36.7,
+      "spo2": 97
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

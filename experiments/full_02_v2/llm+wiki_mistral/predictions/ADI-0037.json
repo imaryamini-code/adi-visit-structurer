@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0037",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:03",
+    "extractors": "v2",
+    "knowledge_context_chars": 1674
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "interventions": [
+      "rivalutazione_medica",
+      "cambio_medicazione",
+      "valutazione_locale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 60,
+      "temperature": 37.8,
+      "spo2": 96
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

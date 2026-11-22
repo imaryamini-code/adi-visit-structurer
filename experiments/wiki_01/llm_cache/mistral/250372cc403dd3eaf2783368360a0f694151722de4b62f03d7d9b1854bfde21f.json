@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per la lesione da pressione in trattamento",
+      "follow_up": "nuovo controllo domiciliare entro tre giorni",
+      "interventions": [
+        "cambio medicazione",
+        "valutazione_lesione_locale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "140",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "80",
+        "temperature": "37.2"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per la lesione da pressione in trattamento\",\n    \"follow_up\": \"nuovo controllo domiciliare entro tre giorni\",\n    \"interventions\": [\"cambio medicazione\", \"valutazione_lesione_locale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"140\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"80\",\n      \"temperature\": \"37.2\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"lesione_da_pressione\"]\n  }\n}"
+}

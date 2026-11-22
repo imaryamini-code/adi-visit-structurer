@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per il paziente con dolore cronico al ginocchio destro",
+      "follow_up": "controllo tra 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 128,
+        "blood_pressure_diastolic": 76,
+        "heart_rate": 80,
+        "temperature": 36.4,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore_cronico"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per il paziente con dolore cronico al ginocchio destro\",\n    \"follow_up\": \"controllo tra 7 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"valutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 128,\n      \"blood_pressure_diastolic\": 76,\n      \"heart_rate\": 80,\n      \"temperature\": 36.4,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore_cronico\"\n    ]\n  }\n}"
+}

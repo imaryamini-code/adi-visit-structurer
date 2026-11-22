@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0056",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T20:17:27",
+    "knowledge_context_chars": 1641
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione caduta recente",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 78,
+      "temperature": 37.8,
+      "spo2": 96
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "caduta_recente",
+      "ipertensione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

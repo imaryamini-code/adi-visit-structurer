@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "record_id": "ADI-0059",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T17:31:02"
+  },
+  "clinical": {
+    "reason_for_visit": "valutazione parametri vitali",
+    "follow_up": "controllo domiciliare per 18/03/2026",
+    "interventions": [
+      "monitoraggio_parametri_vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 60,
+      "temperature": 37.8,
+      "spo2": 97
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

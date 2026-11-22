@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0009",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": null,
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0009",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "monitoraggio segni vitali e verifica terapia",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 74,
+      "temperature": 36.6,
+      "spo2": null
+    },
+    "interventions": [
+      "controllo_parametri_vitali"
+    ],
+    "critical_issues": [],
+    "follow_up": "controllo la prossima settimana"
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

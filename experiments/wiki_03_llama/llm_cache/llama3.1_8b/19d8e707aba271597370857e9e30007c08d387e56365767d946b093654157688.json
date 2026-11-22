@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "medicazione della ferita e controllo locale",
+      "follow_up": "controllo della lesione per prossima settimana",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "medicazione",
+        "rivalutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 140,
+        "blood_pressure_diastolic": 75,
+        "heart_rate": 64,
+        "temperature": 36.7,
+        "spo2": 95
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"medicazione della ferita e controllo locale\",\n    \"follow_up\": \"controllo della lesione per prossima settimana\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"medicazione\",\n      \"rivalutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 140,\n      \"blood_pressure_diastolic\": 75,\n      \"heart_rate\": 64,\n      \"temperature\": 36.7,\n      \"spo2\": 95\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

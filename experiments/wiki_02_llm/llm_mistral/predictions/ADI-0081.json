@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0081",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:45:29"
+  },
+  "clinical": {
+    "reason_for_visit": "verifica della terapia in corso e somministrazione di farmaci",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 115,
+      "blood_pressure_diastolic": 65,
+      "heart_rate": 80,
+      "temperature": 37.8,
+      "spo2": 98
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dispnea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

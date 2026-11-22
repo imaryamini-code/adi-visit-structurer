@@ -1,0 +1,71 @@
+{
+  "records": 10,
+  "reason_accuracy": 0.4,
+  "follow_up_type_timing_accuracy": 0.6,
+  "vitals_exact_record_accuracy": 0.9,
+  "vitals_field_accuracy": {
+    "blood_pressure_systolic": 0.9,
+    "blood_pressure_diastolic": 0.9,
+    "heart_rate": 1.0,
+    "temperature": 1.0,
+    "spo2": 1.0
+  },
+  "interventions": {
+    "micro_precision": 0.6,
+    "micro_recall": 1.0,
+    "micro_f1": 0.7499999999999999,
+    "tp": 12,
+    "fp": 8,
+    "fn": 0
+  },
+  "problems": {
+    "micro_precision": 0.8,
+    "micro_recall": 0.36363636363636365,
+    "micro_f1": 0.5000000000000001,
+    "tp": 4,
+    "fp": 1,
+    "fn": 7
+  },
+  "error_examples": [
+    {
+      "record_id": "ADI-0003",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": [
+        "blood_pressure_systolic",
+        "blood_pressure_diastolic"
+      ]
+    },
+    {
+      "record_id": "ADI-0004",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0005",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0006",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0007",
+      "reason_gold": "controllo generale",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0009",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    }
+  ],
+  "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+}

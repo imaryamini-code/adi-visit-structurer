@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "record_id": "ADI-0093",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-02T11:00:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0093",
+    "age": 76,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo terapia e somministrazione farmaco",
+    "anamnesis_brief": [
+      "terapia domiciliare in corso"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 64,
+      "temperature": 37.8,
+      "spo2": 99
+    },
+    "consciousness": "vigile",
+    "mobility": "autonoma",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dispnea"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Farmaco menzionato senza dose"
+    ]
+  }
+}

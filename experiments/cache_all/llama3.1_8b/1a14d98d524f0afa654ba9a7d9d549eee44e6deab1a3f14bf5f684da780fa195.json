@@ -1,0 +1,27 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "valutazione clinica generale per verificare lo stato di salute dopo i sintomi riferiti nei giorni scorsi",
+      "follow_up": "ricontatto telefonico con il caregiver per monitorare lo stato di salute del paziente",
+      "interventions": [
+        "valutazione_clinica_generale",
+        "fornitura_indicazioni_educative",
+        "somministrazione_farmaco"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": 37.1,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "ridotto_appetito",
+        "nausea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"valutazione clinica generale per verificare lo stato di salute dopo i sintomi riferiti nei giorni scorsi\",\n    \"follow_up\": \"ricontatto telefonico con il caregiver per monitorare lo stato di salute del paziente\",\n    \"interventions\": [\n      \"valutazione_clinica_generale\",\n      \"fornitura_indicazioni_educative\",\n      \"somministrazione_farmaco\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": 37.1,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"ridotto_appetito\",\n      \"nausea\"\n    ]\n  }\n}"
+}

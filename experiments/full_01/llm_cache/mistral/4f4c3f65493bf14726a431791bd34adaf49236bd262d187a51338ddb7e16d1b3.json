@@ -1,0 +1,19 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale del paziente",
+      "follow_up": null,
+      "interventions": [],
+      "vitals": {
+        "blood_pressure_systolic": 120,
+        "blood_pressure_diastolic": 70,
+        "heart_rate": 68,
+        "temperature": 36.4
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale del paziente\",\n    \"follow_up\": null,\n    \"interventions\": [],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 120,\n      \"blood_pressure_diastolic\": 70,\n      \"heart_rate\": 68,\n      \"temperature\": 36.4\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

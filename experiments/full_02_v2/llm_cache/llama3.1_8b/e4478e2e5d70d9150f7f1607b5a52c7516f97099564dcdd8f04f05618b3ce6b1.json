@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo pressione e rivalutazione terapia",
+      "follow_up": "controllo entro 3 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 78,
+        "temperature": 36.7,
+        "spo2": 98
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo pressione e rivalutazione terapia\",\n    \"follow_up\": \"controllo entro 3 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 78,\n      \"temperature\": 36.7,\n      \"spo2\": 98\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

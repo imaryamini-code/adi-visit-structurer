@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0099",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:08",
+    "extractors": "v2"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione clinica",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "interventions": [],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "debolezza generale"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No interventions extracted"
+    ]
+  }
+}

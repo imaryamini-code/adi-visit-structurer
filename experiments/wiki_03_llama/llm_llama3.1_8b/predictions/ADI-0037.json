@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0037",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:56:43"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale presso l'abitazione del paziente",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "interventions": [
+      "valutazione cutanea nella zona lesionale",
+      "rivalutazione medica con cambio di medicazione",
+      "monitoraggio parametri vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 60,
+      "temperature": 37.8,
+      "spo2": 96
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore",
+      "lesione_da_pressione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo clinico per verifica di eventuali lesioni maggiori",
+      "follow_up": "controllo domiciliare per prossima rilevazione",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 120,
+        "blood_pressure_diastolic": 65,
+        "heart_rate": 68,
+        "temperature": 37.4,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "caduta",
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo clinico per verifica di eventuali lesioni maggiori\",\n    \"follow_up\": \"controllo domiciliare per prossima rilevazione\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"valutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 120,\n      \"blood_pressure_diastolic\": 65,\n      \"heart_rate\": 68,\n      \"temperature\": 37.4,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"caduta\",\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "record_id": "ADI-0018",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:07:36"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": "nuovo controllo domiciliare entro 7 giorni",
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 98,
+      "temperature": 36.5,
+      "spo2": 99
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

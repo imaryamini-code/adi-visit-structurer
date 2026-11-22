@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "record_id": "ADI-0099",
+    "visit_datetime": "2026-03-13T12:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:08",
+    "llm_status": "called",
+    "extractors": "v2",
+    "knowledge_context_chars": 1281
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "interventions": [
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [
+      "blood_pressure"
+    ],
+    "fields": {
+      "heart_rate": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "temperature": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "spo2": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "problems": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "blood_pressure": {
+        "status": "flagged",
+        "source": "none",
+        "reason": "note mentions blood pressure but rules found none; LLM pair missing, implausible or not in note",
+        "llm_suggestion": "120/None"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "rules returned only a generic reason; LLM agrees or adds nothing usable"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "rules produced only the generic fallback; LLM found nothing more specific"
+      }
+    }
+  }
+}

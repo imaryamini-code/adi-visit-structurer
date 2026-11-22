@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0092",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T20:29:45",
+    "knowledge_context_chars": 1713
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": "caregiver"
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 105,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 68,
+      "temperature": 36.5,
+      "spo2": 94
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

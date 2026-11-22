@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0062",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T20:19:30",
+    "knowledge_context_chars": 1603
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 2
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 72,
+      "temperature": 37.1,
+      "spo2": 97
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

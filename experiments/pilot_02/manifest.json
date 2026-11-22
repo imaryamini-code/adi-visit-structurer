@@ -1,0 +1,290 @@
+{
+  "created_utc": "2026-11-16T12:50:13.557315+00:00",
+  "commit": "e7881f7906f274eb863061a1855e4327e218be7a",
+  "working_tree_changes": "?? experiments/",
+  "source_sha256": {
+    "src/run_pipeline.py": "e61668ab7543093e324fb91a661522a7e407262ebfb72566e8b0b7962b786168",
+    "src/extract_rules.py": "217912d9c0da20670868ade470e5ce47fa32618c51c9d90cf0ad7c1d4df124a0",
+    "src/llm_extract.py": "126636781d941e22dd8e432c8bb9ce119386dd3605184e632c56aada1b50d706",
+    "src/normalize.py": "c79757798cc868818b5441ecdabd6861387afbc5fc8e2c4498169e26c9ed5725",
+    "src/evaluate.py": "7d6264a1e9fb6463c57c8add1e7b147b6649a95f586a9785bff2620c0eeee531",
+    "src/schema.py": "1447ca3c8f810008afef8cde1c92b01ffd9264dd1e134e2099117981db3da7df",
+    "src/routing.py": "4b47e5b07f979b7cc74418e9817a5bcb2e24539c938aa445c96cce03e263e69e",
+    "tools/compare_models.py": "a7e11005ac26a416568c815c7c51831d7142fe81ab0002a7d9f7fca120774a85"
+  },
+  "pipeline_version": "1.0.0",
+  "dataset": "synthetic, gold-first; see docs/DATASET.md",
+  "gold_dir": "data/synthetic/gold",
+  "raw_count": 10,
+  "raw_fingerprint_sha256": "332f6d4df29d9e2765449e489be20a7b91ce8234c34e45ab37797eec5e2697f5",
+  "gold_fingerprint_sha256": "891ffdbd43c1395aaec51bdab9c2ac602a3a68f3c6ede621127849185ed1a7f1",
+  "prompt_sha256": "7414f8a2f04a95c50bc1408dd516e20014bab89664de0aac53f0639b96d612ef",
+  "ollama_url": "http://localhost:11434",
+  "llm_options": {
+    "temperature": 0.0,
+    "stream": false,
+    "max_retries": 1
+  },
+  "conditions": {
+    "rules": {
+      "mode": "rules",
+      "model": null,
+      "metrics": {
+        "records": 10,
+        "reason_accuracy": 0.4,
+        "follow_up_type_timing_accuracy": 0.6,
+        "vitals_exact_record_accuracy": 0.9,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.9,
+          "blood_pressure_diastolic": 0.9,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 1.0
+        },
+        "interventions": {
+          "micro_precision": 0.6,
+          "micro_recall": 1.0,
+          "micro_f1": 0.7499999999999999,
+          "tp": 12,
+          "fp": 8,
+          "fn": 0
+        },
+        "problems": {
+          "micro_precision": 0.8,
+          "micro_recall": 0.36363636363636365,
+          "micro_f1": 0.5000000000000001,
+          "tp": 4,
+          "fp": 1,
+          "fn": 7
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "blood_pressure_systolic",
+              "blood_pressure_diastolic"
+            ]
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "hybrid_mistral": {
+      "mode": "hybrid",
+      "model": "mistral",
+      "ollama": {
+        "server_version": {
+          "version": "0.17.7"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 10,
+        "reason_accuracy": 0.4,
+        "follow_up_type_timing_accuracy": 0.6,
+        "vitals_exact_record_accuracy": 0.9,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.9,
+          "blood_pressure_diastolic": 0.9,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 1.0
+        },
+        "interventions": {
+          "micro_precision": 0.6,
+          "micro_recall": 1.0,
+          "micro_f1": 0.7499999999999999,
+          "tp": 12,
+          "fp": 8,
+          "fn": 0
+        },
+        "problems": {
+          "micro_precision": 0.8,
+          "micro_recall": 0.36363636363636365,
+          "micro_f1": 0.5000000000000001,
+          "tp": 4,
+          "fp": 1,
+          "fn": 7
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "blood_pressure_systolic",
+              "blood_pressure_diastolic"
+            ]
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "adaptive_mistral": {
+      "mode": "adaptive",
+      "model": "mistral",
+      "ollama": {
+        "server_version": {
+          "version": "0.17.7"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 10,
+        "reason_accuracy": 0.4,
+        "follow_up_type_timing_accuracy": 0.6,
+        "vitals_exact_record_accuracy": 1.0,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 1.0,
+          "blood_pressure_diastolic": 1.0,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 1.0
+        },
+        "interventions": {
+          "micro_precision": 0.6,
+          "micro_recall": 1.0,
+          "micro_f1": 0.7499999999999999,
+          "tp": 12,
+          "fp": 8,
+          "fn": 0
+        },
+        "problems": {
+          "micro_precision": 0.8,
+          "micro_recall": 0.36363636363636365,
+          "micro_f1": 0.5000000000000001,
+          "tp": 4,
+          "fp": 1,
+          "fn": 7
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    }
+  }
+}

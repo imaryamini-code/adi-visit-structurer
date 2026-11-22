@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0075",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:45:30",
+    "knowledge_context_chars": 988
+  },
+  "clinical": {
+    "reason_for_visit": "controllo domiciliare per verificare il corretto funzionamento del catetere vescicale",
+    "follow_up": null,
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "verificato_il_corretto_funzionamento_del_presidio_urinario"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 76,
+      "temperature": 37.8,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "Follow-up not specified"
+    ]
+  }
+}

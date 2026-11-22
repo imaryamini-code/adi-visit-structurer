@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "record_id": "ADI-0061",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:03",
+    "extractors": "v2"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo delle condizioni dopo la caduta riferita dal caregiver",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "interventions": [
+      "controllo_generale",
+      "monitoraggio_parametri_vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 78,
+      "temperature": 36.2,
+      "spo2": 97
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

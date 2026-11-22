@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per trattamento della lesione già nota",
+      "follow_up": "controllo della lesione per il prossimo 2 giorni",
+      "interventions": [
+        "eseguita medicazione della lesione secondo indicazioni specifiche",
+        "valutata condizione generale del paziente"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "72",
+        "temperature": "37.1"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per trattamento della lesione già nota\",\n    \"follow_up\": \"controllo della lesione per il prossimo 2 giorni\",\n    \"interventions\": [\"eseguita medicazione della lesione secondo indicazioni specifiche\", \"valutata condizione generale del paziente\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"150\",\n      \"blood_pressure_diastolic\": \"80\",\n      \"heart_rate\": \"72\",\n      \"temperature\": \"37.1\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"lesione\"]\n  }\n}"
+}

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0063",
+    "visit_datetime": "2026-02-19T16:20:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "rules",
+    "llm_model": null,
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T17:53:33"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione dolore",
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 60,
+      "temperature": 36.7,
+      "spo2": null
+    },
+    "interventions": [
+      "valutazione_generale",
+      "monitoraggio_parametri_vitali",
+      "medicazione"
+    ],
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": null
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore",
+      "lesione_da_pressione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

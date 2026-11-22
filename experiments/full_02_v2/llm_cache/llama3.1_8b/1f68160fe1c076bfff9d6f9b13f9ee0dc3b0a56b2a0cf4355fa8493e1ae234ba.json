@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo domiciliare generale",
+      "follow_up": "nuovo controllo domiciliare per 3 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 95,
+        "heart_rate": 88,
+        "temperature": 36.8,
+        "spo2": 94
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo domiciliare generale\",\n    \"follow_up\": \"nuovo controllo domiciliare per 3 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 95,\n      \"heart_rate\": 88,\n      \"temperature\": 36.8,\n      \"spo2\": 94\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

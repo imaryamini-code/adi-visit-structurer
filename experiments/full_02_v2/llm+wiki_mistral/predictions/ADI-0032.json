@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0032",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:03",
+    "extractors": "v2",
+    "knowledge_context_chars": 1684
+  },
+  "clinical": {
+    "reason_for_visit": "valutazione clinica generale",
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": "caregiver"
+    },
+    "interventions": [
+      "educazione terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": 36.5,
+      "spo2": 96
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "nausea",
+      "ridotto_appetito"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

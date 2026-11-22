@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "record_id": "ADI-0036",
+    "visit_datetime": "2026-03-11T18:40:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:11",
+    "llm_status": "called",
+    "extractors": "v2"
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione caduta recente",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 78,
+      "temperature": 36.5,
+      "spo2": 96
+    },
+    "interventions": [
+      "valutazione_generale",
+      "monitoraggio_parametri_vitali"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "critical_issues": [
+      "caduta_recente"
+    ]
+  },
+  "coding": {
+    "problems_normalized": [
+      "caduta"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "problems": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "spo2": {
+        "status": "escalated_accepted",
+        "source": "llm",
+        "reason": "note mentions spo2 but rules found none; LLM value plausible and found in note"
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "record_id": "ADI-0086",
+    "visit_datetime": "2026-03-05T08:20:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T21:03:37",
+    "llm_status": "called",
+    "knowledge_context_chars": 1790
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 76,
+      "temperature": 36.4,
+      "spo2": 95
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [
+      "reason_for_visit"
+    ],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "spo2": {
+        "status": "escalated_accepted",
+        "source": "llm",
+        "reason": "note mentions spo2 but rules found none; LLM value plausible and found in note"
+      },
+      "reason_for_visit": {
+        "status": "flagged",
+        "source": "rules",
+        "reason": "rules returned only a generic reason; LLM disagrees ('controllo parametri')",
+        "llm_suggestion": "controllo parametri"
+      },
+      "problems": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "rules found no problems; LLM also found none"
+      }
+    }
+  }
+}

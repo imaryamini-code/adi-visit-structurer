@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "riferiti sintomi generali",
+      "follow_up": "ricontatto telefonico",
+      "interventions": [
+        "valutazione_generale",
+        "consigli_terapeutici"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": "36.2 °C",
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea",
+        "astenia"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"riferiti sintomi generali\",\n    \"follow_up\": \"ricontatto telefonico\",\n    \"interventions\": [\"valutazione_generale\", \"consigli_terapeutici\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": \"36.2 °C\",\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"nausea\", \"astenia\"]\n  }\n}"
+}

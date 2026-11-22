@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0051",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:45:29"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale presso il paziente che riferisce persistenza di dolore nella zona già interessata da lesione",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 7
+    },
+    "interventions": [
+      "cambio_di_medicazione",
+      "valutazione_locale_della_lesione",
+      "valutazione_clinica_generale_del_paziente"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 78,
+      "temperature": 36.5,
+      "spo2": 97
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "records": 100,
+  "reason_accuracy": 0.63,
+  "follow_up_type_timing_accuracy": 0.49,
+  "vitals_exact_record_accuracy": 1.0,
+  "vitals_field_accuracy": {
+    "blood_pressure_systolic": 1.0,
+    "blood_pressure_diastolic": 1.0,
+    "heart_rate": 1.0,
+    "temperature": 1.0,
+    "spo2": 1.0
+  },
+  "interventions": {
+    "micro_precision": 0.8553459119496856,
+    "micro_recall": 0.723404255319149,
+    "micro_f1": 0.7838616714697405,
+    "tp": 136,
+    "fp": 23,
+    "fn": 52
+  },
+  "problems": {
+    "micro_precision": 0.8333333333333334,
+    "micro_recall": 0.6329113924050633,
+    "micro_f1": 0.7194244604316549,
+    "tp": 50,
+    "fp": 10,
+    "fn": 29
+  },
+  "error_examples": [
+    {
+      "record_id": "ADI-0003",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0004",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0005",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0006",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo generale del paziente",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0009",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0013",
+      "reason_gold": "valutazione sintomi generali",
+      "reason_pred": "controllo generale per valutazione della condizione del paziente",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0018",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0019",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo generale per valutazione del quadro attuale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0021",
+      "reason_gold": "valutazione sintomi generali",
+      "reason_pred": "richiesta di visita per la comparsa di sintomi aspecifici",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0028",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0029",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0030",
+      "reason_gold": "valutazione sintomi generali",
+      "reason_pred": "sentirsi male in generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0031",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0032",
+      "reason_gold": "valutazione sintomi generali",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0037",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "visita_di_controllo_generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0038",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0039",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "rivalutazione dolore",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0040",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "visita_di_controllo_generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0041",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": null,
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0042",
+      "reason_gold": "valutazione sintomi generali",
+      "reason_pred": "rivalutazione dei sintomi inizialmente segnalati",
+      "vital_mismatches": []
+    }
+  ],
+  "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+}

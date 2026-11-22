@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione clinica in seguito alla recente caduta denunciata dal caregiver",
+      "follow_up": "nuovo controllo domiciliare",
+      "interventions": [
+        "valutazione_generale",
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 65,
+        "temperature": 36.2,
+        "spo2": 98
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "caduta"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione clinica in seguito alla recente caduta denunciata dal caregiver\",\n    \"follow_up\": \"nuovo controllo domiciliare\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 65,\n      \"temperature\": 36.2,\n      \"spo2\": 98\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"caduta\"\n    ]\n  }\n}"
+}

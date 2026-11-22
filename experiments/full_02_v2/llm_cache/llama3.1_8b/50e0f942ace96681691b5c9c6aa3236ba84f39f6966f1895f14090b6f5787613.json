@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo parametri vitali",
+      "follow_up": "controllo tra 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 120,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 98,
+        "temperature": 37.1,
+        "spo2": 99
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo parametri vitali\",\n    \"follow_up\": \"controllo tra 7 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"somministrazione_farmaco\",\n      \"educazione_terapeutica\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 120,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 98,\n      \"temperature\": 37.1,\n      \"spo2\": 99\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "record_id": "ADI-0064",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:04",
+    "extractors": "v2",
+    "knowledge_context_chars": 1128
+  },
+  "clinical": {
+    "reason_for_visit": "visita domiciliare per controllo generale",
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": "caregiver"
+    },
+    "interventions": [
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "nausea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}

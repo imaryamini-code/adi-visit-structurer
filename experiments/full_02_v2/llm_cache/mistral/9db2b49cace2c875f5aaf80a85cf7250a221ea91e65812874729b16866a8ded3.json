@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "visita_domiciliare_di_controllo_generale_del_paziente",
+      "follow_up": "visita_di_controllo_prevista_tra_2_giorni",
+      "interventions": [
+        "osservazione_generale",
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "140",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "65",
+        "temperature": "36.7"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"visita_domiciliare_di_controllo_generale_del_paziente\",\n    \"follow_up\": \"visita_di_controllo_prevista_tra_2_giorni\",\n    \"interventions\": [\"osservazione_generale\", \"monitoraggio_parametri_vitali\", \"somministrazione_farmaco\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"140\",\n      \"blood_pressure_diastolic\": \"85\",\n      \"heart_rate\": \"65\",\n      \"temperature\": \"36.7\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

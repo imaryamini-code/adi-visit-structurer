@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0098",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:09",
+    "extractors": "v2",
+    "knowledge_context_chars": 1651
+  },
+  "clinical": {
+    "reason_for_visit": "somministrazione del farmaco e il monitoraggio della terapia",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 76,
+      "temperature": 36.5,
+      "spo2": 94
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dispnea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

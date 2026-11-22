@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0055",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-18T09:54:09",
+    "extractors": "v2",
+    "knowledge_context_chars": 1573
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per trattamento della lesione già nota",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 2
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 98,
+      "temperature": 37.8,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

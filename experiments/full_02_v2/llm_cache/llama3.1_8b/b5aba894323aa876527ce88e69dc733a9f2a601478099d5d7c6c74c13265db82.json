@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "riferimento di nausea e astenia",
+      "follow_up": "contatto telefonico con i familiari",
+      "interventions": [
+        "valutazione_generale",
+        "fornitura_consigli_terapeutici"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": null,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea",
+        "astenia"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"riferimento di nausea e astenia\",\n    \"follow_up\": \"contatto telefonico con i familiari\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"fornitura_consigli_terapeutici\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": null,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"nausea\",\n      \"astenia\"\n    ]\n  }\n}"
+}

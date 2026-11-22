@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo e gestione catetere",
+      "follow_up": "controllo entro 7 giorni",
+      "interventions": [
+        "gestione catetere",
+        "monitoraggio parametri vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 115,
+        "blood_pressure_diastolic": 70,
+        "heart_rate": 76,
+        "temperature": 36.8,
+        "spo2": 95
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo e gestione catetere\",\n    \"follow_up\": \"controllo entro 7 giorni\",\n    \"interventions\": [\n      \"gestione catetere\",\n      \"monitoraggio parametri vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 115,\n      \"blood_pressure_diastolic\": 70,\n      \"heart_rate\": 76,\n      \"temperature\": 36.8,\n      \"spo2\": 95\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

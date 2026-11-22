@@ -30,4 +30,13 @@ __MACOSX/
 uploads/
 *.wav
 *.mp3
-*.m4a
+*.m4a*.zip
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+*.zip
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/

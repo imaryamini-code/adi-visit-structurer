@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo presso il proprio domicilio per monitoraggio della condizione generale del paziente",
+      "follow_up": "controllo domiciliare ulteriore fra tre giorni",
+      "interventions": [
+        "valutazione_generale",
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 68,
+        "temperature": 37.4
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo presso il proprio domicilio per monitoraggio della condizione generale del paziente\",\n    \"follow_up\": \"controllo domiciliare ulteriore fra tre giorni\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 68,\n      \"temperature\": 37.4\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

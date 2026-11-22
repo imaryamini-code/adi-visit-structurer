@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "i sintomi riferiti di inappetenza e nausea",
+      "follow_up": "ricontatto telefonico con caregiver",
+      "interventions": [
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": null,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "inappetenza",
+        "nausea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"i sintomi riferiti di inappetenza e nausea\",\n    \"follow_up\": \"ricontatto telefonico con caregiver\",\n    \"interventions\": [\"valutazione_generale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": null,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"inappetenza\", \"nausea\"]\n  }\n}"
+}

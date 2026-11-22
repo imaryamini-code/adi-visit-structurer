@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0019",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:44:41"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per valutazione del quadro attuale",
+    "follow_up": "controllo domiciliare programmato per dentro due giorni",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 72,
+      "temperature": 37.1,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}
