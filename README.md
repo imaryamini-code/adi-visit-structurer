@@ -124,24 +124,30 @@ Every access decision is logged to `access_log.jsonl` and analysed by `access_lo
 
 ## Evaluation
 
-The system includes a full evaluation module (`src/evaluate.py`) comparing structured predictions against a 100-record synthetic gold dataset.
+The system includes a full evaluation module (`src/evaluate.py`) comparing structured predictions against a 100-record synthetic gold dataset. The labels come from the dataset generator, not from a human annotator.
 
-**Results (rules-only baseline, 100 records):**
+**Main comparison (100 records, models run locally through Ollama at temperature 0):**
 
-| Metric | Score |
-|---|---|
-| Reason for visit accuracy | 74% |
-| Follow-up accuracy | 75% |
-| Vitals exact match rate | 79% |
-| Interventions macro F1 | 0.706 |
-| Problems macro F1 | 0.448 |
+| Condition | Reason | Follow-up | Vitals (exact) | Interventions F1 | Problems F1 |
+|---|---|---|---|---|---|
+| Rules only | 0.74 | 0.77 | 0.79 | 0.787 | 0.719 |
+| LLM only, Mistral | 0.63 | 0.49 | 1.00 | 0.784 | 0.719 |
+| Hybrid, Mistral | 0.74 | 0.77 | 0.79 | 0.787 | 0.718 |
+| **Adaptive, Mistral** | 0.74 | 0.77 | **0.97** | 0.787 | 0.718 |
+| LLM only, Llama 3.1 8B | 0.59 | 0.55 | 1.00 | 0.817 | 0.727 |
+| Hybrid, Llama 3.1 8B | 0.74 | 0.77 | 0.79 | 0.787 | 0.721 |
+| **Adaptive, Llama 3.1 8B** | 0.74 | 0.76 | **0.97** | 0.787 | 0.734 |
 
-To run evaluation:
+Reason, follow-up and vitals are accuracies. Interventions and problems are micro-averaged F1. The numbers come from `experiments/full_01/manifest.json`. Adaptive routing raises the vital signs from 0.79 to 0.97 with both models, while the reason and follow-up stay at the level of the rules. Statistics (bootstrap intervals and paired tests) are produced by `tools/stats.py`.
+
+To run the batch pipeline and the evaluation:
 
 ```bash
 python3 -m src.run_pipeline        # generate predictions
 python3 -m src.evaluate            # compute metrics → reports/metrics.json
 ```
+
+The comparison between conditions is run with `tools/compare_models.py`.
 
 ---
 
@@ -161,6 +167,7 @@ adi-visit-structurer/
 │   ├── llm_extract.py            # Local LLM via Ollama (Mistral)
 │   ├── schema.py                 # LLM output coercion
 │   ├── run_pipeline.py           # Batch pipeline
+│   ├── routing.py                # Adaptive field-level routing and verification
 │   ├── evaluate.py               # Evaluation metrics
 │   ├── voice_input.py            # Audio transcription (faster-whisper)
 │   ├── italian_numbers.py        # Italian word-to-number parser
@@ -175,7 +182,11 @@ adi-visit-structurer/
 │       └── pred/                 # Pipeline predictions
 ├── tools/
 │   ├── generate_dataset.py       # Synthetic dataset generator
-│   └── validate_dataset.py       # Dataset schema validator
+│   ├── validate_dataset.py       # Dataset schema validator
+│   ├── compare_models.py         # Rules / LLM / hybrid / adaptive comparison
+│   ├── stats.py                  # Bootstrap intervals and paired tests
+│   └── replay_routing.py         # Re-run routing variants from saved model answers
+├── experiments/                  # Run manifests, metrics, predictions, model-answer caches
 ├── templates/
 │   ├── index.html                # Clinical workspace dashboard
 │   ├── finance.html              # Billing portal (finance role)
