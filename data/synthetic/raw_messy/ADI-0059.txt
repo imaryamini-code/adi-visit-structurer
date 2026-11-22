@@ -1,0 +1,8 @@
+11/03/2026 ore 15:30. eseguito controllo dom. per valutazione parametri vitali. la persona in visita presenta condizioni generali discrete. i dati rilevati sono:
+
+* tensione arteeriosa: 110/80 mmhg
+* fc: 60 battiti al minuto
+* tc: 37,8°c
+* saturo di ossigeno per via orale (spo2): 97%
+
+effettuata rilevazione dei parametri vitali. programmato controllo dom. per verificarne lo stato futuro in data 18/03/2026.

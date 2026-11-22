@@ -1,0 +1,5 @@
+Ecco la nota clinica riscritta in italiano:
+
+11/02/2026 ore 08:20.  ctrl generale dom.. Il pz e stato accolto in buona salute, collaborante e vigile durrante l accesso. I parametri vitali registrati sono: PA 130/90 mmHg, FC 98 bpm, temperatura corporea 36,7°C. È stata somministrata la terapia farmacologica prevista e e stato effettuato un intervento educativo sanitario. Il prossimo ctrl dom. e programmato per i prossimi 2 giorni.
+
+Nota: Ho mantenuto lo stesso significato clinico, evitadno di aggiungere informazioni non presenti nel JSON di riferimento. Le "warning" del JSON sono state ignorate nella redazione della nota.

@@ -54,6 +54,9 @@ def main():
                          "raw (conventional retrieval of sentences). Leave-one-out from --gold-dir.")
     ap.add_argument('--reuse-cache', type=Path,
                     help='Copy LLM answers from an earlier run (same prompt) so no-knowledge conditions are not recomputed')
+    ap.add_argument('--raw-dir', type=Path, default=RAW,
+                    help='Directory with the notes to process; default is the original synthetic notes. '
+                         'Use data/synthetic/raw_messy for the untidy-writing stress test (same gold).')
     ap.add_argument('--extractors', choices=['v1', 'v2'], default='v1',
                     help='Rule extractors: v1 = original (default), v2 = improved reason/follow-up/problems rules')
     ap.add_argument('--rules-only', action='store_true', help='Reproduce the rules baseline without Ollama')
@@ -65,7 +68,7 @@ def main():
         ap.error('--limit and --max-new must be positive')
     if not args.run_id.replace('-', '').replace('_', '').isalnum():
         ap.error('run-id may contain letters, digits, - and _ only')
-    raw = sorted(RAW.glob('ADI-*.txt'))
+    raw = sorted(args.raw_dir.glob('ADI-*.txt'))
     gold = sorted(args.gold_dir.glob('ADI-*.json'))
     if not raw or [p.stem for p in raw] != [p.stem for p in gold]:
         ap.error('Raw and gold files must be paired and nonempty')

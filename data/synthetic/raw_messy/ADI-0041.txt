@@ -1,0 +1,7 @@
+Ecco la nota clinica dom.  ADI riscritta in italiano:
+
+11/03/2026 ore 11:50.
+
+pz in condizioni genrali discrete.  I parametri vitali sono stati rilevati come segue: pressione arteriosa 120/80 mmHg, FC 98 bpm, TC 37,1°C e sat. di ossigeno 99%. È stata somministrata la terapia farmacologiica prevista. Inoltre, e stata fornita un educazione sanitaria durante l accesso domestico. Un nuovo ctrl dom. e stato programmato per le prossmie sette giorni.
+
+Nota: ho mantenuto i dati clinici originali e non ho introdotto informazioni non presenti nel JSON di riferimento.

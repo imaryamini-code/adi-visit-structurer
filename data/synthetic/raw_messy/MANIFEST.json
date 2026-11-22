@@ -1,0 +1,8 @@
+{
+  "seed": 20261122,
+  "typo_rate": 0.06,
+  "notes": 100,
+  "notes_changed": 100,
+  "sha256_of_all_notes": "ed3f40a606e37ef7a7167738cc134b8965729093f73051a12431d70b85b436f9",
+  "source": "data/synthetic/raw"
+}

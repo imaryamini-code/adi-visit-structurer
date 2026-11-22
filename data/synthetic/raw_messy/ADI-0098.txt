@@ -1,0 +1,5 @@
+Ecco la nota clinica dom. ADI in italiano, riscritta secondo le regole indicate:
+
+21/03/2026 ore 18:50. Oggi è stato effettuato il ctrl dom. della pz per la somministrazione del famaco e il monitoraggio della terapia. La pz ha dichiarato di soffrire di lieve dispnea. I parametri vitali rilevati sono stati: PA 125/90 mmHg, FC 76 bpm, TC 36,5°C e sat. di ossigeno 94%. È stato eseguito il monitoraggio dei parametri vitali e somministrata la terapia come da prescrizione. La pz è stata istruita sull'uso del farmaco e su eventuali sintomi avversi. È programmato un nuovo ctrl dom. per domani.
+
+Nota: ho mantenuto gli stessi dati clinici del JSON di rifreimento, aggiustando la forma della nota per renderla più naturale e professionale, come richiesto.
