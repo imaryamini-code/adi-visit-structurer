@@ -64,7 +64,18 @@ Voice / Text Input
 ### Hybrid extraction
 
 **Rules first** — deterministic and interpretable for structured data (vitals, dates, follow-up timing).  
-**LLM as fallback** — handles variable clinical language when rules don't produce enough. Called only when needed via a smart gate (`_should_call_llm`), so the system runs without Ollama.
+**LLM as fallback** — handles variable clinical language when rules don't produce enough. The system runs without Ollama: if the model is not available, it falls back to rule-only mode.
+
+When the model is called depends on where the code runs:
+
+- **Web app (`app.py`)** — a gate (`_should_call_llm`) can skip the model when the rules already gave a reason, at least one vital sign and some interventions. The gate is switched off by default (`SMART_LLM_MODE = False`), so with Ollama running the app calls the model on every note.
+- **Batch hybrid condition (`src/run_pipeline.py`, `apply_hybrid`)** — used in the thesis experiments. The model is called on every note. It can only fill an empty reason and add problems; the rules keep all numbers and the other fields.
+
+### Adaptive routing (thesis work)
+
+The thesis extends the hybrid pipeline with **adaptive field-level routing** (`src/routing.py`). For each field the rules answer first. The model is called at most once per note, and only if some field needs it. Its answer is verified against the note (for example, numbers must appear in the text and be physiologically plausible), and a field that cannot be verified is flagged for human review instead of being filled.
+
+Four conditions are compared on the same notes with two local models (Mistral and Llama 3.1 8B, temperature 0): rules only, LLM only, hybrid and adaptive. The runs, with manifests, metrics, predictions and a cache of the model answers, are in `experiments/`; see `experiments/full_01/manifest.json` for the main comparison. All data are synthetic.
 
 ### Access control — ABAC vs RBAC
 
