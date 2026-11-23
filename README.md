@@ -115,15 +115,17 @@ Every access decision is logged to `access_log.jsonl` and analysed by `access_lo
 
 The system includes a full evaluation module (`src/evaluate.py`) comparing structured predictions against a 100-record synthetic gold dataset.
 
-**Results (rules-only baseline, 100 records):**
+**Results (rules-only baseline, 100 synthetic records; the thesis uses the same numbers):**
 
 | Metric | Score |
 |---|---|
-| Reason for visit accuracy | 74% |
-| Follow-up accuracy | 75% |
-| Vitals exact match rate | 79% |
-| Interventions macro F1 | 0.706 |
-| Problems macro F1 | 0.448 |
+| Reason for visit accuracy | 0.74 |
+| Follow-up accuracy | 0.77 |
+| Vitals exact match rate | 0.79 |
+| Interventions F1 (micro / macro) | 0.787 / 0.742 |
+| Problems F1 (micro / macro) | 0.719 / 0.472 |
+
+The thesis experiments (adaptive routing, knowledge layer, review flag, untidy notes) are in `experiments/` and described in `experiments/README.md`.
 
 To run evaluation:
 
