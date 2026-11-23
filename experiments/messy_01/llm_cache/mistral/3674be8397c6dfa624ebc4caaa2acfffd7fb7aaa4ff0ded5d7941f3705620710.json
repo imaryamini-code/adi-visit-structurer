@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per la lesione in sede",
+      "follow_up": "controllo dellesecuzione della lesione in sede tra tre giorni",
+      "interventions": [
+        "medicazione_della_lesione"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "140",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "72",
+        "temperature": "37.1",
+        "spo2": "98"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per la lesione in sede\",\n    \"follow_up\": \"controllo dellesecuzione della lesione in sede tra tre giorni\",\n    \"interventions\": [\"medicazione_della_lesione\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"140\",\n      \"blood_pressure_diastolic\": \"70\",\n      \"heart_rate\": \"72\",\n      \"temperature\": \"37.1\",\n      \"spo2\": \"98\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

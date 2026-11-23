@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "record_id": "ADI-0038",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T20:27:17"
+  },
+  "clinical": {
+    "reason_for_visit": "accesso dom. di ctrl generale",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "interventions": [
+      "medicazione_della_lesione"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 98,
+      "temperature": 36.7,
+      "spo2": 99
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

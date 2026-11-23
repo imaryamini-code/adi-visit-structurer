@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo domiciliare per verificare lo stato di salute",
+      "follow_up": "controllo tra 2 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 64,
+        "temperature": 37.8,
+        "spo2": 99
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "quadro respiratorio"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo domiciliare per verificare lo stato di salute\",\n    \"follow_up\": \"controllo tra 2 giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\", \"somministrazione_farmaco\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 64,\n      \"temperature\": 37.8,\n      \"spo2\": 99\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"quadro respiratorio\"]\n  }\n}"
+}

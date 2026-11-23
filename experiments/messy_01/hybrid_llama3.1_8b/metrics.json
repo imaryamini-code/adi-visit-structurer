@@ -1,0 +1,175 @@
+{
+  "records": 100,
+  "reason_accuracy": 0.74,
+  "follow_up_type_timing_accuracy": 0.73,
+  "vitals_exact_record_accuracy": 0.6,
+  "vitals_field_accuracy": {
+    "blood_pressure_systolic": 0.98,
+    "blood_pressure_diastolic": 0.99,
+    "heart_rate": 1.0,
+    "temperature": 1.0,
+    "spo2": 0.62
+  },
+  "interventions": {
+    "micro_precision": 0.7925531914893617,
+    "micro_recall": 0.7925531914893617,
+    "micro_f1": 0.7925531914893617,
+    "tp": 149,
+    "fp": 39,
+    "fn": 39
+  },
+  "problems": {
+    "micro_precision": 0.6451612903225806,
+    "micro_recall": 0.759493670886076,
+    "micro_f1": 0.6976744186046513,
+    "tp": 60,
+    "fp": 33,
+    "fn": 19
+  },
+  "error_examples": [
+    {
+      "record_id": "ADI-0003",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": [
+        "blood_pressure_systolic",
+        "blood_pressure_diastolic"
+      ]
+    },
+    {
+      "record_id": "ADI-0005",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0006",
+      "reason_gold": "rivalutazione dolore",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0007",
+      "reason_gold": "controllo generale",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0009",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0015",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0017",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0018",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0019",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "rivalutazione dolore",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0022",
+      "reason_gold": "controllo parametri",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0028",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0029",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0035",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "educazione caregiver e controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0036",
+      "reason_gold": "rivalutazione caduta recente",
+      "reason_pred": "rivalutazione caduta recente",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0037",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0038",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0039",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "educazione caregiver e controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0040",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo generale",
+      "vital_mismatches": []
+    },
+    {
+      "record_id": "ADI-0041",
+      "reason_gold": "controllo terapia e somministrazione farmaco",
+      "reason_pred": "controllo parametri",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    },
+    {
+      "record_id": "ADI-0045",
+      "reason_gold": "medicazione e controllo lesione",
+      "reason_pred": "medicazione e controllo lesione",
+      "vital_mismatches": [
+        "spo2"
+      ]
+    }
+  ],
+  "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+}

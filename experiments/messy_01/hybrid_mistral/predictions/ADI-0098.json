@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0098",
+    "visit_datetime": "2026-03-21T18:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T20:46:59",
+    "llm_status": "called"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo respiratorio e gestione ossigenoterapia",
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 76,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "educazione_terapeutica",
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "dispnea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

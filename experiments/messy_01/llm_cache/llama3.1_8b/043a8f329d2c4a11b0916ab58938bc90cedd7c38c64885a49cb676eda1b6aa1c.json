@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione clinica dopo aver riferito sintomi di debolezza generale",
+      "follow_up": "ricontatto telefonico entro breve",
+      "interventions": [
+        "valutazione_generale",
+        "indicazioni_terapeutiche"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": null,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "debolezza_generale"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione clinica dopo aver riferito sintomi di debolezza generale\",\n    \"follow_up\": \"ricontatto telefonico entro breve\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"indicazioni_terapeutiche\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": null,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"debolezza_generale\"\n    ]\n  }\n}"
+}

@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0015",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T20:21:49"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per valutazione continua del pz con lesione già trattata",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 2
+    },
+    "interventions": [
+      "cambio_di_medic",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 78,
+      "temperature": 37.1,
+      "spo2": 96
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

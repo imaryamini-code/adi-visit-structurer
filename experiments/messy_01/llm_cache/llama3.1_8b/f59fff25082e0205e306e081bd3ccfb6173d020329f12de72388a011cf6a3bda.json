@@ -1,0 +1,28 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "persistenza di dolore nella zona gia interessata da lesione",
+      "follow_up": "controllo della lesione per la prossima settimana",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale",
+        "medicazione",
+        "rivalutazione_locale_della_lesione"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 70,
+        "heart_rate": 78,
+        "temperature": 36.5,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore",
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"persistenza di dolore nella zona gia interessata da lesione\",\n    \"follow_up\": \"controllo della lesione per la prossima settimana\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"valutazione_generale\",\n      \"medicazione\",\n      \"rivalutazione_locale_della_lesione\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 70,\n      \"heart_rate\": 78,\n      \"temperature\": 36.5,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore\",\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

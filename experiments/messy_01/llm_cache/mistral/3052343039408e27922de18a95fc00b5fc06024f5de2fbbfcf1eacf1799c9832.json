@@ -1,0 +1,28 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "visita di ctrl genrale presso l abitazione del pz",
+      "follow_up": "ctrl della lesione per tre giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "rivalutazione_cutanea",
+        "rivalutazione_medica",
+        "cambio_medicazione",
+        "valutazione_locale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "60",
+        "temperature": "37.8",
+        "spo2": "96"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"visita di ctrl genrale presso l abitazione del pz\",\n    \"follow_up\": \"ctrl della lesione per tre giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\", \"rivalutazione_cutanea\", \"rivalutazione_medica\", \"cambio_medicazione\", \"valutazione_locale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"150\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"60\",\n      \"temperature\": \"37.8\",\n      \"spo2\": \"96\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\"]\n  }\n}"
+}

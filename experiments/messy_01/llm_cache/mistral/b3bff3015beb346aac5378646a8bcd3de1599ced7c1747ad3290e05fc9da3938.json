@@ -1,0 +1,21 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "visita_di_controllo",
+      "follow_up": "controllo_domiciliare_ulteriori_fra_tre_giorni",
+      "interventions": [
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "68",
+        "temperature": "37.4"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"visita_di_controllo\",\n    \"follow_up\": \"controllo_domiciliare_ulteriori_fra_tre_giorni\",\n    \"interventions\": [\"valutazione_generale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"150\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"68\",\n      \"temperature\": \"37.4\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

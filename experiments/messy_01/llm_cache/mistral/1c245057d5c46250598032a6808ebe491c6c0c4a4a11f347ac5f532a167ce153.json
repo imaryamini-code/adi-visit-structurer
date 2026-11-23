@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": null,
+      "follow_up": "controllo domestico programmato per le prossime sette giorni",
+      "interventions": [
+        "terapia_farmacologica_somministrata",
+        "educazione_sanitaria_durante_l_accesso_domestico"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "98",
+        "temperature": "37.1",
+        "spo2": "99"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": null,\n    \"follow_up\": \"controllo domestico programmato per le prossime sette giorni\",\n    \"interventions\": [\"terapia_farmacologica_somministrata\", \"educazione_sanitaria_durante_l_accesso_domestico\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"120\",\n      \"blood_pressure_diastolic\": \"80\",\n      \"heart_rate\": \"98\",\n      \"temperature\": \"37.1\",\n      \"spo2\": \"99\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

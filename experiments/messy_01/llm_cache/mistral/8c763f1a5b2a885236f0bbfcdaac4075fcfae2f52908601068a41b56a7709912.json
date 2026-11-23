@@ -1,0 +1,21 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "verifica dei parametri vitali",
+      "follow_up": "nuovo ctrl in casa tra 3 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "98",
+        "temperature": "36.5"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"verifica dei parametri vitali\",\n    \"follow_up\": \"nuovo ctrl in casa tra 3 giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"130\",\n      \"blood_pressure_diastolic\": \"80\",\n      \"heart_rate\": \"98\",\n      \"temperature\": \"36.5\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

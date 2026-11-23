@@ -1,0 +1,21 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo domiciliare per verificare il corretto funzionamento del catetere vescicale",
+      "follow_up": "programmata la successiva visita domiciliare per 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 76,
+        "temperature": 37.8
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo domiciliare per verificare il corretto funzionamento del catetere vescicale\",\n    \"follow_up\": \"programmata la successiva visita domiciliare per 7 giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 76,\n      \"temperature\": 37.8\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

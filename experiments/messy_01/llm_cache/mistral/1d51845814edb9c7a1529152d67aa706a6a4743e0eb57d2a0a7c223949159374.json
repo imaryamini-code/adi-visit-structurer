@@ -1,0 +1,21 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "monitorare il pz",
+      "follow_up": "nuovo controllo dom. per dopo tre giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "110",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "72",
+        "temperature": "37.1"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"monitorare il pz\",\n    \"follow_up\": \"nuovo controllo dom. per dopo tre giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"110\",\n      \"blood_pressure_diastolic\": \"85\",\n      \"heart_rate\": \"72\",\n      \"temperature\": \"37.1\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

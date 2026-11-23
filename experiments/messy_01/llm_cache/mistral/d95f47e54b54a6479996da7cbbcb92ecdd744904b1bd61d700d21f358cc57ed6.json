@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "monitoraggio dei parametri vitali",
+      "follow_up": "nuovo ctrl dom. per il prossimo week-end",
+      "interventions": [
+        "rilevazioni_dei_parametri"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "150",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "90",
+        "temperature": "37.1",
+        "spo2": "97"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"monitoraggio dei parametri vitali\",\n    \"follow_up\": \"nuovo ctrl dom. per il prossimo week-end\",\n    \"interventions\": [\"rilevazioni_dei_parametri\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"150\",\n      \"blood_pressure_diastolic\": \"80\",\n      \"heart_rate\": \"90\",\n      \"temperature\": \"37.1\",\n      \"spo2\": \"97\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

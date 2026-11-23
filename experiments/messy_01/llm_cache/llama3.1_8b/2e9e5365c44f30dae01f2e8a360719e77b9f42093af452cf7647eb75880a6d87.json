@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "riferito di sentirsi male in generale",
+      "follow_up": "contatto telefonico con i familiari per una nuova verifica della situazione",
+      "interventions": [
+        "valutazione_generale",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": null,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea",
+        "astenia"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"riferito di sentirsi male in generale\",\n    \"follow_up\": \"contatto telefonico con i familiari per una nuova verifica della situazione\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"educazione_terapeutica\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": null,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"nausea\",\n      \"astenia\"\n    ]\n  }\n}"
+}

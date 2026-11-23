@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0023",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T20:23:24"
+  },
+  "clinical": {
+    "reason_for_visit": "valutazione sintomatologia generale",
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": null
+    },
+    "interventions": [
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia",
+      "ridotto_appetito"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}

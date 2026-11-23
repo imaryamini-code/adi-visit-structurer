@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo dom. per valutazione parametri vitali",
+      "follow_up": "controllo dom. per verificarne lo stato futuro in data 18/03/2026",
+      "interventions": [
+        "controllo_dom"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 110,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 60,
+        "temperature": 37.8,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo dom. per valutazione parametri vitali\",\n    \"follow_up\": \"controllo dom. per verificarne lo stato futuro in data 18/03/2026\",\n    \"interventions\": [\"controllo_dom\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 110,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 60,\n      \"temperature\": 37.8,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

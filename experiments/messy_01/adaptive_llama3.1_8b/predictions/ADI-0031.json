@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "record_id": "ADI-0031",
+    "visit_datetime": "2026-03-04T18:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T21:20:28",
+    "llm_status": "not_needed"
+  },
+  "clinical": {
+    "reason_for_visit": "medicazione e controllo lesione",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 65,
+      "temperature": 37.1,
+      "spo2": null
+    },
+    "interventions": [
+      "medicazione",
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione_da_pressione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  },
+  "routing": {
+    "llm_called": false,
+    "llm_error": null,
+    "needs_review": [],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "spo2": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "problems": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      }
+    }
+  }
+}

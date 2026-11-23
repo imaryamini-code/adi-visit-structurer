@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "record_id": "ADI-0028",
+    "visit_datetime": "2026-02-24T16:40:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T21:20:28",
+    "llm_status": "called"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 78,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "lievi difficoltà respiratorie"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [
+      "reason_for_visit"
+    ],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "spo2": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "reason_for_visit": {
+        "status": "flagged",
+        "source": "rules",
+        "reason": "rules returned only a generic reason; LLM disagrees ('controllo generale')",
+        "llm_suggestion": "controllo generale"
+      },
+      "follow_up": {
+        "status": "escalated_accepted",
+        "source": "llm",
+        "reason": "note mentions a follow-up but rules found none; LLM phrase parsed by rules"
+      },
+      "problems": {
+        "status": "escalated_accepted",
+        "source": "llm",
+        "reason": "rules found no problems; LLM problems in vocabulary"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per il pz con dolore cronico al ginocchio destro",
+      "follow_up": null,
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 128,
+        "blood_pressure_diastolic": 76,
+        "heart_rate": 80,
+        "temperature": 36.4
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per il pz con dolore cronico al ginocchio destro\",\n    \"follow_up\": null,\n    \"interventions\": [\"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 128,\n      \"blood_pressure_diastolic\": 76,\n      \"heart_rate\": 80,\n      \"temperature\": 36.4\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\"]\n  }\n}"
+}

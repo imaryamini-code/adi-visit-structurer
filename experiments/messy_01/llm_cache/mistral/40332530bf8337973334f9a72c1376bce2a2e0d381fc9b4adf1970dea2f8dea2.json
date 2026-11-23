@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "richiesta di visita per la comparsa di sintomi aspecifici",
+      "follow_up": "ricontatto telefonico con il caregiver",
+      "interventions": [
+        "valutazione_generale",
+        "indicazioni_terapeutiche"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": null,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea",
+        "astenia"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"richiesta di visita per la comparsa di sintomi aspecifici\",\n    \"follow_up\": \"ricontatto telefonico con il caregiver\",\n    \"interventions\": [\"valutazione_generale\", \"indicazioni_terapeutiche\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": null,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"nausea\", \"astenia\"]\n  }\n}"
+}

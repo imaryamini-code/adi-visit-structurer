@@ -1,0 +1,28 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per valutazione continua del pz",
+      "follow_up": "controllo della lesione in due giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "medicazione",
+        "valutazione_generale",
+        "somministrazione_farmaco",
+        "rivalutazione_lesione"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 78,
+        "temperature": 37.1,
+        "spo2": 96
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per valutazione continua del pz\",\n    \"follow_up\": \"controllo della lesione in due giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"medicazione\",\n      \"valutazione_generale\",\n      \"somministrazione_farmaco\",\n      \"rivalutazione_lesione\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 78,\n      \"temperature\": 37.1,\n      \"spo2\": 96\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

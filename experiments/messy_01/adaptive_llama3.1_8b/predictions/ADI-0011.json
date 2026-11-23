@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "record_id": "ADI-0011",
+    "visit_datetime": "2026-02-10T08:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T21:20:28",
+    "llm_status": "called"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 76,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "follow_up": null,
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up not specified"
+    ]
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [
+      "follow_up"
+    ],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "spo2": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "rules returned only a generic reason; LLM agrees or adds nothing usable"
+      },
+      "follow_up": {
+        "status": "flagged",
+        "source": "none",
+        "reason": "note mentions a follow-up but rules found none; LLM follow-up missing or not parseable",
+        "llm_suggestion": "prossima visita programmata"
+      },
+      "problems": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "rules found no problems; LLM also found none"
+      }
+    }
+  }
+}

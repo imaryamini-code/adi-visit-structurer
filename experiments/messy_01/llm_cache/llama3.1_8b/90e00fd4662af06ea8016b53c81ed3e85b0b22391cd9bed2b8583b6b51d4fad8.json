@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per trattamento della lesione gia nota",
+      "follow_up": "controllo della lesione per il prossimo 2 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "medicazione_della_lesione",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 72,
+        "temperature": 37.1,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per trattamento della lesione gia nota\",\n    \"follow_up\": \"controllo della lesione per il prossimo 2 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"medicazione_della_lesione\",\n      \"valutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 72,\n      \"temperature\": 37.1,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}
