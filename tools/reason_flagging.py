@@ -10,6 +10,8 @@ winner picked from the data. Needs no model call: LLM answers are read from the 
 Signals (flag a note when ...):
   classifier  the rules' reason differs from a TF-IDF + logistic regression (C=10) prediction made
               by a model that never saw that note (5-fold, fixed seed)
+  confident   the same, but only when the classifier's own probability is at least GATE (0.3), which
+              cuts the review load; GATE was picked on the DEV notes and scored once on TEST
   llm         the rules' reason differs from the LLM-only reason of the model (needs --llm-runs)
   routing     the adaptive pipeline already flagged the reason (needs --adaptive-runs)
 Reported: notes flagged, wrong reasons caught, precision, and the accuracy of the notes that are NOT
@@ -35,6 +37,7 @@ from tools.reason_cv import prep
 from tools.reason_variants import load
 
 SEED, C = 20261116, 10.0
+GATE = 0.3  # chosen on the DEV (odd) notes only, from {0, .2, .3, .4, .5, .6, .7}; TEST scored once
 
 
 def predictions(run: Path, cond: str, ids: List[str]) -> Dict[str, str]:
@@ -50,15 +53,16 @@ def routing_flags(run: Path, cond: str, ids: List[str]) -> np.ndarray:
                      ["routing"]["fields"]["reason_for_visit"]["status"] == "flagged" for i in ids])
 
 
-def classifier_oof(X, y, ids, seed: int) -> Dict[str, str]:
-    out = {}
+def classifier_oof(X, y, ids, seed: int, with_confidence: bool = False):
+    out, conf = {}, {}
     for tr, te in KFold(5, shuffle=True, random_state=seed).split(X):
         m = make_pipeline(TfidfVectorizer(ngram_range=(1, 2), sublinear_tf=True),
                           LogisticRegression(C=C, max_iter=2000))
         m.fit(list(X[tr]), list(y[tr]))
-        for j, p in zip(te, m.predict(list(X[te]))):
-            out[ids[j]] = p
-    return out
+        proba, classes = m.predict_proba(list(X[te])), list(m.classes_)
+        for k, j in enumerate(te):
+            out[ids[j]], conf[ids[j]] = classes[int(proba[k].argmax())], float(proba[k].max())
+    return (out, conf) if with_confidence else out
 
 
 def row(name: str, flag: np.ndarray, wrong: np.ndarray, odd: np.ndarray) -> str:
@@ -86,8 +90,10 @@ def main() -> None:
     odd = np.array([int(re.findall(r"\d+", i)[0]) % 2 == 1 for i in ids])
     X = np.array([prep(text[i]) for i in ids], dtype=object)
     y = np.array([gold[i] for i in ids], dtype=object)
-    clf = classifier_oof(X, y, ids, SEED)
-    sig = {"classifier disagrees with rules": np.array([rules[i] != clf[i] for i in ids])}
+    clf, conf = classifier_oof(X, y, ids, SEED, with_confidence=True)
+    sig = {"classifier disagrees with rules": np.array([rules[i] != clf[i] for i in ids]),
+           f"classifier disagrees and is confident (p >= {GATE})":
+               np.array([rules[i] != clf[i] and conf[i] >= GATE for i in ids])}
     for spec in a.llm_runs:
         r, cond = spec.split(":")
         p = predictions(Path(r), cond, ids)
@@ -105,14 +111,17 @@ def main() -> None:
         print(row(k, f, wrong, odd))
     for c, f in cur.items():
         print(row(f"{c} routing + classifier", f | sig["classifier disagrees with rules"], wrong, odd))
+        print(row(f"{c} routing + confident classifier", f | sig[f"classifier disagrees and is confident (p >= {GATE})"], wrong, odd))
     reps = []
     for r in range(10):
-        p = classifier_oof(X, y, ids, 1000 + r)
+        p, cf = classifier_oof(X, y, ids, 1000 + r, with_confidence=True)
         f = np.array([rules[i] != p[i] for i in ids])
-        reps.append((int(f.sum()), int((f & wrong).sum())))
+        g = np.array([rules[i] != p[i] and cf[i] >= GATE for i in ids])
+        reps.append((int(f.sum()), int((f & wrong).sum()), int(g.sum()), int((g & wrong).sum())))
     reps = np.array(reps)
-    print(f"\nStability, classifier signal over 10 fold splits: flagged {reps[:, 0].min()}-{reps[:, 0].max()}, "
-          f"wrong caught {reps[:, 1].min()}-{reps[:, 1].max()} of {int(wrong.sum())}.")
+    print(f"\nStability over 10 fold splits: classifier signal flagged {reps[:, 0].min()}-{reps[:, 0].max()}, "
+          f"wrong caught {reps[:, 1].min()}-{reps[:, 1].max()} of {int(wrong.sum())}; "
+          f"confident signal flagged {reps[:, 2].min()}-{reps[:, 2].max()}, caught {reps[:, 3].min()}-{reps[:, 3].max()}.")
 
 
 if __name__ == "__main__":
