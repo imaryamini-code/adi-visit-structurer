@@ -1,0 +1,27 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "persistenza di dolore, monitorizzato",
+      "follow_up": "controllo della lesione per proseguire la gestione nel prossimo 3 giorni",
+      "interventions": [
+        "valutazione_generale",
+        "medicazione",
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 85,
+        "heart_rate": 60,
+        "temperature": 36.7,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore",
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"persistenza di dolore, monitorizzato\",\n    \"follow_up\": \"controllo della lesione per proseguire la gestione nel prossimo 3 giorni\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"medicazione\",\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 85,\n      \"heart_rate\": 60,\n      \"temperature\": 36.7,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore\",\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo parametri",
+      "follow_up": "controllo entro 3 giorni",
+      "interventions": [
+        "cambio_medicazione",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 140,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 80,
+        "temperature": 37.2,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_da_pressione",
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo parametri\",\n    \"follow_up\": \"controllo entro 3 giorni\",\n    \"interventions\": [\n      \"cambio_medicazione\",\n      \"valutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 140,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 80,\n      \"temperature\": 37.2,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"lesione_da_pressione\",\n      \"dolore\"\n    ]\n  }\n}"
+}

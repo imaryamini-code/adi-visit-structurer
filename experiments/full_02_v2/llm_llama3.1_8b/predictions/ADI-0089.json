@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "record_id": "ADI-0089",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:01",
+    "extractors": "v2"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo e gestione del catetere vescicale",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "interventions": [
+      "gestione_catetere",
+      "monitoraggio_parametri_vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 115,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 76,
+      "temperature": 36.8,
+      "spo2": 95
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

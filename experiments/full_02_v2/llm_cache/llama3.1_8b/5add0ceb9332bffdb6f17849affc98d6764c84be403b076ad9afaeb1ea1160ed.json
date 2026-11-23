@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo dei parametri vitali e valutazione generale",
+      "follow_up": "prossima visita programmata",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 135,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 76,
+        "temperature": 36.5
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo dei parametri vitali e valutazione generale\",\n    \"follow_up\": \"prossima visita programmata\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"valutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 135,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 76,\n      \"temperature\": 36.5\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

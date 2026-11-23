@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0063",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:02",
+    "extractors": "v2",
+    "knowledge_context_chars": 1458
+  },
+  "clinical": {
+    "reason_for_visit": "persistenza di dolore, monitorizzato",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "interventions": [
+      "valutazione_generale",
+      "medicazione",
+      "monitoraggio_parametri_vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 60,
+      "temperature": 36.7,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

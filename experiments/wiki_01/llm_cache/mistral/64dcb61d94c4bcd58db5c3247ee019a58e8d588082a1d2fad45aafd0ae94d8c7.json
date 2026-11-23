@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "educazione del caregiver e controllo generale su paziente con astenia",
+      "follow_up": "ricontatto telefonico con il caregiver per un controllo generale",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "105",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "68",
+        "temperature": "36.5",
+        "spo2": "94"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"educazione del caregiver e controllo generale su paziente con astenia\",\n    \"follow_up\": \"ricontatto telefonico con il caregiver per un controllo generale\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\", \"valutazione_generale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"105\",\n      \"blood_pressure_diastolic\": \"80\",\n      \"heart_rate\": \"68\",\n      \"temperature\": \"36.5\",\n      \"spo2\": \"94\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione le condizioni di dolore e generiche",
+      "follow_up": "prossimo controllo domiciliare per i prossimi 7 giorni",
+      "interventions": [
+        "controllo_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 110,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 80,
+        "temperature": 36.7,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione le condizioni di dolore e generiche\",\n    \"follow_up\": \"prossimo controllo domiciliare per i prossimi 7 giorni\",\n    \"interventions\": [\"controllo_parametri_vitali\", \"valutazione_generale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 110,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 80,\n      \"temperature\": 36.7,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\"]\n  }\n}"
+}

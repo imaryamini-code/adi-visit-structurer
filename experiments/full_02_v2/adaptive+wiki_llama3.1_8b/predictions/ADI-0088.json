@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "record_id": "ADI-0088",
+    "visit_datetime": "2026-02-27T08:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:05",
+    "llm_status": "called",
+    "extractors": "v2",
+    "knowledge_context_chars": 1790
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "vitals": {
+      "blood_pressure_systolic": 110,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 64,
+      "temperature": 37.8,
+      "spo2": 98
+    },
+    "interventions": [
+      "valutazione_generale",
+      "monitoraggio_parametri_vitali"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 14
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "spo2": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "rules returned only a generic reason; LLM agrees or adds nothing usable"
+      },
+      "problems": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "rules found no problems; LLM also found none"
+      }
+    }
+  }
+}

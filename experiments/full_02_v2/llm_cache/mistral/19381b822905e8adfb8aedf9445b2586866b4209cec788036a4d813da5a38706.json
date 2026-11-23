@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale",
+      "interventions": [
+        "somministrazione_farmaco",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "80",
+        "heart_rate": "78",
+        "temperature": "36.5",
+        "spo2": "97"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dispnea"
+      ]
+    },
+    "follow_up": "nuovo controllo domiciliare per il prossimo 7 giorni"
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale\",\n    \"interventions\": [\"somministrazione_farmaco\", \"educazione_terapeutica\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"120\",\n      \"blood_pressure_diastolic\": \"80\",\n      \"heart_rate\": \"78\",\n      \"temperature\": \"36.5\",\n      \"spo2\": \"97\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dispnea\"]\n  },\n  \"follow_up\": \"nuovo controllo domiciliare per il prossimo 7 giorni\"\n}"
+}

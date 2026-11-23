@@ -1,0 +1,27 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "visita domiciliare del paziente per la medicazione della ferita già nota",
+      "follow_up": "controllo della lesione in sede di domicilio tra tre giorni",
+      "interventions": [
+        "rilevazione_parametri",
+        "cambio_medicazione",
+        "rivalutazione_locale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "105",
+        "blood_pressure_diastolic": "75",
+        "heart_rate": "96",
+        "temperature": "36,8",
+        "spo2": "98"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore",
+        "lesione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"visita domiciliare del paziente per la medicazione della ferita già nota\",\n    \"follow_up\": \"controllo della lesione in sede di domicilio tra tre giorni\",\n    \"interventions\": [\"rilevazione_parametri\", \"cambio_medicazione\", \"rivalutazione_locale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"105\",\n      \"blood_pressure_diastolic\": \"75\",\n      \"heart_rate\": \"96\",\n      \"temperature\": \"36,8\",\n      \"spo2\": \"98\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\", \"lesione\"]\n  }\n}"
+}

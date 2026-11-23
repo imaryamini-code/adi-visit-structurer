@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione clinica seguita a una caduta recente",
+      "follow_up": "controllo entro 7 giorni",
+      "interventions": [
+        "valutazione generale",
+        "monitoraggio dei parametri vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 70,
+        "heart_rate": 72,
+        "temperature": 36.5,
+        "spo2": 98
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "caduta_recente"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione clinica seguita a una caduta recente\",\n    \"follow_up\": \"controllo entro 7 giorni\",\n    \"interventions\": [\n      \"valutazione generale\",\n      \"monitoraggio dei parametri vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 70,\n      \"heart_rate\": 72,\n      \"temperature\": 36.5,\n      \"spo2\": 98\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"caduta_recente\"\n    ]\n  }\n}"
+}

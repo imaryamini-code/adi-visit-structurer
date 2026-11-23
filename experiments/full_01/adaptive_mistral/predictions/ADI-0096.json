@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "record_id": "ADI-0096",
+    "visit_datetime": "2026-03-17T08:50:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:37:33",
+    "llm_status": "called"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo e gestione catetere",
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 65,
+      "heart_rate": 96,
+      "temperature": 36.4,
+      "spo2": 98
+    },
+    "interventions": [
+      "gestione_catetere",
+      "monitoraggio_parametri_vitali"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [],
+    "fields": {
+      "blood_pressure": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "reason_for_visit": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "follow_up": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "problems": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "spo2": {
+        "status": "escalated_accepted",
+        "source": "llm",
+        "reason": "note mentions spo2 but rules found none; LLM value plausible and found in note"
+      }
+    }
+  }
+}

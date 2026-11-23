@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "valutazione delle condizioni generali",
+      "follow_up": null,
+      "interventions": [
+        "valutazione_generale",
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "110",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "65",
+        "temperature": "36.2",
+        "spo2": "98"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"valutazione delle condizioni generali\",\n    \"follow_up\": null,\n    \"interventions\": [\"valutazione_generale\", \"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"110\",\n      \"blood_pressure_diastolic\": \"70\",\n      \"heart_rate\": \"65\",\n      \"temperature\": \"36.2\",\n      \"spo2\": \"98\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

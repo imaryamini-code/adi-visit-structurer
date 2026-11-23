@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0012",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": null,
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0012",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione caduta recente",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 72,
+      "temperature": null,
+      "spo2": null
+    },
+    "interventions": [
+      "controllo_parametri_vitali"
+    ],
+    "critical_issues": [],
+    "follow_up": "programmato nuovo controllo"
+  },
+  "coding": {
+    "problems_normalized": [
+      "caduta"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

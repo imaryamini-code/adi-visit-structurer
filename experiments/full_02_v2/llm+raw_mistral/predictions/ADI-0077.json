@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "record_id": "ADI-0077",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:44:57",
+    "extractors": "v2",
+    "knowledge_context_chars": 1227
+  },
+  "clinical": {
+    "reason_for_visit": "visita domiciliare del paziente per la medicazione della ferita già nota",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "interventions": [
+      "rilevazione_parametri",
+      "cambio_medicazione",
+      "rivalutazione_locale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 105,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 96,
+      "temperature": 36.8,
+      "spo2": 98
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore",
+      "lesione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

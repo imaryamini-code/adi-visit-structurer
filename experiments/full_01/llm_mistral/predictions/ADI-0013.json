@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0013",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:06:00"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per valutazione della condizione del paziente",
+    "follow_up": "ricontatto telefonico con il caregiver",
+    "interventions": [
+      "rivalutazione_clinica_generale",
+      "consigli_alimentari"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "debolezza_generale",
+      "ridotto_appetito"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0093",
+    "visit_datetime": "2026-03-02T11:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T21:03:35",
+    "llm_status": "called",
+    "knowledge_context_chars": 1708
+  },
+  "clinical": {
+    "reason_for_visit": "controllo terapia e somministrazione farmaco",
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 64,
+      "temperature": 37.8,
+      "spo2": 99
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "somministrazione_farmaco"
+    ],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "quadro_respiratorio"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale",
+      "follow_up": "controllo_ferita entro 3 giorni",
+      "interventions": [
+        "medicazione",
+        "gestione_lesione"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "65",
+        "temperature": "37.1"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale\",\n    \"follow_up\": \"controllo_ferita entro 3 giorni\",\n    \"interventions\": [\"medicazione\", \"gestione_lesione\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"120\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"65\",\n      \"temperature\": \"37.1\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

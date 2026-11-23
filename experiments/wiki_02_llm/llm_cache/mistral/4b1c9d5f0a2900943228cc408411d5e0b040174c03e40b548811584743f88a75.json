@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "valutazione del quadro attuale",
+      "follow_up": "controllo domiciliare programmato per dentro due giorni",
+      "interventions": [
+        "educazione terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "130",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "72",
+        "temperature": "37.1"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"valutazione del quadro attuale\",\n    \"follow_up\": \"controllo domiciliare programmato per dentro due giorni\",\n    \"interventions\": [\"educazione terapeutica\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"130\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"72\",\n      \"temperature\": \"37.1\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\"]\n  }\n}"
+}

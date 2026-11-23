@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "record_id": "ADI-0076",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:27:53"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo della stomia e valutazione delle condizioni locali",
+    "follow_up": "visitato nuovamente in 3 giorni per controllo domiciliare",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "controllato_stato_stomia"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 80,
+      "temperature": 36.5,
+      "spo2": 95
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

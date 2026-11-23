@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione condizioni del paziente",
+      "follow_up": "ricontatto con il caregiver via telefono",
+      "interventions": [
+        "valutazione_generale",
+        "monitoraggio_costante"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 70,
+        "heart_rate": 78,
+        "temperature": 36.5,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "inappetenza",
+        "nausea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione condizioni del paziente\",\n    \"follow_up\": \"ricontatto con il caregiver via telefono\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"monitoraggio_costante\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 70,\n      \"heart_rate\": 78,\n      \"temperature\": 36.5,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"inappetenza\",\n      \"nausea\"\n    ]\n  }\n}"
+}

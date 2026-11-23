@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "record_id": "ADI-0097",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-26T11:50:00",
+    "operator_role": "medico"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0097",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "riferiti sintomi generali",
+    "anamnesis_brief": [
+      "riferita sintomatologia aspecifica nelle ultime 24 ore"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "consciousness": "collaborante",
+    "mobility": "ridotta",
+    "interventions": [
+      "valutazione_generale",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "target": "caregiver",
+      "timing_days": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia",
+      "insonnia"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up senza tempistica",
+      "Nessun parametro vitale riportato"
+    ]
+  }
+}

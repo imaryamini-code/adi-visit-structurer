@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale per valutazione della condizione del paziente",
+      "follow_up": "ricontatto telefonico con caregiver",
+      "interventions": [
+        "rivalutazione clinica generale",
+        "consigli alimentari"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": "36.5",
+        "spo2": "96"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "debolezza generale",
+        "ridotto appetito"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale per valutazione della condizione del paziente\",\n    \"follow_up\": \"ricontatto telefonico con caregiver\",\n    \"interventions\": [\"rivalutazione clinica generale\", \"consigli alimentari\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": \"36.5\",\n      \"spo2\": \"96\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"debolezza generale\", \"ridotto appetito\"]\n  }\n}"
+}

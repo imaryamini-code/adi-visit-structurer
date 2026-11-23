@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "record_id": "ADI-0031",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:56:43"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 3
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "valutazione_generale",
+      "cambio_di_medicazione",
+      "rivalutazione_locale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 65,
+      "temperature": 37.1,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione_da_pressione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

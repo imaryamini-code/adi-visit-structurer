@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "record_id": "ADI-0042",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T20:46:54",
+    "knowledge_context_chars": 1002
+  },
+  "clinical": {
+    "reason_for_visit": "rivalutazione dei sintomi inizialmente segnalati",
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": "caregiver"
+    },
+    "interventions": [
+      "valutazione_generale",
+      "intervista_anamnestica",
+      "gestione_sintomi"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "nausea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}

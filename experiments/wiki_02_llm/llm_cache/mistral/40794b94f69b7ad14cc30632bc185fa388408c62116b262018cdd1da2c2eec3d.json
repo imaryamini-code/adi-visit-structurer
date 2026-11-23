@@ -1,0 +1,16 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione clinica",
+      "follow_up": "programmato nuovo controllo domiciliare",
+      "interventions": [],
+      "vitals": {
+        "blood_pressure_systolic": "120"
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione clinica\",\n    \"follow_up\": \"programmato nuovo controllo domiciliare\",\n    \"interventions\": [],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"120\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

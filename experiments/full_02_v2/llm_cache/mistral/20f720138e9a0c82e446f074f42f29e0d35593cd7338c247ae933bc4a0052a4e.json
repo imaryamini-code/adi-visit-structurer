@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "monitoraggio del dolore riferito",
+      "follow_up": "controllo entro 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "115",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "68",
+        "temperature": "36.1",
+        "spo2": "97"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"monitoraggio del dolore riferito\",\n    \"follow_up\": \"controllo entro 7 giorni\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"115\",\n      \"blood_pressure_diastolic\": \"70\",\n      \"heart_rate\": \"68\",\n      \"temperature\": \"36.1\",\n      \"spo2\": \"97\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\"]\n  }\n}"
+}

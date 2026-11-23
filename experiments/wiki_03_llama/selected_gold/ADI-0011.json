@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "record_id": "ADI-0011",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": null,
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0011",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 76,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "controllo_parametri_vitali"
+    ],
+    "critical_issues": [],
+    "follow_up": null
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

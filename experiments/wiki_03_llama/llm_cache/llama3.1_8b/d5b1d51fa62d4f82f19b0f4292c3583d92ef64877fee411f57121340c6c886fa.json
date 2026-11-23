@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo della stomia e valutazione delle condizioni locali",
+      "follow_up": "controllo entro 3 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "gestione_stomia"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 125,
+        "blood_pressure_diastolic": 85,
+        "heart_rate": 80,
+        "temperature": 36.5,
+        "spo2": 95
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo della stomia e valutazione delle condizioni locali\",\n    \"follow_up\": \"controllo entro 3 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"gestione_stomia\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 125,\n      \"blood_pressure_diastolic\": 85,\n      \"heart_rate\": 80,\n      \"temperature\": 36.5,\n      \"spo2\": 95\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"nausea\"\n    ]\n  }\n}"
+}

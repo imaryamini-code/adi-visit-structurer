@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "sintomi riferiti nei giorni scorsi",
+      "follow_up": "ricontatto telefonico con il caregiver",
+      "interventions": [
+        "valutazione_clinica_generale",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 0,
+        "temperature": 36.5,
+        "spo2": 96
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "ridotto_appetito",
+        "nausea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"sintomi riferiti nei giorni scorsi\",\n    \"follow_up\": \"ricontatto telefonico con il caregiver\",\n    \"interventions\": [\n      \"valutazione_clinica_generale\",\n      \"educazione_terapeutica\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 0,\n      \"temperature\": 36.5,\n      \"spo2\": 96\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"ridotto_appetito\",\n      \"nausea\"\n    ]\n  }\n}"
+}

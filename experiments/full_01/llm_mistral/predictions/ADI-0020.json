@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "record_id": "ADI-0020",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:08:16"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo dopo caduta segnalata dal caregiver",
+    "follow_up": null,
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 72,
+      "temperature": 36.2,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "Follow-up not specified"
+    ]
+  }
+}

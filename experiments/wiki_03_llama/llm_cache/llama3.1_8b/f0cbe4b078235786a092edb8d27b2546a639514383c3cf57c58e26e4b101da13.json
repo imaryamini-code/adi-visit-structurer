@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo condizioni dopo caduta",
+      "follow_up": "prossimo controllo programmato entro breve tempo",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "controllo_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 140,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 78,
+        "temperature": 36.2,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "caduta"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo condizioni dopo caduta\",\n    \"follow_up\": \"prossimo controllo programmato entro breve tempo\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"controllo_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 140,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 78,\n      \"temperature\": 36.2,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"caduta\"\n    ]\n  }\n}"
+}

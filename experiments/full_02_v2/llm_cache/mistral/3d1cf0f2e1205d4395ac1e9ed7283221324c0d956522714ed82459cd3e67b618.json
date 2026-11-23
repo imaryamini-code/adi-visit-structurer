@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "monitorare il quadro respiratorio in osservazione del paziente",
+      "follow_up": "nuovo controllo domiciliare in 7 giorni",
+      "interventions": [
+        "somministrazione_farmaco",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 110,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 60,
+        "temperature": 36.2
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "quadro respiratorio"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"monitorare il quadro respiratorio in osservazione del paziente\",\n    \"follow_up\": \"nuovo controllo domiciliare in 7 giorni\",\n    \"interventions\": [\"somministrazione_farmaco\", \"educazione_terapeutica\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 110,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 60,\n      \"temperature\": 36.2\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"quadro respiratorio\"]\n  }\n}"
+}

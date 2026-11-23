@@ -1,0 +1,27 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale presso l'abitazione del paziente",
+      "follow_up": "controllo della lesione per tre giorni",
+      "interventions": [
+        "valutazione cutanea nella zona lesionale",
+        "rivalutazione medica con cambio di medicazione",
+        "monitoraggio parametri vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 60,
+        "temperature": 37.8,
+        "spo2": 96
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore",
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale presso l'abitazione del paziente\",\n    \"follow_up\": \"controllo della lesione per tre giorni\",\n    \"interventions\": [\n      \"valutazione cutanea nella zona lesionale\",\n      \"rivalutazione medica con cambio di medicazione\",\n      \"monitoraggio parametri vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 60,\n      \"temperature\": 37.8,\n      \"spo2\": 96\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore\",\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

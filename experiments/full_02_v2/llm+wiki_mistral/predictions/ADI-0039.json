@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0039",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:44:56",
+    "extractors": "v2",
+    "knowledge_context_chars": 1799
+  },
+  "clinical": {
+    "reason_for_visit": "accesso domiciliare di controllo generale del paziente per monitoraggio della terapia in corso a causa di persistente dolore riferito",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 65,
+      "temperature": 37.1,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

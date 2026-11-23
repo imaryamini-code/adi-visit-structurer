@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "record_id": "ADI-0003",
+    "visit_datetime": "2026-02-17T11:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "adaptive",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T17:42:34",
+    "llm_status": "called"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 70,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali"
+    ],
+    "follow_up": null,
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up not specified"
+    ]
+  },
+  "routing": {
+    "llm_called": true,
+    "llm_error": null,
+    "needs_review": [
+      "reason_for_visit"
+    ],
+    "fields": {
+      "heart_rate": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "temperature": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "plausible value found by rules"
+      },
+      "spo2": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no mention in note"
+      },
+      "follow_up": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "no evidence in note"
+      },
+      "interventions": {
+        "status": "accepted",
+        "source": "rules",
+        "reason": "specific value found by rules"
+      },
+      "blood_pressure": {
+        "status": "escalated_accepted",
+        "source": "llm",
+        "reason": "note mentions blood pressure but rules found none; LLM pair plausible and found in note"
+      },
+      "reason_for_visit": {
+        "status": "flagged",
+        "source": "rules",
+        "reason": "rules returned only a generic reason; LLM disagrees ('controllo parametri')",
+        "llm_suggestion": "controllo parametri"
+      },
+      "problems": {
+        "status": "not_mentioned",
+        "source": "none",
+        "reason": "rules found no problems; LLM also found none"
+      }
+    }
+  }
+}

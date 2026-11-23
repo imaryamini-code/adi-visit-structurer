@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo parametri",
+      "follow_up": "controllo_ferita entro 1 settimana",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 135,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 74,
+        "temperature": 36.6,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo parametri\",\n    \"follow_up\": \"controllo_ferita entro 1 settimana\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 135,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 74,\n      \"temperature\": 36.6,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore\"\n    ]\n  }\n}"
+}

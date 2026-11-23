@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0093",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T21:01:24",
+    "knowledge_context_chars": 1647
+  },
+  "clinical": {
+    "reason_for_visit": "controllo domiciliare per verificare lo stato di salute della signora e somministrare il farmaco prescritto secondo le istruzioni del medico",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "monitoraggio_parametri_vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 64,
+      "temperature": 37.8,
+      "spo2": 99
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "quadro_respiratorio"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

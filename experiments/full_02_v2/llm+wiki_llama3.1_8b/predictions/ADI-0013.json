@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "record_id": "ADI-0013",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:01",
+    "extractors": "v2",
+    "knowledge_context_chars": 1732
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "timing_days": null,
+      "target": null
+    },
+    "interventions": [
+      "valutazione clinica generale",
+      "somministrazione consigli alimentari"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 72,
+      "temperature": 36.5,
+      "spo2": 96
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "debolezza generale",
+      "ridotto appetito"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

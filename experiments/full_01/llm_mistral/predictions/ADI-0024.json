@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "record_id": "ADI-0024",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:09:26"
+  },
+  "clinical": {
+    "reason_for_visit": "sintomi generali e inappetenza",
+    "follow_up": "ricontatto telefonico con il caregiver",
+    "interventions": [
+      "rivalutazione_clinica_generale",
+      "educazione_sanitaria"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": null,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "No vital signs extracted"
+    ]
+  }
+}

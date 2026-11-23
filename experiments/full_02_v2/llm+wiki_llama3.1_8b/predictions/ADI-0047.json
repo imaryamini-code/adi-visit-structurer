@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0047",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:01",
+    "extractors": "v2",
+    "knowledge_context_chars": 1667
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per trattamento lesione",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 2
+    },
+    "interventions": [
+      "medicazione",
+      "valutazione generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 72,
+      "temperature": 37.1,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

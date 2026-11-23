@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "record_id": "ADI-0041",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:44:56",
+    "extractors": "v2",
+    "knowledge_context_chars": 1796
+  },
+  "clinical": {
+    "reason_for_visit": null,
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 98,
+      "temperature": 37.1,
+      "spo2": 99
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime",
+      "clinical.reason_for_visit"
+    ],
+    "warnings": []
+  }
+}

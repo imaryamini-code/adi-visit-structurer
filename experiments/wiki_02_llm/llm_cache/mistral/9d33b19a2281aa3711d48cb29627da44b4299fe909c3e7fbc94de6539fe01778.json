@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale della lesione già in trattamento domiciliare",
+      "follow_up": "controllo della lesione in due giorni",
+      "interventions": [
+        "medicazione"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "140",
+        "blood_pressure_diastolic": "85",
+        "heart_rate": "65",
+        "temperature": "37.8"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_cutanea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale della lesione già in trattamento domiciliare\",\n    \"follow_up\": \"controllo della lesione in due giorni\",\n    \"interventions\": [\"medicazione\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"140\",\n      \"blood_pressure_diastolic\": \"85\",\n      \"heart_rate\": \"65\",\n      \"temperature\": \"37.8\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"lesione_cutanea\"]\n  }\n}"
+}

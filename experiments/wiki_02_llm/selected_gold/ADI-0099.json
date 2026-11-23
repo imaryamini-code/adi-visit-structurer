@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "record_id": "ADI-0099",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-13T12:50:00",
+    "operator_role": "medico"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0099",
+    "age": 83,
+    "sex": "M"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 120,
+      "blood_pressure_diastolic": null,
+      "heart_rate": null,
+      "temperature": null,
+      "spo2": null
+    },
+    "consciousness": "vigile",
+    "mobility": null,
+    "interventions": [],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Dettatura incompleta o sintetica",
+      "Nessun intervento esplicito riportato",
+      "Possibili informazioni cliniche mancanti"
+    ]
+  }
+}

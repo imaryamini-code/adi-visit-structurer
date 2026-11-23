@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "record_id": "ADI-0091",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T14:33:36"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo dei parametri vitali del paziente",
+    "follow_up": "programmati nuovi controlli domiciliari tra 3 giorni",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 60,
+      "temperature": 36.5,
+      "spo2": 99
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

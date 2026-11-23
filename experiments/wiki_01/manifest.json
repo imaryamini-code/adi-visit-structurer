@@ -1,0 +1,1331 @@
+{
+  "created_utc": "2026-11-16T16:53:33.454613+00:00",
+  "commit": "4b5eeafc54c71ad8dbd8a78bc6ef676a0bba13db",
+  "working_tree_changes": "?? experiments/",
+  "source_sha256": {
+    "src/run_pipeline.py": "84a19b45e558fd0d718976306cc2ded5e82998916a895d5c3f14f8bfd2eede38",
+    "src/extract_rules.py": "217912d9c0da20670868ade470e5ce47fa32618c51c9d90cf0ad7c1d4df124a0",
+    "src/llm_extract.py": "3350d0bdce6d407e7ef68ae4f5ff0c01f44f6ee39a09026c10bf8708b19176a3",
+    "src/normalize.py": "c79757798cc868818b5441ecdabd6861387afbc5fc8e2c4498169e26c9ed5725",
+    "src/evaluate.py": "7d6264a1e9fb6463c57c8add1e7b147b6649a95f586a9785bff2620c0eeee531",
+    "src/schema.py": "1447ca3c8f810008afef8cde1c92b01ffd9264dd1e134e2099117981db3da7df",
+    "src/routing.py": "4b47e5b07f979b7cc74418e9817a5bcb2e24539c938aa445c96cce03e263e69e",
+    "src/wiki.py": "d593345d1643e5df36b042f219de472860db826d672444d82c4b9f13a910c1d7",
+    "src/wiki_context.py": "ecf5632b9ffe51ab053c7e81d75625216042a0856fc112716e909f6b4e58cbdf",
+    "tools/compare_models.py": "83d832246bc3bec251166c521cc1868ebf1d2e4af2fe5ff50f8206d7a78d2016"
+  },
+  "pipeline_version": "1.0.0",
+  "dataset": "synthetic, gold-first; see docs/DATASET.md",
+  "gold_dir": "data/synthetic/gold",
+  "raw_count": 100,
+  "raw_fingerprint_sha256": "6c217534361eabd7567ff7baa0cb4890342e476fedc8601df78f3c47ed6e0eb4",
+  "gold_fingerprint_sha256": "d91a416a87113a07ccf498edc3f188a9d39116aa6ce409fbd19e3b3833695c8e",
+  "prompt_sha256": "7414f8a2f04a95c50bc1408dd516e20014bab89664de0aac53f0639b96d612ef",
+  "ollama_url": "http://localhost:11434",
+  "llm_options": {
+    "temperature": 0.0,
+    "stream": false,
+    "max_retries": 1
+  },
+  "llm_cache": "llm_cache/<model>/<sha256(prompt+model+note)>.json; modes share one answer per note",
+  "conditions": {
+    "rules": {
+      "mode": "rules",
+      "model": null,
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.77,
+        "vitals_exact_record_accuracy": 0.79,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.98,
+          "blood_pressure_diastolic": 0.99,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.81
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6818181818181818,
+          "micro_recall": 0.759493670886076,
+          "micro_f1": 0.7185628742514971,
+          "tp": 60,
+          "fp": 28,
+          "fn": 19
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "blood_pressure_systolic",
+              "blood_pressure_diastolic"
+            ]
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0036",
+            "reason_gold": "rivalutazione caduta recente",
+            "reason_pred": "rivalutazione caduta recente",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0052",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "medicazione e controllo lesione",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "hybrid_mistral": {
+      "mode": "hybrid",
+      "model": "mistral",
+      "ollama": {
+        "server_version": {
+          "version": "0.40.3"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.77,
+        "vitals_exact_record_accuracy": 0.79,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.98,
+          "blood_pressure_diastolic": 0.99,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.81
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6703296703296703,
+          "micro_recall": 0.7721518987341772,
+          "micro_f1": 0.7176470588235294,
+          "tp": 61,
+          "fp": 30,
+          "fn": 18
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "blood_pressure_systolic",
+              "blood_pressure_diastolic"
+            ]
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0036",
+            "reason_gold": "rivalutazione caduta recente",
+            "reason_pred": "rivalutazione caduta recente",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0052",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "medicazione e controllo lesione",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "hybrid+wiki_mistral": {
+      "mode": "hybrid",
+      "model": "mistral",
+      "knowledge": {
+        "kind": "wiki",
+        "source": "data/synthetic/gold",
+        "leave_one_out": true,
+        "entries": 502,
+        "fingerprint_sha256": "8be7956b2684a42ad84b4b835760c9044cd6d4d59786100b30b265e57c030354",
+        "k": 10,
+        "per_concept": 2,
+        "max_chars": 1800
+      },
+      "ollama": {
+        "server_version": {
+          "version": "0.40.3"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.77,
+        "vitals_exact_record_accuracy": 0.79,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.98,
+          "blood_pressure_diastolic": 0.99,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.81
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6703296703296703,
+          "micro_recall": 0.7721518987341772,
+          "micro_f1": 0.7176470588235294,
+          "tp": 61,
+          "fp": 30,
+          "fn": 18
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "blood_pressure_systolic",
+              "blood_pressure_diastolic"
+            ]
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0036",
+            "reason_gold": "rivalutazione caduta recente",
+            "reason_pred": "rivalutazione caduta recente",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0052",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "medicazione e controllo lesione",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "hybrid+raw_mistral": {
+      "mode": "hybrid",
+      "model": "mistral",
+      "knowledge": {
+        "kind": "raw",
+        "source": "data/synthetic/gold",
+        "leave_one_out": true,
+        "entries": 592,
+        "fingerprint_sha256": "c7ed3dfeec6de6b64635975cd3b2a2d33b72ace024485d385b0445a13aea5bf7",
+        "k": 10,
+        "per_concept": 2,
+        "max_chars": 1800
+      },
+      "ollama": {
+        "server_version": {
+          "version": "0.40.3"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.77,
+        "vitals_exact_record_accuracy": 0.79,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.98,
+          "blood_pressure_diastolic": 0.99,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.81
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6703296703296703,
+          "micro_recall": 0.7721518987341772,
+          "micro_f1": 0.7176470588235294,
+          "tp": 61,
+          "fp": 30,
+          "fn": 18
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "blood_pressure_systolic",
+              "blood_pressure_diastolic"
+            ]
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0036",
+            "reason_gold": "rivalutazione caduta recente",
+            "reason_pred": "rivalutazione caduta recente",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0052",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "medicazione e controllo lesione",
+            "vital_mismatches": [
+              "spo2"
+            ]
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "adaptive_mistral": {
+      "mode": "adaptive",
+      "model": "mistral",
+      "ollama": {
+        "server_version": {
+          "version": "0.40.3"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.77,
+        "vitals_exact_record_accuracy": 0.97,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.99,
+          "blood_pressure_diastolic": 1.0,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.98
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6703296703296703,
+          "micro_recall": 0.7721518987341772,
+          "micro_f1": 0.7176470588235294,
+          "tp": 61,
+          "fp": 30,
+          "fn": 18
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0055",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0062",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "adaptive+wiki_mistral": {
+      "mode": "adaptive",
+      "model": "mistral",
+      "knowledge": {
+        "kind": "wiki",
+        "source": "data/synthetic/gold",
+        "leave_one_out": true,
+        "entries": 502,
+        "fingerprint_sha256": "8be7956b2684a42ad84b4b835760c9044cd6d4d59786100b30b265e57c030354",
+        "k": 10,
+        "per_concept": 2,
+        "max_chars": 1800
+      },
+      "ollama": {
+        "server_version": {
+          "version": "0.40.3"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.78,
+        "vitals_exact_record_accuracy": 0.97,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.99,
+          "blood_pressure_diastolic": 1.0,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.98
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6777777777777778,
+          "micro_recall": 0.7721518987341772,
+          "micro_f1": 0.7218934911242604,
+          "tp": 61,
+          "fp": 29,
+          "fn": 18
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0055",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0062",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    },
+    "adaptive+raw_mistral": {
+      "mode": "adaptive",
+      "model": "mistral",
+      "knowledge": {
+        "kind": "raw",
+        "source": "data/synthetic/gold",
+        "leave_one_out": true,
+        "entries": 592,
+        "fingerprint_sha256": "c7ed3dfeec6de6b64635975cd3b2a2d33b72ace024485d385b0445a13aea5bf7",
+        "k": 10,
+        "per_concept": 2,
+        "max_chars": 1800
+      },
+      "ollama": {
+        "server_version": {
+          "version": "0.40.3"
+        },
+        "model_digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "model_details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modelfile_sha256": "6d428f9bff1f2d9a633779afbb7dfd108b09ca4e2c541c82d30b2cc3ad4d3f67",
+        "parameters": "stop                           \"[INST]\"\nstop                           \"[/INST]\"",
+        "template_sha256": "1ff5b64b61b9a63146475a24f70d3ca2fd6fdeec44247987163479968896fc0b"
+      },
+      "metrics": {
+        "records": 100,
+        "reason_accuracy": 0.74,
+        "follow_up_type_timing_accuracy": 0.77,
+        "vitals_exact_record_accuracy": 0.97,
+        "vitals_field_accuracy": {
+          "blood_pressure_systolic": 0.99,
+          "blood_pressure_diastolic": 1.0,
+          "heart_rate": 1.0,
+          "temperature": 1.0,
+          "spo2": 0.98
+        },
+        "interventions": {
+          "micro_precision": 0.7440758293838863,
+          "micro_recall": 0.8351063829787234,
+          "micro_f1": 0.786967418546366,
+          "tp": 157,
+          "fp": 54,
+          "fn": 31
+        },
+        "problems": {
+          "micro_precision": 0.6703296703296703,
+          "micro_recall": 0.7721518987341772,
+          "micro_f1": 0.7176470588235294,
+          "tp": 61,
+          "fp": 30,
+          "fn": 18
+        },
+        "error_examples": [
+          {
+            "record_id": "ADI-0003",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0004",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0005",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0006",
+            "reason_gold": "rivalutazione dolore",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0007",
+            "reason_gold": "controllo generale",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0009",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0018",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0019",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0022",
+            "reason_gold": "controllo parametri",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0028",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0029",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0037",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0039",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0040",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0041",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0046",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0050",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "controllo parametri",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0053",
+            "reason_gold": "medicazione e controllo lesione",
+            "reason_pred": "controllo generale",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0055",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          },
+          {
+            "record_id": "ADI-0062",
+            "reason_gold": "controllo terapia e somministrazione farmaco",
+            "reason_pred": "rivalutazione dolore",
+            "vital_mismatches": []
+          }
+        ],
+        "method": "Missing-vs-missing counts correct for exact-match fields; multi-label F1 is micro-averaged; follow-up compares type and timing."
+      }
+    }
+  }
+}

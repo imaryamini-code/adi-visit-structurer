@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "record_id": "ADI-0010",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:01",
+    "extractors": "v2",
+    "knowledge_context_chars": 1543
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per il paziente con dolore cronico al ginocchio destro",
+    "follow_up": null,
+    "interventions": [
+      "monitoraggio_parametri_vitali"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 128,
+      "blood_pressure_diastolic": 76,
+      "heart_rate": 80,
+      "temperature": 36.4,
+      "spo2": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore_cronico_al_ginocchio_destro"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": [
+      "Follow-up not specified"
+    ]
+  }
+}

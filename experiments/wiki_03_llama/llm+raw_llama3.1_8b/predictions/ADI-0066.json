@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0066",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T20:54:14",
+    "knowledge_context_chars": 926
+  },
+  "clinical": {
+    "reason_for_visit": "controllo generale per la lesione in sede",
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 3
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "medicazione",
+      "valutazione_generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 70,
+      "heart_rate": 72,
+      "temperature": 37.1,
+      "spo2": 98
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

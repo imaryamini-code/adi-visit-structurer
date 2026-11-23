@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo del catetere vescicale",
+      "follow_up": "controllo domiciliare tra sette giorni",
+      "interventions": [
+        "gestione_catetere"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 125,
+        "blood_pressure_diastolic": 65,
+        "heart_rate": 96,
+        "temperature": 36.4,
+        "spo2": 98
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore",
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo del catetere vescicale\",\n    \"follow_up\": \"controllo domiciliare tra sette giorni\",\n    \"interventions\": [\n      \"gestione_catetere\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 125,\n      \"blood_pressure_diastolic\": 65,\n      \"heart_rate\": 96,\n      \"temperature\": 36.4,\n      \"spo2\": 98\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore\",\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

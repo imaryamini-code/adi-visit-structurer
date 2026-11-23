@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale",
+      "follow_up": "controllo tra 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "medicazione",
+        "gestione_lesione_da_decubito"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 130,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 75,
+        "temperature": 36.5,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_da_decubito"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale\",\n    \"follow_up\": \"controllo tra 7 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"medicazione\",\n      \"gestione_lesione_da_decubito\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 130,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 75,\n      \"temperature\": 36.5,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"lesione_da_decubito\"\n    ]\n  }\n}"
+}

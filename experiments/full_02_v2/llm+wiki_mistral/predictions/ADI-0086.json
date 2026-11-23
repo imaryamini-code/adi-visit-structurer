@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "record_id": "ADI-0086",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:44:56",
+    "extractors": "v2",
+    "knowledge_context_chars": 1790
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri vitali",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 7
+    },
+    "interventions": [
+      "valutazione generale"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 135,
+      "blood_pressure_diastolic": 75,
+      "heart_rate": 76,
+      "temperature": 36.4,
+      "spo2": 95
+    }
+  },
+  "coding": {
+    "problems_normalized": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo terapia/somministrazione farmaco",
+      "follow_up": "controllo_ferita entro 7 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 120,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 78,
+        "temperature": 36.5,
+        "spo2": 97
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dispnea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo terapia/somministrazione farmaco\",\n    \"follow_up\": \"controllo_ferita entro 7 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"somministrazione_farmaco\",\n      \"educazione_terapeutica\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 120,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 78,\n      \"temperature\": 36.5,\n      \"spo2\": 97\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dispnea\"\n    ]\n  }\n}"
+}

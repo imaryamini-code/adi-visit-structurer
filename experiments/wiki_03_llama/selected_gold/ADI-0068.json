@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "record_id": "ADI-0068",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-07T16:40:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0068",
+    "age": null,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "controllo parametri",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 140,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 90,
+      "temperature": 36.5,
+      "spo2": null
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 14
+    }
+  },
+  "coding": {
+    "problems_normalized": [],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "SpO2 non menzionata"
+    ]
+  }
+}

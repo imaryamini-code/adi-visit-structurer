@@ -1,0 +1,24 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "riferiti sintomi generali",
+      "follow_up": "ricontatto_telefonico",
+      "interventions": [
+        "valutazione_generale",
+        "educazione_terapeutica"
+      ],
+      "vitals": null,
+      "problems_normalized": [
+        "nausea",
+        "scarso_appetito"
+      ]
+    },
+    "coding": {
+      "problems_normalized": [
+        "nausea",
+        "scarso_appetito"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"riferiti sintomi generali\",\n    \"follow_up\": \"ricontatto_telefonico\",\n    \"interventions\": [\"valutazione_generale\", \"educazione_terapeutica\"],\n    \"vitals\": null,\n    \"problems_normalized\": [\"nausea\", \"scarso_appetito\"]\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"nausea\", \"scarso_appetito\"]\n  }\n}"
+}

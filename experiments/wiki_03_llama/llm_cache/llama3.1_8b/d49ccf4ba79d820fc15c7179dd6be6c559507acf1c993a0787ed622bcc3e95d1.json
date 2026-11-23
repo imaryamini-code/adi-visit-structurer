@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "rivalutazione clinica generale",
+      "follow_up": "ricontatto telefonico con il caregiver per monitorare lo stato di salute",
+      "interventions": [
+        "valutazione_generale",
+        "educazione_sanitaria"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": null,
+        "blood_pressure_diastolic": null,
+        "heart_rate": null,
+        "temperature": null,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": []
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"rivalutazione clinica generale\",\n    \"follow_up\": \"ricontatto telefonico con il caregiver per monitorare lo stato di salute\",\n    \"interventions\": [\n      \"valutazione_generale\",\n      \"educazione_sanitaria\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": null,\n      \"blood_pressure_diastolic\": null,\n      \"heart_rate\": null,\n      \"temperature\": null,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": []\n  }\n}"
+}

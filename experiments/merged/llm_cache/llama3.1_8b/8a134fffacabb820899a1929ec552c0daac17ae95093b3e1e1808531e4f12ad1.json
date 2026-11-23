@@ -1,0 +1,26 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "medicazione e controllo lesione",
+      "follow_up": "controllo_ferita entro 3 giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "medicazione",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 105,
+        "blood_pressure_diastolic": 80,
+        "heart_rate": 80,
+        "temperature": 36.4,
+        "spo2": 94
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "lesione_cutanea"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"medicazione e controllo lesione\",\n    \"follow_up\": \"controllo_ferita entro 3 giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"medicazione\",\n      \"valutazione_generale\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 105,\n      \"blood_pressure_diastolic\": 80,\n      \"heart_rate\": 80,\n      \"temperature\": 36.4,\n      \"spo2\": 94\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"lesione_cutanea\"\n    ]\n  }\n}"
+}

@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo dopo caduta riferita dal caregiver familiare",
+      "follow_up": "il nuovo controllo domiciliare sarà programmato",
+      "interventions": [
+        "monitoraggio_parametri_vitali"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "70",
+        "heart_rate": "72",
+        "temperature": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "caduta"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo dopo caduta riferita dal caregiver familiare\",\n    \"follow_up\": \"il nuovo controllo domiciliare sarà programmato\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"120\",\n      \"blood_pressure_diastolic\": \"70\",\n      \"heart_rate\": \"72\",\n      \"temperature\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"caduta\"]\n  }\n}"
+}

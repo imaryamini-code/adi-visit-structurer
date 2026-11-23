@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0090",
+    "visit_datetime": "2026-02-11T12:00:00",
+    "operator_role": "infermiere",
+    "extraction_mode": "hybrid",
+    "llm_model": "mistral",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-16T19:22:21",
+    "llm_status": "called",
+    "knowledge_context_chars": 1562
+  },
+  "clinical": {
+    "reason_for_visit": "medicazione e controllo lesione",
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 72,
+      "temperature": 37.8,
+      "spo2": 99
+    },
+    "interventions": [
+      "medicazione",
+      "monitoraggio_parametri_vitali"
+    ],
+    "follow_up": {
+      "type": "controllo_ferita",
+      "timing_days": 7
+    },
+    "critical_issues": []
+  },
+  "coding": {
+    "problems_normalized": [
+      "lesione_da_pressione",
+      "dolore"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

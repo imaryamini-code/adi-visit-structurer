@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "record_id": "ADI-0092",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-15T18:30:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0092",
+    "age": 79,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "educazione caregiver e controllo generale",
+    "anamnesis_brief": [
+      "caregiver presente durante l'accesso"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 105,
+      "blood_pressure_diastolic": 80,
+      "heart_rate": 68,
+      "temperature": 36.5,
+      "spo2": 94
+    },
+    "consciousness": "vigile e orientato",
+    "mobility": "con aiuto",
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "valutazione_generale",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "ricontatto_telefonico",
+      "target": "caregiver",
+      "timing_days": null
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "astenia"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Follow-up senza tempistica"
+    ]
+  }
+}

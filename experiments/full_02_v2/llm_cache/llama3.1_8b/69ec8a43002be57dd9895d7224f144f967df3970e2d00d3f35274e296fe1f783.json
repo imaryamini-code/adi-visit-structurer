@@ -1,0 +1,27 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale su paziente con sintomatologia nota",
+      "follow_up": "controllo in prossimità di due giorni",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "somministrazione_farmaco",
+        "educazione_terapeutica"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": 150,
+        "blood_pressure_diastolic": 90,
+        "heart_rate": 98,
+        "temperature": 37.8,
+        "spo2": null
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore",
+        "lesione_da_pressione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale su paziente con sintomatologia nota\",\n    \"follow_up\": \"controllo in prossimità di due giorni\",\n    \"interventions\": [\n      \"monitoraggio_parametri_vitali\",\n      \"somministrazione_farmaco\",\n      \"educazione_terapeutica\"\n    ],\n    \"vitals\": {\n      \"blood_pressure_systolic\": 150,\n      \"blood_pressure_diastolic\": 90,\n      \"heart_rate\": 98,\n      \"temperature\": 37.8,\n      \"spo2\": null\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\n      \"dolore\",\n      \"lesione_da_pressione\"\n    ]\n  }\n}"
+}

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "record_id": "ADI-0062",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-03-01T09:30:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0062",
+    "age": 65,
+    "sex": "F"
+  },
+  "clinical": {
+    "reason_for_visit": "controllo terapia/somministrazione farmaco",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 150,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 72,
+      "temperature": 37.1,
+      "spo2": 97
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "dolore"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": []
+  }
+}

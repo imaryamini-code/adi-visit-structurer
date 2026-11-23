@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "record_id": "ADI-0076",
+    "visit_datetime": null,
+    "operator_role": "infermiere",
+    "extraction_mode": "llm",
+    "llm_model": "llama3.1:8b",
+    "pipeline_version": "1.0.0",
+    "generated_at": "2026-11-22T18:45:02",
+    "extractors": "v2",
+    "knowledge_context_chars": 1248
+  },
+  "clinical": {
+    "reason_for_visit": "controllo della stomia e valutazione delle condizioni locali",
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 3
+    },
+    "interventions": [
+      "monitoraggio_parametri_vitali",
+      "gestione_stomia"
+    ],
+    "vitals": {
+      "blood_pressure_systolic": 125,
+      "blood_pressure_diastolic": 85,
+      "heart_rate": 80,
+      "temperature": 36.5,
+      "spo2": 95
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "disturbi_di_nausea"
+    ]
+  },
+  "quality": {
+    "missing_mandatory_fields": [
+      "meta.visit_datetime"
+    ],
+    "warnings": []
+  }
+}

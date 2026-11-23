@@ -1,0 +1,25 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "valutazione della caduta recente segnalata dal caregiver",
+      "follow_up": "nuovo controllo domiciliare per continuare la sorveglianza del paziente",
+      "interventions": [
+        "monitoraggio_parametri_vitali",
+        "valutazione_generale"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "110",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "78",
+        "temperature": "37,8",
+        "spo2": "96"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "ipertensione"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"valutazione della caduta recente segnalata dal caregiver\",\n    \"follow_up\": \"nuovo controllo domiciliare per continuare la sorveglianza del paziente\",\n    \"interventions\": [\"monitoraggio_parametri_vitali\", \"valutazione_generale\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"110\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"78\",\n      \"temperature\": \"37,8\",\n      \"spo2\": \"96\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"ipertensione\"]\n  }\n}"
+}

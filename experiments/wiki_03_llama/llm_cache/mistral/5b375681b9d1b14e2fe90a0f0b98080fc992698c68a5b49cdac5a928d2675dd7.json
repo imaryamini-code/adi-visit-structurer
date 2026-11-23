@@ -1,0 +1,23 @@
+{
+  "parsed": {
+    "clinical": {
+      "reason_for_visit": "controllo generale del paziente per monitoraggio della terapia in corso a causa di persistente dolore riferito",
+      "follow_up": "controllo domiciliare programmato tra 7 giorni",
+      "interventions": [
+        "somministrazione_farmaco"
+      ],
+      "vitals": {
+        "blood_pressure_systolic": "120",
+        "blood_pressure_diastolic": "90",
+        "heart_rate": "65",
+        "temperature": "37.1"
+      }
+    },
+    "coding": {
+      "problems_normalized": [
+        "dolore"
+      ]
+    }
+  },
+  "raw": "{\n  \"clinical\": {\n    \"reason_for_visit\": \"controllo generale del paziente per monitoraggio della terapia in corso a causa di persistente dolore riferito\",\n    \"follow_up\": \"controllo domiciliare programmato tra 7 giorni\",\n    \"interventions\": [\"somministrazione_farmaco\"],\n    \"vitals\": {\n      \"blood_pressure_systolic\": \"120\",\n      \"blood_pressure_diastolic\": \"90\",\n      \"heart_rate\": \"65\",\n      \"temperature\": \"37.1\"\n    }\n  },\n  \"coding\": {\n    \"problems_normalized\": [\"dolore\"]\n  }\n}"
+}

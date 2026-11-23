@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "record_id": "ADI-0029",
+    "template_type": [
+      "diario_clinico"
+    ],
+    "visit_datetime": "2026-02-11T08:20:00",
+    "operator_role": "infermiere"
+  },
+  "patient": {
+    "patient_id": "SYNTH-ADI-0029",
+    "age": 80,
+    "sex": null
+  },
+  "clinical": {
+    "reason_for_visit": "controllo terapia/somministrazione farmaco",
+    "anamnesis_brief": [],
+    "vitals": {
+      "blood_pressure_systolic": 130,
+      "blood_pressure_diastolic": 90,
+      "heart_rate": 98,
+      "temperature": 36.7,
+      "spo2": null
+    },
+    "interventions": [
+      "somministrazione_farmaco",
+      "educazione_terapeutica"
+    ],
+    "critical_issues": [],
+    "follow_up": {
+      "type": "controllo",
+      "timing_days": 2
+    }
+  },
+  "coding": {
+    "problems_normalized": [
+      "febbre"
+    ],
+    "risk_flags": []
+  },
+  "quality": {
+    "missing_mandatory_fields": [],
+    "warnings": [
+      "Farmaco menzionato senza dose",
+      "SpO2 non menzionata"
+    ]
+  }
+}
